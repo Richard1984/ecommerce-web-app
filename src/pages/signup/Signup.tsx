@@ -5,20 +5,22 @@ import { toast } from "react-toastify";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
-import Link from "../../components/Link/Link";
 import Textfield from "../../components/Textfield/Textfield";
 import api from "../../config/api";
-import "./login.scss";
+import "./signup.scss";
 
-const Login = () => {
+
+const SignUp = () => {
     const [form, setForm] = useState({
+        firstname: "",
+        lastname: "",
         email: "",
         password: "",
     })
     const [picture, setPicture] = useState('');
 
-    const handleLogin = async () => {
-        const response = await api.post('/users/login', {
+    const handleSignup = async () => {
+        const response = await api.post('users/signup', {
             user: {
                 email: form.email,
                 password: form.password
@@ -63,13 +65,19 @@ const Login = () => {
                         </div>
                         <div className="login-form-body-form">
                             <div className="login-form-body-form-input">
+                                <Textfield type="text" name="firstname" label="Nome" placeholder="Nome" fullWidth value={form.firstname} onChange={handleChange} />
+                            </div>
+                            <div className="login-form-body-form-input">
+                                <Textfield type="email" name="lastname" label="Cognome" placeholder="Cognome" fullWidth value={form.lastname} onChange={handleChange} />
+                            </div>
+                            <div className="login-form-body-form-input">
                                 <Textfield type="email" name="email" label="Email" placeholder="Email" fullWidth value={form.email} onChange={handleChange} />
                             </div>
                             <div className="login-form-body-form-input">
                                 <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" fullWidth value={form.password} onChange={handleChange} />
                             </div>
                             <div className="login-form-body-form-button">
-                                <Button text="Login" onClick={() => handleLogin()} />
+                                <Button text="Registrati" onClick={() => handleSignup()} />
                             </div>
                             <Divider text="oppure" />
                             <div className="login-form-body-form-button">
@@ -86,9 +94,6 @@ const Login = () => {
                                     )}
                                 />
                             </div>
-                            <div style={{ textAlign: "center" }}>
-                                <p>Non sei ancora registrato? <Link href="/signup">Registrati</Link></p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,4 +102,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp;

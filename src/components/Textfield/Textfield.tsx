@@ -3,7 +3,8 @@ import './textfield.scss';
 interface TextfieldProps {
     label: string;
     value?: string;
-    onChange?: (value: string) => void;
+    name: string;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void;
     type?: string;
     placeholder?: string;
     className?: string;
@@ -13,10 +14,10 @@ interface TextfieldProps {
 }
 
 const Textfield = (props: TextfieldProps) => {
-    const { label, value, onChange, type, placeholder, className, disabled, required } = props;
+    const { label, value, name, onChange, type, placeholder, className, disabled, required } = props;
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) onChange(e.target.value);
+        if (onChange) onChange(e, e.target.value);
     }
 
     return (
@@ -27,6 +28,7 @@ const Textfield = (props: TextfieldProps) => {
                 value={value}
                 onChange={handleOnChange}
                 placeholder={placeholder}
+                name={name}
                 disabled={disabled}
                 required={required}
                 className="textfield__input"
