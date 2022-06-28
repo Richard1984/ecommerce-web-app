@@ -15,7 +15,8 @@ export const authenticationSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(authenticateUser.fulfilled, (state, action) => {
-      state.user = action.payload.data;
+      console.log(action.payload);
+      state.user = action.payload.data.data;
     });
   },
   reducers: {
@@ -29,7 +30,9 @@ export const authenticateUser = createAsyncThunk(
   "authentication/authenticate_user",
   async (login: { email: string; password: string }, thunkAPI) => {
     const requestUrl = `users/login`;
-    const result = await api.post<User>(requestUrl, { user: login });
+    const result = await api.post<{ data: User; message: string }>(requestUrl, {
+      user: login,
+    });
     return result;
   }
 );
