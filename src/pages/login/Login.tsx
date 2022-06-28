@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { toast } from "react-toastify";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
 import Link from "../../components/Link/Link";
 import Textfield from "../../components/Textfield/Textfield";
 import api from "../../config/api";
+import { useAppDispatch } from "../../config/store";
+import { authenticateUser } from "../../reducers/authentication";
 import "./login.scss";
 
 const Login = () => {
+    const dispatch = useAppDispatch()
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -18,13 +20,8 @@ const Login = () => {
     const [picture, setPicture] = useState('');
 
     const handleLogin = async () => {
-        const response = await api.post('/users/login', {
-            user: {
-                email: form.email,
-                password: form.password
-            }
-        });
-        toast.success("Login successful");
+        dispatch(authenticateUser({ email: form.email, password: form.password }))
+        // toast.success("Login successful");
     }
 
 
@@ -62,15 +59,20 @@ const Login = () => {
                             <img src={picture} alt="" />
                         </div>
                         <div className="login-form-body-form">
-                            <div className="login-form-body-form-input">
-                                <Textfield type="email" name="email" label="Email" placeholder="Email" fullWidth value={form.email} onChange={handleChange} />
-                            </div>
-                            <div className="login-form-body-form-input">
-                                <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" fullWidth value={form.password} onChange={handleChange} />
-                            </div>
-                            <div className="login-form-body-form-button">
-                                <Button text="Login" onClick={() => handleLogin()} />
-                            </div>
+                            <form onSubmit={(event) => {
+                                event.preventDefault();
+                                handleLogin()
+                            }}>
+                                <div className="login-form-body-form-input">
+                                    <Textfield type="email"  name="email" label="Email" placeholder="Email" autocomplete="email" fullWidth value={form.email} onChange={handleChange} />
+                                </div>
+                                <div className="login-form-body-form-input">
+                                    <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" autocomplete="current-password" fullWidth value={form.password} onChange={handleChange} />
+                                </div>
+                                <div className="login-form-body-form-button">
+                                    <Button text="Login" type="submit" />
+                                </div>
+                           </form>
                             <Divider text="oppure" />
                             <div className="login-form-body-form-button">
                                 <FacebookLogin

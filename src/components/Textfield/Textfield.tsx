@@ -11,10 +11,11 @@ interface TextfieldProps {
     disabled?: boolean;
     required?: boolean;
     fullWidth?: boolean;
+    autocomplete?: string;
 }
 
 const Textfield = (props: TextfieldProps) => {
-    const { label, value, name, onChange, type, placeholder, className, disabled, required } = props;
+    const { label, value, name, onChange, type, placeholder, className, disabled, required, autocomplete } = props;
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) onChange(e, e.target.value);
@@ -31,6 +32,7 @@ const Textfield = (props: TextfieldProps) => {
                 name={name}
                 disabled={disabled}
                 required={required}
+                autoComplete={autocomplete}
                 className="textfield__input"
                 style={props.fullWidth ? { width: '100%' } : undefined}
             />
