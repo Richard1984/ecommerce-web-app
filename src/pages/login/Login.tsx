@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
 import Link from "../../components/Link/Link";
 import Textfield from "../../components/Textfield/Textfield";
 import api from "../../config/api";
-import { useAppDispatch } from "../../config/store";
+import { useAppDispatch, useAppSelector } from "../../config/store";
 import { authenticateUser } from "../../reducers/authentication";
 import "./login.scss";
 
 const Login = () => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const { user } = useAppSelector(state => state.authentication)
     const [form, setForm] = useState({
         email: "",
         password: "",
@@ -21,7 +24,6 @@ const Login = () => {
 
     const handleLogin = async () => {
         dispatch(authenticateUser({ email: form.email, password: form.password }))
-        // toast.success("Login successful");
     }
 
 
@@ -46,6 +48,12 @@ const Login = () => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user])
 
     return (
         <div className="container">
