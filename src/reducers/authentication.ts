@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../config/api";
-import User from "../shared/models/User";
+import IUser from "../shared/models/IUser";
 
 export interface AuthenticationState {
-  user?: User | null;
+  user?: IUser | null;
 }
 
 const initialState: AuthenticationState = {
@@ -35,16 +35,26 @@ export const authenticateUser = createAsyncThunk(
   "authentication/authenticate_user",
   async (login: { email: string; password: string }, thunkAPI) => {
     const requestUrl = `users/login`;
-    const result = await api.post<{ data: User; message: string }>(requestUrl, {
-      user: login,
-    });
+    const result = await api.post<{ data: IUser; message: string }>(
+      requestUrl,
+      {
+        user: login,
+      }
+    );
     return result;
   }
 );
 
 export const getAccount = createAsyncThunk(
   "authentication/get_account",
-  async () => api.get<{ data: User }>("account")
+  async () => {
+    try {
+      return api.get<{ data: IUser }>("account");
+    } catch (e) {
+      localStorage.removeItem("access_token");
+      throw e;
+    }
+  }
 );
 
 // Action creators are generated for each case reducer function

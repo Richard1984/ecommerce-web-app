@@ -1,0 +1,35 @@
+.search-bar {
+    display: flex;
+    flex-direction: row;
+
+    &:focus-within {
+        outline: 2px solid black;
+        border-radius: 2px;
+    }
+
+    .select {
+        filter: brightness(95%);
+
+        &__input {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .textfield {
+
+        &__input {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

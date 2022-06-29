@@ -32,7 +32,7 @@
     }
 
     &:hover {
-        transform: scale(1.01);
+        filter: brightness(95%);
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.01);
     }
 

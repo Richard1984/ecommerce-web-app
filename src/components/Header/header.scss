@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    background-color: #fff;
+    border-bottom: 1px solid #cac9c9;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    .left {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+
+        .search-bar {
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .profile {
+                height: 45px;
+                width: 45px;
+                border-radius: 100%;
+                overflow: hidden;
+                margin-left: 15px;
+            }
+    }
+}

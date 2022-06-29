@@ -24,7 +24,10 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
+    if (["account"].includes(error.response.config.url)) {
+      return Promise.reject(error);
+    }
+
     if (error?.response?.data?.message) {
       toast.error(error.response.data.message);
     } else if (error?.response?.data?.error) {

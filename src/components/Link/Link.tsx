@@ -3,16 +3,17 @@ import './link.scss';
 
 interface LinkProps {
     href: string;
+    underline?: boolean;
     children: React.ReactNode;
 }
 
 const Link = (props: LinkProps) => {
 
-    const { href } = props;
+    const { href, underline = true, children } = props;
 
     return (
-        <NavLink to={href} className="link">
-            {props.children}
+        <NavLink to={href} className={"link" + (underline ? " link--underline"  : "")}>
+            {children}
         </NavLink>
     )
 }

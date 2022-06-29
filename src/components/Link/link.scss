@@ -3,7 +3,9 @@
     color: inherit;
     font-weight: bold;
 
-    &:hover {
-        text-decoration: underline;
+    &--underline {
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
