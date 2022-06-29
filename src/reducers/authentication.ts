@@ -22,6 +22,10 @@ export const authenticationSlice = createSlice({
       })
       .addCase(getAccount.fulfilled, (state, action) => {
         state.user = action.payload.data.data;
+      })
+      .addCase(getAccount.rejected, (state, action) => {
+        state.user = null;
+        localStorage.removeItem("access_token");
       });
   },
   reducers: {
@@ -47,14 +51,7 @@ export const authenticateUser = createAsyncThunk(
 
 export const getAccount = createAsyncThunk(
   "authentication/get_account",
-  async () => {
-    try {
-      return api.get<{ data: IUser }>("account");
-    } catch (e) {
-      localStorage.removeItem("access_token");
-      throw e;
-    }
-  }
+  async () => api.get<{ data: IUser }>("account")
 );
 
 // Action creators are generated for each case reducer function

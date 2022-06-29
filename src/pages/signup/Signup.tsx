@@ -22,6 +22,8 @@ const SignUp = () => {
     const handleSignup = async () => {
         const response = await api.post('users/signup', {
             user: {
+                firstname: form.firstname,
+                lastname: form.lastname,
                 email: form.email,
                 password: form.password
             }

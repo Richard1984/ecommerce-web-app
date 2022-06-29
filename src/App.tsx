@@ -23,6 +23,7 @@ function App() {
         position={toast.POSITION.TOP_LEFT}
         className="toastify-container"
         toastClassName="toastify-toast"
+        style={{ "zIndex": "100001"}}
       />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -21,7 +21,7 @@ const Header = (props: HeaderProps) => {
             </div>
             {props.user && (
                 <div className="menu">
-                    <p>{user?.firstName + " " + user?.lastName}</p>
+                    <p>{user?.firstname + " " + user?.lastname}</p>
                     {/* <a href="/logout">Logout</a> */}
                     <div className="profile">
                         <img src={user?.img || "https://via.placeholder.com/45"} alt="Profile" />
