@@ -14,10 +14,15 @@ export const authenticationSlice = createSlice({
   name: "authentication",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(authenticateUser.fulfilled, (state, action) => {
-      console.log(action.payload);
-      state.user = action.payload.data.data;
-    });
+    builder
+      .addCase(authenticateUser.fulfilled, (state, action) => {
+        state.user = action.payload.data.data;
+        const token = action.payload.headers.authorization.split("Bearer ")[1];
+        localStorage.setItem("access_token", token);
+      })
+      .addCase(getAccount.fulfilled, (state, action) => {
+        state.user = action.payload.data.data;
+      });
   },
   reducers: {
     reset: (state) => {
@@ -35,6 +40,11 @@ export const authenticateUser = createAsyncThunk(
     });
     return result;
   }
+);
+
+export const getAccount = createAsyncThunk(
+  "authentication/get_account",
+  async () => api.get<{ data: User }>("account")
 );
 
 // Action creators are generated for each case reducer function
