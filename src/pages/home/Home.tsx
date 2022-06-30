@@ -1,17 +1,29 @@
+import { useEffect, useState } from "react"
 import Header from "../../components/Header/Header"
-import { useAppSelector } from "../../config/store"
+import api from "../../config/api"
+import { useAppDispatch, useAppSelector } from "../../config/store"
+import { getCategories } from "../../reducers/categories"
 import IProduct from "../../shared/models/IProduct"
 import ProductsList from "./components/ProductsList/ProductsList"
 import './home.scss'
 
 const Home = () => {
+    const dispatch = useAppDispatch()
+    const [products, setProducts] = useState<IProduct[]>([])
     const { user } = useAppSelector(state => state.authentication)
 
-    const products: IProduct[] = [{ id: 1, name: "Product 1", price: 100 }, { id: 2, name: "Product 2", price: 200 }, { id: 3, name: "Product 3", price: 300 }, {id: 4, name: "Product 4", price: 400}]
+    useEffect(() => {
+        const getProducts = async () => {
+            const response = await api.get<{ data: IProduct[] }>("/products")
+            setProducts(response.data.data)
+        }
+        getProducts()
+        dispatch(getCategories())
+    }, [])
 
     return (
         <div>
-            <Header user={user} />
+            <Header user={user}/>
             <div className="content">
                 <ProductsList title="I prodotti piu venduti" products={products} />
                 <ProductsList title="I prodotti piu amati" products={products} />

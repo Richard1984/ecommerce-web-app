@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../config/store";
 import IUser from "../../shared/models/IUser";
 import Link from "../Link/Link";
 import SearchBar from "../SearchBar/SearchBar";
@@ -8,6 +9,7 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
+    const { entities: categories } = useAppSelector(state => state.categories)
 
     const { user } = props
 
@@ -17,7 +19,7 @@ const Header = (props: HeaderProps) => {
                 <Link href="/" underline={false}>
                     <h2>Amnazom</h2>
                 </Link>
-                <SearchBar fullWidth/>
+                <SearchBar fullWidth categories={categories} />
             </div>
             {props.user && (
                 <div className="menu">
