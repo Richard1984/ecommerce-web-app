@@ -10,7 +10,7 @@ import Textfield from "../../components/Textfield/Textfield";
 import api from "../../config/api";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { authenticateUser } from "../../reducers/authentication";
-import "./login.scss";
+import styles from "./login.module.scss";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -56,33 +56,33 @@ const Login = () => {
     }, [user])
 
     return (
-        <div className="container">
-            <div className="login">
-                <div className="login-form">
-                    <div className="login-form-header">
+        <div className={styles.container}>
+            <div className={styles.login}>
+                <div className={styles["login-form"]}>
+                    <div className={styles["login-form-header"]}>
                         <h1>Amnazom</h1>
                     </div>
-                    <div className="login-form-body">
-                        <div className="login-form-body-picture">
+                    <div className={styles["login-form-body"]}>
+                        <div className={styles["login-form-body-picture"]}>
                             <img src={picture} alt="" />
                         </div>
-                        <div className="login-form-body-form">
+                        <div className={styles["login-form-body-form"]}>
                             <form onSubmit={(event) => {
                                 event.preventDefault();
                                 handleLogin()
                             }}>
-                                <div className="login-form-body-form-input">
+                                <div className={styles["login-form-body-form-input"]}>
                                     <Textfield type="email"  name="email" label="Email" placeholder="Email" autocomplete="email" fullWidth value={form.email} onChange={handleChange} />
                                 </div>
-                                <div className="login-form-body-form-input">
+                                <div className={styles["login-form-body-form-input"]}>
                                     <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" autocomplete="current-password" fullWidth value={form.password} onChange={handleChange} />
                                 </div>
-                                <div className="login-form-body-form-button">
+                                <div className={styles["login-form-body-form-button"]}>
                                     <Button text="Login" type="submit" />
                                 </div>
                            </form>
                             <Divider text="oppure" />
-                            <div className="login-form-body-form-button">
+                            <div className={styles["login-form-body-form-button"]}>
                                 <FacebookLogin
                                     appId="486585759895782"
                                     // autoLoad={true}

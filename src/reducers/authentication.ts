@@ -4,10 +4,12 @@ import IUser from "../shared/models/IUser";
 
 export interface AuthenticationState {
   user?: IUser | null;
+  logoutSuccess?: boolean;
 }
 
 const initialState: AuthenticationState = {
   user: null,
+  logoutSuccess: false,
 };
 
 export const authenticationSlice = createSlice({
@@ -26,6 +28,10 @@ export const authenticationSlice = createSlice({
       .addCase(getAccount.rejected, (state, action) => {
         state.user = null;
         localStorage.removeItem("access_token");
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.user = null;
+        state.logoutSuccess = true;
       });
   },
   reducers: {
@@ -53,6 +59,14 @@ export const getAccount = createAsyncThunk(
   "authentication/get_account",
   async () => api.get<{ data: IUser }>("account")
 );
+
+export const logout = createAsyncThunk("authentication/logout", async () => {
+  const response = await api.delete<{ data: IUser; message: string }>(
+    "users/sign_out"
+  );
+  localStorage.removeItem("access_token");
+  return response;
+});
 
 // Action creators are generated for each case reducer function
 export const { reset } = authenticationSlice.actions;

@@ -56,33 +56,33 @@ const SignUp = () => {
 
     return (
         <div className="container">
-            <div className="login">
-                <div className="login-form">
-                    <div className="login-form-header">
+            <div className="signup">
+                <div className="signup-form">
+                    <div className="signup-form-header">
                         <h1>Amnazom</h1>
                     </div>
-                    <div className="login-form-body">
-                        <div className="login-form-body-picture">
+                    <div className="signup-form-body">
+                        <div className="signup-form-body-picture">
                             <img src={picture} alt="" />
                         </div>
-                        <div className="login-form-body-form">
-                            <div className="login-form-body-form-input">
+                        <div className="signup-form-body-form">
+                            <div className="signup-form-body-form-input">
                                 <Textfield type="text" name="firstname" label="Nome" placeholder="Nome" fullWidth value={form.firstname} onChange={handleChange} />
                             </div>
-                            <div className="login-form-body-form-input">
+                            <div className="signup-form-body-form-input">
                                 <Textfield type="email" name="lastname" label="Cognome" placeholder="Cognome" fullWidth value={form.lastname} onChange={handleChange} />
                             </div>
-                            <div className="login-form-body-form-input">
+                            <div className="signup-form-body-form-input">
                                 <Textfield type="email" name="email" label="Email" placeholder="Email" fullWidth value={form.email} onChange={handleChange} />
                             </div>
-                            <div className="login-form-body-form-input">
+                            <div className="signup-form-body-form-input">
                                 <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" fullWidth value={form.password} onChange={handleChange} />
                             </div>
-                            <div className="login-form-body-form-button">
+                            <div className="signup-form-body-form-button">
                                 <Button text="Registrati" onClick={() => handleSignup()} />
                             </div>
                             <Divider text="oppure" />
-                            <div className="login-form-body-form-button">
+                            <div className="signup-form-body-form-button">
                                 <FacebookLogin
                                     appId="486585759895782"
                                     // autoLoad={true}

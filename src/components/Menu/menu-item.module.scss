@@ -1,0 +1,29 @@
+.item {
+    padding: 0.15rem 1rem;
+    background-color: inherit;
+    cursor: pointer;
+
+    .text {
+            font-size: 14px;
+            // font-weight: bold;
+            color: inherit;
+            display: inline-block;
+        }
+
+    .icon {
+                margin-right: 8px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: inherit;
+                    text-decoration: none;
+                    display: inline-block;
+    }
+
+    &:hover {
+        filter: brightness(95%);
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid #ccc;
+    }
+}
