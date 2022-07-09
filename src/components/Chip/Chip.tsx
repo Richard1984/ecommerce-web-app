@@ -12,7 +12,7 @@ const Chip = (props: IChipProps) => {
     const { label, onClick, leftIcon, className } = props;
 
     return (
-        <div className={styles.chip + " " + className} onClick={onClick}>
+        <div className={styles.chip + (className ? " " + className : "")} onClick={onClick}>
             {leftIcon && <div className={styles.icon}>{leftIcon}</div>}
             <div className={styles.label}>{label}</div>
         </div>

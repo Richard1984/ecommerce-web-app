@@ -1,16 +1,16 @@
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createRef, useEffect, useState } from "react";
-import Product from "../../../../components/Product/Product";
-import IProduct from "../../../../shared/models/IProduct";
-import './product-list.scss';
+import IProduct from "../../shared/models/IProduct";
+import Product from "../Product/Product";
+import styles from './product-list.module.scss';
 
-interface ProductsListProps {
+interface IProductsListProps {
     title: string;
     products: IProduct[]
 }
 
-const ProductsList = (props: ProductsListProps) => {
+const ProductsList = (props: IProductsListProps) => {
     const productsListRef = createRef<HTMLDivElement>()
     const [scrolledToStart, setScrolledToStart] = useState(true)
     const [scrolledToEnd, setScrolledToEnd] = useState(false)
@@ -46,15 +46,15 @@ const ProductsList = (props: ProductsListProps) => {
     }, [productsListRef.current])
 
     return (
-        <div className="products-list" >
-            <div className="products-list__header">
+        <div className={styles.productsList} >
+            <div className={styles.header}>
                 <h2>{title}</h2>
             </div>
-            <div className="products-list__body">
-                {!scrolledToStart ? <button className="buttons button-left" onClick={handleMoveLeft}><FontAwesomeIcon icon={faAngleLeft} /></button> : null}
-                {!scrolledToEnd ? <button className="buttons button-right" onClick={handleMoveRight}><FontAwesomeIcon icon={faAngleRight} /></button> : null}
-                <div className="products" ref={productsListRef}>
-                    {products.map(product => <Product product={product} key={product.id} />)}
+            <div className={styles.body}>
+                {!scrolledToStart ? <button className={styles.buttons + " " + styles.buttonLeft} onClick={handleMoveLeft}><FontAwesomeIcon icon={faAngleLeft} /></button> : null}
+                {!scrolledToEnd ? <button className={styles.buttons + " " + styles.buttonRight} onClick={handleMoveRight}><FontAwesomeIcon icon={faAngleRight} /></button> : null}
+                <div className={styles.products} ref={productsListRef}>
+                    {products.map(product => <Product product={product} key={product.id} className={styles.product} />)}
                 </div>
             </div>
         </div>

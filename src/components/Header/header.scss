@@ -44,7 +44,7 @@
                 padding: 0 0.5rem;
                 border-radius: 3px;
                 height: 55px;
-                cursor: pointer ;
+                cursor: pointer;
 
                 &:hover {
                     background-color: #eaeaea;
@@ -53,6 +53,45 @@
                 &:active {
                     filter: brightness(95%);
                 }
+            }
+
+            .shopping-cart-menu {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: row;
+
+                    .shopping-cart-menu-icon {
+                        font-size: 22px;
+                        margin-right: 10px;
+                    }
+
+                    .shopping-cart-menu-primary {
+                        font-size: 12px;
+                        margin: 0;
+                    }
+
+                    .shopping-cart-menu-secondary {
+                        font-size: 14px;
+                        font-weight: bold;
+                        margin: 0;
+                    }
+                }
+            }
+
+            .separator {
+                width: 1px;
+                height: 45px;
+                background-color: #cac9c9;
+                margin: 0 10px;
             }
 
             .profile-menu {

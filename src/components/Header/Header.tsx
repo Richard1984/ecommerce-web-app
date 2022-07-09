@@ -1,4 +1,4 @@
-import { faAngleDown, faGear, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faGear, faRightFromBracket, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -49,6 +49,27 @@ const Header = (props: HeaderProps) => {
                 <div className="menu">
                     {props.user ? (
                         <>
+                            <div className="menu-item shopping-cart-menu" onClick={handleOpenProfileMenu}>
+                        
+                                <RouterLink to="/login">
+                                    <div className="shopping-cart-menu-icon">
+                                        <FontAwesomeIcon icon={faShoppingCart} />
+                                    </div>
+                                    <div className="text">
+                                        <p className="shopping-cart-menu-primary">Il tuo</p>
+                                        <p className="shopping-cart-menu-secondary">Carrello</p>
+                                    </div>
+                                </RouterLink>
+                                {/* <div className="profile">
+                                    <img src={user?.img || "https://via.placeholder.com/40"} alt="Profile" />
+                                </div>
+                                <p>{user?.firstname + " " + user?.lastname}</p>
+                                <a href="/logout">Logout</a> 
+                                <div className="menu-icon">
+                                    <FontAwesomeIcon icon={faAngleDown} />
+                                </div> */}
+                            </div>
+                            <div className="separator"/>
                             <div className="menu-item profile-menu" onClick={handleOpenProfileMenu}>
                                 <div className="profile">
                                     <img src={user?.img || "https://via.placeholder.com/40"} alt="Profile" />

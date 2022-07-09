@@ -7,6 +7,7 @@ import { useAppDispatch } from './config/store';
 import PublicLayout from './layout/PublicLayout/PublicLayout';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
+import ProductDetail from './pages/product-detail/ProductDetail';
 import Search from './pages/search/Search';
 import SignUp from './pages/signup/Signup';
 import { getAccount } from './reducers/authentication';
@@ -34,6 +35,7 @@ function App() {
         <Route element={<PublicLayout/>}>
           <Route index element={<Home />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Route>
       </Routes>
     </div>

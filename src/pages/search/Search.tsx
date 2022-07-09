@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Chip from '../../components/Chip/Chip';
+import ProductsList from '../../components/ProductsList/ProductsList';
 import api from '../../config/api';
 import { useAppSelector } from '../../config/store';
 import IProduct from '../../shared/models/IProduct';
-import ProductsList from '../home/components/ProductsList/ProductsList';
 import styles from './search.module.scss';
 
 interface IQuery {

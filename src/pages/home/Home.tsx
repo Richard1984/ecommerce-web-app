@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import ProductsList from "../../components/ProductsList/ProductsList"
 import api from "../../config/api"
 import IProduct from "../../shared/models/IProduct"
-import ProductsList from "./components/ProductsList/ProductsList"
 import styles from './home.module.scss'
 
 const Home = () => {

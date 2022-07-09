@@ -1,11 +1,11 @@
-.products-list {
+.productsList {
     width: 100%;
 
     &:not(:last-child) {
         margin-bottom: 20px;
     }
 
-    &__header {
+    .header {
         padding-left: 25px;
 
         h2 {
@@ -13,7 +13,7 @@
         }
     }
 
-    &__body {
+    .body {
 
         position: relative;
 
@@ -42,12 +42,12 @@
             }
         }
 
-        .button-right {
-            right: 40px;
+        .buttonLeft {
+            left: 40px;
         }
 
-        .button-left {
-            left: 40px;
+        .buttonRight {
+            right: 40px;
         }
 
         .products {

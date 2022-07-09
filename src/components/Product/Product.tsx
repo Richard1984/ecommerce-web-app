@@ -1,33 +1,34 @@
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom"
 import IProduct from "../../shared/models/IProduct"
 import Button from "../Button/Button"
-import './product.scss'
+import styles from './product.module.scss'
 
 interface ProductProps {
-    product: IProduct
+    product: IProduct;
+    className?: string;
 }
 
 const Product = (props: ProductProps) => {
 
-    const { product } = props
+    const { product, className } = props
 
     return (
-        <div className="product">
-            <div className="product__image">
+        <Link to={"/products/" + product.id} className={styles.product + (className ? " " + className : "")}>
+            <div className={styles.image}>
                 <img src="https://picsum.photos/150" alt="product" />
             </div>
-            <div className="product__body">
-                <div className="info">
-                    <h3 className="name">{product.name}</h3>
-                    <p className="price">{product.price + " €"}</p>
+            <div className={styles.body}>
+                <div className={styles.info}>
+                    <h3 className={styles.name}>{product.name}</h3>
+                    <p className={styles.price}>{product.price + " €"}</p>
                 </div>
-                <div className="actions">
-                    <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart}/>} text="Aggiungi al carrello" />
+                <div className={styles.actions}>
+                    <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" />
                 </div>
             </div>
-            
-        </div>
+        </Link>
     )
 }
 
