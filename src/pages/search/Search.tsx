@@ -1,6 +1,10 @@
+import { faSearch, faTag } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import Chip from '../../components/Chip/Chip';
 import api from '../../config/api';
+import { useAppSelector } from '../../config/store';
 import IProduct from '../../shared/models/IProduct';
 import ProductsList from '../home/components/ProductsList/ProductsList';
 import styles from './search.module.scss';
@@ -29,6 +33,7 @@ const Search = (props: SearchProps) => {
         category_id: searchParams.get("category_id") as string | null,
         search_name: searchParams.get("search_name") as string | null,
     });
+    const { entities: categories } = useAppSelector(state => state.categories);
 
 
     const search = async (searchParams: IQuery & { sort_criteria: string, sort_order: string }) => {
@@ -66,8 +71,11 @@ const Search = (props: SearchProps) => {
     return (
         <>
             <div className={styles.header}>
-                <h1>Ricerca</h1>
-                <h3>Risultati per: {query.search_name}</h3>
+                <h3 className={styles.title}>Risultati ricerca per: </h3>
+                <div className={styles.filters}>
+                    {query.search_name ? <Chip className={styles.chip} label={query.search_name} leftIcon={<FontAwesomeIcon icon={faSearch} />} /> : null}
+                    {query.category_id && query.category_id !== "all" ? <Chip className={styles.chip} label={categories?.find(c => c.id === parseInt(query.category_id || ""))?.name || ""} leftIcon={<FontAwesomeIcon icon={faTag} />} /> : null}
+               </div>
             </div>
             <div className={styles.content}>
                 <ProductsList title="Nuovi prodotti" products={newestProducts} />

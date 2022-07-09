@@ -3,5 +3,21 @@
 }
 
 .header {
-    padding: 0 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 25px;
+
+    .title {
+        padding: 0;
+        margin: 0;
+        margin-right: 10px;
+    }
+
+    .filters {
+        .chip:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
 }
