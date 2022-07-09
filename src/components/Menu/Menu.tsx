@@ -18,8 +18,15 @@ const Menu = (props: MenuProps) => {
 
             if (menuAnchor.current) {
                 menuAnchor.current.style.top = (anchor?.offsetHeight || 0) + 10 + 'px';
-                menuAnchor.current.style.left = (anchor?.offsetLeft || 0) + 'px';
+                
                 menuAnchor.current.style.minWidth = (anchor?.offsetWidth || 0) + 'px';
+
+                if (anchor?.offsetLeft + menuAnchor?.current?.offsetWidth > document.documentElement.clientWidth) {
+                    menuAnchor.current.style.right = document.documentElement.clientWidth - anchor?.offsetLeft - anchor?.offsetWidth + 'px';
+                } else {
+                    menuAnchor.current.style.left = (anchor?.offsetLeft || 0) + 'px';
+                }
+               
             }
 
         }

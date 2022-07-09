@@ -1,7 +1,7 @@
 import { faSearch, faTag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useMemo, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Chip from '../../components/Chip/Chip';
 import api from '../../config/api';
 import { useAppSelector } from '../../config/store';
@@ -16,12 +16,6 @@ interface IQuery {
 
 interface SearchProps {
 
-}
-
-const useQuery = () => {
-    const { search } = useLocation();
-
-    return useMemo(() => new URLSearchParams(search), [search]);
 }
 
 const Search = (props: SearchProps) => {
