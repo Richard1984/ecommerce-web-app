@@ -20,7 +20,7 @@ const Product = (props: ProductProps) => {
             <div className="product__body">
                 <div className="info">
                     <h3 className="name">{product.name}</h3>
-                    <p className="price">{product.price}</p>
+                    <p className="price">{product.price + " €"}</p>
                 </div>
                 <div className="actions">
                     <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart}/>} text="Aggiungi al carrello" />
