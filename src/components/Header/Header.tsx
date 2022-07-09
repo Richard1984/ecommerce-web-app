@@ -1,8 +1,7 @@
 import { faAngleDown, faGear, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { logout } from "../../reducers/authentication";
 import IUser from "../../shared/models/IUser";
@@ -36,19 +35,13 @@ const Header = (props: HeaderProps) => {
         dispatch(logout())
     }
 
-    useEffect(() => {
-        if (logoutSuccess) {
-            toast.success('Logout effettuato.')
-        }
-    }, [logoutSuccess])
-
     return (
         <header className="header">
             <div className="left">
                 <Link href="/" underline={false}>
                     <h2>Amnazom</h2>
                 </Link>
-                <SearchBar fullWidth categories={categories} />
+                <SearchBar fullWidth/>
             </div>
 
             <div className="right">

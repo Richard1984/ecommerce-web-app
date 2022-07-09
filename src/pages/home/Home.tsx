@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react"
-import Header from "../../components/Header/Header"
 import api from "../../config/api"
-import { useAppDispatch, useAppSelector } from "../../config/store"
-import { getCategories } from "../../reducers/categories"
 import IProduct from "../../shared/models/IProduct"
 import ProductsList from "./components/ProductsList/ProductsList"
-import './home.scss'
+import styles from './home.module.scss'
 
 const Home = () => {
-    const dispatch = useAppDispatch()
-    const [products, setProducts] = useState<IProduct[]>([])
-    const { user } = useAppSelector(state => state.authentication)
+    const [newestProducts, setNewestProducts] = useState<IProduct[]>([]);
+    const [bestSellingProducts, setBestSellingProducts] = useState<IProduct[]>([]);
+    const [bestDealsProducts, setBestDealsProducts] = useState<IProduct[]>([]);
+
+
+    const search = async (searchParams: { sort_criteria: string, sort_order: string }) => {
+        const params = new URLSearchParams();
+        params.append("sort_criteria", searchParams.sort_criteria);
+        params.append("sort_order", searchParams.sort_order);
+
+        const response = await api.get<{ data: IProduct[] }>("/products", { params });
+        return response.data.data
+    }
 
     useEffect(() => {
         const getProducts = async () => {
-            const response = await api.get<{ data: IProduct[] }>("/products")
-            setProducts(response.data.data)
+            const results = await Promise.all([search({ sort_criteria: "date_created", sort_order: "asc" }), search({ sort_criteria: "total_ordered", sort_order: "desc" }), search({  sort_criteria: "price", sort_order: "asc" })])
+            setNewestProducts(results[0])
+            setBestSellingProducts(results[1])
+            setBestDealsProducts(results[2])
         }
         getProducts()
-        dispatch(getCategories())
     }, [])
 
     return (
         <div>
-            <Header user={user}/>
-            <div className="content">
-                <ProductsList title="I prodotti piu venduti" products={products} />
-                <ProductsList title="I prodotti piu amati" products={products} />
-                <ProductsList title="I prodotti piu venduti" products={products} />
-                <ProductsList title="I prodotti piu amati" products={products} />
+            <div className={styles.content}>
+                <ProductsList title="Nuovi prodotti" products={newestProducts} />
+                <ProductsList title="Prodotti più venduti" products={bestSellingProducts} />
+                <ProductsList title="Dal prezzo più basso" products={bestDealsProducts} />
             </div>
         </div>
     )

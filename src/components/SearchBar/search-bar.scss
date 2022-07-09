@@ -23,13 +23,23 @@
     .textfield {
 
         &__input {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
+            border-radius: 0;
             border-left: none;
 
             &:focus {
                 outline: none;
             }
+        }
+    }
+
+    .button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 0;
+
+
+        &:focus {
+            outline: none;
         }
     }
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import './textfield.scss';
 
 interface TextfieldProps {
@@ -12,13 +13,20 @@ interface TextfieldProps {
     required?: boolean;
     fullWidth?: boolean;
     autocomplete?: string;
+    onEnter?: () => void;
 }
 
 const Textfield = (props: TextfieldProps) => {
-    const { label, value, name, onChange, type, placeholder, className, disabled, required, autocomplete } = props;
+    const { label, value, name, onChange, type, placeholder, className, disabled, required, autocomplete, onEnter: handleOnEnter } = props;
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) onChange(e, e.target.value);
+    }
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            if (handleOnEnter) handleOnEnter()
+        }
     }
 
     return (
@@ -36,6 +44,7 @@ const Textfield = (props: TextfieldProps) => {
                     autoComplete={autocomplete}
                     className="textfield__input"
                     style={props.fullWidth ? { width: '100%' } : undefined}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
         </div>
