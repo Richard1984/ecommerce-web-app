@@ -49,7 +49,7 @@ const Review = (props: IReviewProps) => {
                     <img src="https://picsum.photos/50" alt="avatar" />
                 </div>
                 <div className={styles.info}>
-                    <div className={styles.userName}>{"Riccardo Sangiorgio" + (false ? review.user_id : "")}</div>
+                    <div className={styles.userName}>{review.user?.firstname + " " + review.user?.lastname}</div>
                     <StarRatings
                         rating={review.stars || 0}
                         starRatedColor="#ffbf00"
@@ -61,7 +61,7 @@ const Review = (props: IReviewProps) => {
                 </div>
             </div>
             <div className={styles.info}>
-                
+                <div className={styles.date}>Recensito il {new Intl.DateTimeFormat('it-IT', { dateStyle: 'long' }).format(new Date(review.created_at))}</div>
             </div>
             <div className={styles.content}>
                 <div className={styles.text}>{review.comments}</div>

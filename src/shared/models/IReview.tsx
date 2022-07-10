@@ -1,3 +1,5 @@
+import IUser from "./IUser";
+
 interface IReview {
     id: number | null;
     stars: number | null;
@@ -6,6 +8,7 @@ interface IReview {
     user_id: number | null;
     created_at: string;
     updated_at: string;
+    user?: IUser | null;
 }
 
 export const reviewDefaultValue: IReview = {

@@ -54,7 +54,7 @@ const EditReview = (props: IEditReviewProps) => {
 
     return (
         <Dialog open={open} width="600px">
-            <DialogHeader title={"Scrivi una recensione"} />
+            <DialogHeader title={isNew ? "Scrivi una recensione" : "Modifica recensione"} />
             {/* <Divider color="#cacaca"/> */}
             <DialogContent>
                 <div className="rating" style={{ marginBottom: "10px "}}>
@@ -81,8 +81,8 @@ const EditReview = (props: IEditReviewProps) => {
             </DialogContent>
             <DialogActions>
 
-                <Button leftIcon={<FontAwesomeIcon icon={faSave}/>} text="Salva" onClick={handleSubmit} />
-                <Button leftIcon={<FontAwesomeIcon icon={faXmark}/>} text="Annulla" onClick={handleOnClose}/>
+                <Button size="small" leftIcon={<FontAwesomeIcon icon={faSave}/>} text="Salva" onClick={handleSubmit} />
+                <Button size="small" leftIcon={<FontAwesomeIcon icon={faXmark}/>} text="Annulla" onClick={handleOnClose}/>
             </DialogActions>
         </Dialog>
     )
