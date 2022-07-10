@@ -1,5 +1,4 @@
 .button {
-    padding: 12px 9px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -7,7 +6,7 @@
     color: #333;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-        backface-visibility: hidden;
+    backface-visibility: hidden;
 
     &--facebook {
         background-color: #3b5998;
@@ -15,7 +14,24 @@
         color: #fff !important;
     }
 
-    .button__icon {
+    &--large {
+        padding: 12px 9px;
+    }
+
+    &--medium {
+        padding: 12px 9px;
+    }
+
+    &--small {
+        padding: 8px;
+
+
+        .text {
+            font-size: 13px !important;
+        }
+    }
+
+    .icon {
         font-size: 14px;
         font-weight: bold;
         color: inherit;
@@ -23,7 +39,7 @@
         display: inline-block;
     }
 
-    .button__text {
+    .text {
         font-size: 14px;
         font-weight: bold;
         color: inherit;

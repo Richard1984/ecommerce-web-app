@@ -1,15 +1,20 @@
-import "./divider.scss";
+import styles from "./divider.module.scss";
 
 interface DividerProps {
     text?: string;
+    color?: string; 
+    className?: string;
 }
 
 const Divider = (props: DividerProps) => {
+
+    const { text, color, className } = props;
+
     return (
-        <div className="divider">
-            <div className="divider__line"></div>
-            {props.text && <div className="divider__text">{props.text}</div>}
-            <div className="divider__line"></div>
+        <div className={styles.divider + (className ? " " + className : "")}>
+            <div className={styles.line} style={color ? { backgroundColor: color } : {}}></div>
+            {props.text && <div className={styles.text}>{text}</div>}
+            <div className={styles.line} style={color ? { backgroundColor: color } : {}}></div>
         </div>
     )
 }

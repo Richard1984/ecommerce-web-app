@@ -1,0 +1,87 @@
+.review {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 10px;
+
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            overflow: hidden;
+            margin-right: 10px;
+
+            img {
+                display: block;
+            }
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+
+            .userName {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .rating {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+    }
+
+    &>.info {
+        margin-bottom: 10px;
+
+        .date {}
+    }
+
+    .content {
+        padding: 15px;
+        border-radius: 3px;
+        background-color: #eaeaea;
+        width: 100%;
+        margin-bottom: 10px;
+
+        .text {}
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .actions {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+        
+                .action {
+                    &:not(:last-child) {
+                        margin-right: 10px;
+                    }
+                }
+        
+            }
+    }
+}

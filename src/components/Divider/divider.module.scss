@@ -4,14 +4,14 @@
     align-items: center;
     margin: 10px 0;
 
-    &__line {
+    .line {
         flex-grow: 1;
         height: 1px;
         background-color:  black;
         display: inline;
     }
 
-    &__text {
+    .text {
         font-size: 14px;
         font-weight: bold;
         color: inherit;

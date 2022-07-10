@@ -1,5 +1,5 @@
 
-import './button.scss';
+import styles from './button.module.scss';
 
 export interface ButtonProps {
     children?: React.ReactNode;
@@ -9,16 +9,17 @@ export interface ButtonProps {
     leftIcon?: React.ReactNode;
     text?: string;
     type?: "reset" | "submit" | "button";
+    size?: "small" | "medium" | "large";
 }
 
 const Button = (props: ButtonProps) => {
 
-    const { children, onClick, className, componentProps, leftIcon, text, type } = props;
+    const { children, onClick, className, componentProps, leftIcon, text, type, size } = props;
     
     return (
-        <button className={`button ${className}`} {...componentProps} type={type} {...(type === "button" || type === undefined ? { onClick } : {})}>
-            {leftIcon && <div className="button__icon" style={text || children ? { marginRight: "8px" } : { padding: "0 5px"}}>{props.leftIcon}</div>}
-            {text && <div className="button__text">{props.text}</div>}
+        <button className={`${styles.button} ${className ? className + " " : ""}${styles[`button--${size || "medium"}`]}`} {...componentProps} type={type} {...(type === "button" || type === undefined ? { onClick } : {})}>
+            {leftIcon && <div className={styles.icon} style={text || children ? { marginRight: "8px" } : { padding: "0 5px"}}>{props.leftIcon}</div>}
+            {text && <div className={styles.text}>{props.text}</div>}
             {children}
         </button>
     );
