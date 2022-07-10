@@ -1,0 +1,21 @@
+.textarea {
+    max-width: 100%;
+
+    .label {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .group {
+        .input {
+                padding: 12px 10px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                font-size: 14px;
+                resize: none;
+                    font-family: inherit;
+            }
+    }
+}

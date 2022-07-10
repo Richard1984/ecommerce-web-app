@@ -1,4 +1,4 @@
-.search-bar {
+.searchBar {
     display: flex;
     flex-direction: row;
 
@@ -10,7 +10,7 @@
     .select {
         filter: brightness(95%);
 
-        &__input {
+        select {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
 
@@ -22,7 +22,7 @@
 
     .textfield {
 
-        &__input {
+        input {
             border-radius: 0;
             border-left: none;
 

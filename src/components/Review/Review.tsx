@@ -12,13 +12,14 @@ import styles from './review.module.scss';
 interface IReviewProps {
     review: IReview;
     className?: string;
+    onEdit: (review: IReview) => void;
 }
 
 const Review = (props: IReviewProps) => {
     const { user } = useAppSelector(state => state.authentication)
     const [vote, setVote] = useState<IVote | null>(null)
 
-    const { review, className } = props;
+    const { review, className, onEdit: handleOnEdit } = props;
 
     useEffect(() => {
         const getVote = async () => {
@@ -37,8 +38,8 @@ const Review = (props: IReviewProps) => {
     }
 
     const unvoteReview = async () => {
-        const response = await api.delete(`/products/${review.product_id}/reviews/${review.id}/vote`)
-        setVote(response.data.data)
+        await api.delete(`/products/${review.product_id}/reviews/${review.id}/vote`)
+        setVote(null)
     }
 
     return (
@@ -50,7 +51,7 @@ const Review = (props: IReviewProps) => {
                 <div className={styles.info}>
                     <div className={styles.userName}>{"Riccardo Sangiorgio" + (false ? review.user_id : "")}</div>
                     <StarRatings
-                        rating={review.stars}
+                        rating={review.stars || 0}
                         starRatedColor="#ffbf00"
                         numberOfStars={5}
                         name='rating'
@@ -69,7 +70,7 @@ const Review = (props: IReviewProps) => {
                 <div className={styles.stats}>54 persone l'hanno trovato utile</div>
 
                 <div className={styles.actions}>
-                    {review.user_id === user?.id ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faEdit} />} text="Modifica" className={styles.action} /> : null}
+                    {review.user_id === user?.id ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faEdit} />} text="Modifica" className={styles.action} onClick={() => handleOnEdit(review)} /> : null}
                     {vote?.likes ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faXmark} />} text="Annulla voto" className={styles.action} onClick={unvoteReview} /> : <Button size="small" leftIcon={<FontAwesomeIcon icon={faThumbsUp} />} text="Utile" className={styles.action} onClick={voteReview} />}
                 </div>
             </div>

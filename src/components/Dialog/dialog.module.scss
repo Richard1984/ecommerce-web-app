@@ -1,0 +1,48 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .dialog {
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        min-width: 40%;
+
+        .dialogHeader {
+            text-align: left;
+            padding: 20px 20px 10px 20px;
+
+            .title {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+
+        .dialogContent {
+            padding: 0 20px 10px 20px;
+        }
+
+        .dialogActions {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 20px 20px 20px;
+
+            & > * {
+                margin-left: 10px;
+            }
+        }
+    }
+}

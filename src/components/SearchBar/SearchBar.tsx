@@ -7,10 +7,11 @@ import { getCategories } from "../../reducers/categories";
 import Button from "../Button/Button";
 import Select from "../Select/Select";
 import Textfield from "../Textfield/Textfield";
-import "./search-bar.scss";
+import styles from "./search-bar.module.scss";
 
 interface SearchBarProps {
     fullWidth?: boolean;
+    className?: string;
 }
 
 const SearchBar = (props: SearchBarProps) => {
@@ -21,7 +22,7 @@ const SearchBar = (props: SearchBarProps) => {
     const [searchName, setSearchName] = useState<string>("")
     const { entities: categories } = useAppSelector(state => state.categories)
 
-    const { fullWidth} = props;
+    const { fullWidth, className } = props;
 
     const options = [{ value: "all", label: "Tutte le categorie" }, ...(categories || []).map(category => ({ value: String(category.id), label: category.name }))]
 
@@ -54,10 +55,10 @@ const SearchBar = (props: SearchBarProps) => {
     }, [])
 
     return (
-        <div className="search-bar" style={fullWidth ? { width: '100%' } : undefined}>
-            <Select name="select-cateogory" placeholder="Seleziona categoria" value={category} onChange={handleChangeCategory} options={options}/>
-            <Textfield name="products-search" placeholder="Cerca prodotti" fullWidth onEnter={search} value={searchName} onChange={(event, value) => setSearchName(value)} />
-            <Button leftIcon={<FontAwesomeIcon icon={faSearch} />} onClick={search}/>
+        <div className={`${styles.searchBar}${className ? " " + className : ""}`} style={fullWidth ? { width: '100%' } : undefined}>
+            <Select className={styles.select}  name="select-cateogory" placeholder="Seleziona categoria" value={category} onChange={handleChangeCategory} options={options}/>
+            <Textfield className={styles.textfield} type="text" name="products-search" placeholder="Cerca prodotti" fullWidth onEnter={search} value={searchName} onChange={(event, value) => setSearchName(value)} />
+            <Button className={styles.button} leftIcon={<FontAwesomeIcon icon={faSearch} />} onClick={search} />
         </div>
     )
 }

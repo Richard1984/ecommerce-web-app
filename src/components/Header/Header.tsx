@@ -41,7 +41,7 @@ const Header = (props: HeaderProps) => {
                 <Link href="/" underline={false}>
                     <h2>Amnazom</h2>
                 </Link>
-                <SearchBar fullWidth/>
+                <SearchBar fullWidth className="search-bar"/>
             </div>
 
             <div className="right">

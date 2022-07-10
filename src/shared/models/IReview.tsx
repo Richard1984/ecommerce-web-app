@@ -1,6 +1,6 @@
 interface IReview {
     id: number | null;
-    stars: number;
+    stars: number | null;
     comments: string;
     product_id: number | null;
     user_id: number | null;
@@ -10,7 +10,7 @@ interface IReview {
 
 export const reviewDefaultValue: IReview = {
     id: null,
-    stars: 0,
+    stars: null,
     comments: "",
     product_id: null,
     user_id: null,

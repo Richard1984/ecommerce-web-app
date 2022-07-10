@@ -15,20 +15,20 @@ const Product = (props: ProductProps) => {
     const { product, className } = props
 
     return (
-        <Link to={"/products/" + product.id} className={styles.product + (className ? " " + className : "")}>
-            <div className={styles.image}>
+        <div  className={styles.product + (className ? " " + className : "")}>
+            <Link to={"/products/" + product.id} className={styles.image}>
                 <img src="https://picsum.photos/150" alt="product" />
-            </div>
+            </Link>
             <div className={styles.body}>
-                <div className={styles.info}>
+                <Link to={"/products/" + product.id} className={styles.info}>
                     <h3 className={styles.name}>{product.name}</h3>
                     <p className={styles.price}>{product.price + " €"}</p>
-                </div>
+                </Link>
                 <div className={styles.actions}>
                     <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" />
                 </div>
             </div>
-        </Link>
+        </div>
     )
 }
 
