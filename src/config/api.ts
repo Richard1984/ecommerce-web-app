@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/",
-  timeout: 1000,
+  timeout: 3000,
   headers: { "Content-Type": "application/json", Accept: "application/json" },
   withCredentials: true,
 });
@@ -24,7 +24,7 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (["account"].includes(error.response.config.url)) {
+    if (["account"].includes(error.response?.config.url)) {
       return Promise.reject(error);
     }
 

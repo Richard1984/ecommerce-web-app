@@ -2,6 +2,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Environment Variables
+Environment variables can be set in `.env` file.
+```
+REACT_APP_STRIPE_PUB_KEY=<your-stripe-public-key>
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

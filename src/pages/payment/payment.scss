@@ -1,0 +1,42 @@
+.content {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-column {
+    flex: 2;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.right-column {
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.box-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+}
+
+.multiple-input {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+}
+
+.textfield {
+    margin-bottom: 5px;
+}

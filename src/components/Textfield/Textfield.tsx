@@ -14,10 +14,15 @@ interface TextfieldProps {
     fullWidth?: boolean;
     autocomplete?: string;
     onEnter?: () => void;
+    style?: React.CSSProperties;
 }
 
 const Textfield = (props: TextfieldProps) => {
     const { label, value, name, onChange, type, placeholder, className, disabled, required, autocomplete, onEnter: handleOnEnter } = props;
+    let style = props.style || {};
+    if (props.fullWidth){
+        style = { ...style, width: '100%' };
+    }
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) onChange(e, e.target.value);
@@ -30,7 +35,7 @@ const Textfield = (props: TextfieldProps) => {
     }
 
     return (
-        <div className={`textfield${className ? " " + className : ""}`} style={props.fullWidth ? { width: '100%' } : undefined}>
+        <div className={`textfield${className ? " " + className : ""}`} style={style}>
             {label ? <label htmlFor={label} className="textfield__label">{required ? label + "*" : label}</label> : null}
             <div className='textfield__group' style={props.fullWidth ? { width: '100%' } : undefined}>
                 <input

@@ -10,19 +10,20 @@ export interface ButtonProps {
     text?: string;
     type?: "reset" | "submit" | "button";
     size?: "small" | "medium" | "large";
+    disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
 
-    const { children, onClick, className, componentProps, leftIcon, text, type, size } = props;
-    
+    const { children, onClick, className, componentProps, leftIcon, text, type, size, disabled } = props;
+
     return (
-        <button className={`${styles.button} ${className ? className + " " : ""}${styles[`button--${size || "medium"}`]}`} {...componentProps} type={type} {...(type === "button" || type === undefined ? { onClick } : {})}>
-            {leftIcon && <div className={styles.icon} style={text || children ? { marginRight: "8px" } : { padding: "0 5px"}}>{props.leftIcon}</div>}
+        <button disabled={disabled} className={`${styles.button} ${className ? className + " " : ""}${styles[`button--${size || "medium"}`]}`} {...componentProps} type={type} {...(type === "button" || type === undefined ? { onClick } : {})}>
+            {leftIcon && <div className={styles.icon} style={text || children ? { marginRight: "8px" } : { padding: "0 5px" }}>{props.leftIcon}</div>}
             {text && <div className={styles.text}>{props.text}</div>}
             {children}
         </button>
     );
-}
+};
 
-export default Button
+export default Button;

@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import ProductDetail from './pages/product-detail/ProductDetail';
 import Search from './pages/search/Search';
 import SignUp from './pages/signup/Signup';
+import Payment from './pages/payment/Payment';
 import { getAccount } from './reducers/authentication';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
         </Route>
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </div>
   );
