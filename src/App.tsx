@@ -12,31 +12,33 @@ import Search from './pages/search/Search';
 import SignUp from './pages/signup/Signup';
 import Payment from './pages/payment/Payment';
 import { getAccount } from './reducers/authentication';
+import Cart from './pages/cart/Cart';
 
 function App() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAccount());
   }, []);
 
-  
+
   return (
     <div className="App">
       <ToastContainer
         position={toast.POSITION.TOP_LEFT}
         className="toastify-container"
         toastClassName="toastify-toast"
-        style={{ "zIndex": "100001"}}
+        style={{ "zIndex": "100001" }}
       />
       <Routes>
-        
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route element={<PublicLayout/>}>
+        <Route element={<PublicLayout />}>
           <Route index element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
         <Route path="/payment" element={<Payment />} />
       </Routes>

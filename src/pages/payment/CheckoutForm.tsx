@@ -1,18 +1,19 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Textfield from '../../components/Textfield/Textfield';
-import ICartProduct from '../../shared/models/ICartProduct';
+import ICartItem from '../../shared/models/ICartItem';
 import Button from '../../components/Button/Button';
 import { toast } from 'react-toastify';
-import api from '../../config/api';
+import styles from "./payment.module.scss";
+import { Link } from 'react-router-dom';
 
 interface ICheckoutFormProps {
-    cart: ICartProduct[];
+    cart: ICartItem[];
     clientSecret: string;
 }
 
 const CheckoutForm = (props: ICheckoutFormProps) => {
-    const { cart, clientSecret } = props;
+    const { cart } = props;
     const stripe = useStripe();
     const elements = useElements();
     const [isLoading, setIsLoading] = useState(false);
@@ -85,11 +86,11 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
     };
 
     return (
-        <form className="content" onSubmit={handleSubmit}>
-            <div className="left-column">
-                <div className="box-container">
+        <form className={styles["content"]} onSubmit={handleSubmit}>
+            <div className={styles["left-column"]}>
+                <div className={styles["box-container"]}>
                     <h2> Indirizzo e spedizione </h2>
-                    <div className="multiple-input">
+                    <div className={styles["multiple-input"]}>
                         <Textfield
                             type="text"
                             name="firstname"
@@ -112,7 +113,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             required={true}
                         />
                     </div>
-                    <div className="multiple-input">
+                    <div className={styles["multiple-input"]}>
                         <Textfield
                             type="text"
                             name="address"
@@ -147,7 +148,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             required={true}
                         />
                     </div>
-                    <div className="multiple-input">
+                    <div className={styles["multiple-input"]}>
                         <Textfield
                             type="text"
                             name="city"
@@ -172,39 +173,39 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         />
                     </div>
                 </div>
-                <div className="box-container">
+                <div className={styles["box-container"]}>
                     <h2> Pagamento </h2>
                     <PaymentElement id="payment-element" />
                 </div>
             </div>
 
-            <div className="right-column">
-                <div className="box-container">
-                    <div className="payment-title">
+            <div className={styles["right-column"]}>
+                <div className={styles["box-container"]}>
+                    <div className={styles["payment-title"]}>
                         <h2>Riepilogo ordine</h2>
                     </div>
-                    <div className="payment-info">
+                    <div className={styles["payment-info"]}>
                         <ul>
                             {
-                                cart.map((item: ICartProduct) => {
+                                cart.map((item: ICartItem) => {
                                     return (
-                                        <li key={item.id}>
+                                        <li key={item.product.id}>
                                             <span>x{item.quantity}</span>
-                                            <b style={{ marginLeft: "10px" }}>{item.name}</b>
-                                            <span style={{ marginLeft: "10px" }}>{item.price}€</span>
+                                            <b style={{ marginLeft: "10px" }}>{item.product.name}</b>
+                                            <span style={{ marginLeft: "10px" }}>{item.product.price}€</span>
                                         </li>
                                     );
                                 })
                             }
                         </ul>
                         <p>
-                            <span>Totale: </span>
+                            <b>Totale: </b>
                             <span>
                                 {
                                     // sum of all the prices of the cart
                                     cart && cart.reduce((acc, item) => {
-                                        return acc + item.price * item.quantity;
-                                    }, 0)
+                                        return acc + item.product.price * item.quantity;
+                                    }, 0).toFixed(2)
                                 }
                                 €
                             </span>
@@ -212,7 +213,12 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         {isLoading ?
                             <Button disabled text='Pagamento in corso' ></Button>
                             :
-                            <Button text='Paga'></Button>
+                            <div>
+                                <Button type='submit' text='Paga' className={styles['submit-button']}></Button>
+                                <Link to="/cart">
+                                    <Button type='reset' text='Annulla ordine'></Button>
+                                </Link>
+                            </div>
                         }
                     </div>
                 </div>
