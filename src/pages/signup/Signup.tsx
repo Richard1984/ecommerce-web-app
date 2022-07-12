@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
@@ -58,9 +59,9 @@ const SignUp = () => {
         <div className="container">
             <div className="signup">
                 <div className="signup-form">
-                    <div className="signup-form-header">
+                    <NavLink to="/" className="signup-form-header">
                         <h1>Amnazom</h1>
-                    </div>
+                    </NavLink>
                     <div className="signup-form-body">
                         <div className="signup-form-body-picture">
                             <img src={picture} alt="" />

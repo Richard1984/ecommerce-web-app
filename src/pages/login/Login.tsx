@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
@@ -53,9 +53,9 @@ const Login = () => {
         <div className={styles.container}>
             <div className={styles.login}>
                 <div className={styles["login-form"]}>
-                    <div className={styles["login-form-header"]}>
+                    <NavLink to="/" className={styles["login-form-header"]}>
                         <h1>Amnazom</h1>
-                    </div>
+                    </NavLink>
                     <div className={styles["login-form-body"]}>
                         <div className={styles["login-form-body-picture"]}>
                             <img src={picture} alt="" />
