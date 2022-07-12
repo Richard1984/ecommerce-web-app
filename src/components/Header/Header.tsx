@@ -49,9 +49,9 @@ const Header = (props: HeaderProps) => {
                 <div className="menu">
                     {props.user ? (
                         <>
-                            <div className="menu-item shopping-cart-menu" onClick={handleOpenProfileMenu}>
+                            <div className="menu-item shopping-cart-menu">
                         
-                                <RouterLink to="/login">
+                                <RouterLink to="/cart">
                                     <div className="shopping-cart-menu-icon">
                                         <FontAwesomeIcon icon={faShoppingCart} />
                                     </div>

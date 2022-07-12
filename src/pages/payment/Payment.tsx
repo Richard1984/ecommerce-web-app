@@ -1,26 +1,25 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import './payment.scss';
 import MinimalHeader from '../../components/Header/MinimalHeader';
 import api from "../../config/api";
 import { useEffect, useState } from 'react';
-import ICartProduct from '../../shared/models/ICartProduct';
+import ICartItem from '../../shared/models/ICartItem';
 import CheckoutForm from './CheckoutForm';
 
 const stripe_key = process.env.REACT_APP_STRIPE_PUB_KEY || "";
 
 const getOrder = async () => {
     // passing the client secret obtained from the server
-    let response = await api.post("/payment/create_order");
+    let response = await api.get("/payment");
     let clientSecret = response.data.client_secret;
     let cart = response.data.cart;
-    return [clientSecret, cart] as [string, ICartProduct[]];
+    return [clientSecret, cart] as [string, ICartItem[]];
 };
 
 const Payment = () => {
     const [stripe, setStripe] = useState<Stripe>();
     const [clientSecret, setClientSecret] = useState<string>();
-    const [cart, setCart] = useState<ICartProduct[]>([]);
+    const [cart, setCart] = useState<ICartItem[]>([]);
 
     useEffect(() => {
         loadStripe(stripe_key).then(stripe => {
@@ -29,7 +28,7 @@ const Payment = () => {
             }
         });
 
-        getOrder().then((data: [string, ICartProduct[]]) => {
+        getOrder().then((data: [string, ICartItem[]]) => {
             setClientSecret(data[0]);
             setCart(data[1]);
         });
@@ -42,12 +41,14 @@ const Payment = () => {
         return (
             <div>
                 <MinimalHeader />
-                {clientSecret && cart ?
-                    <Elements stripe={stripe} options={{ clientSecret }}>
-                        <CheckoutForm cart={cart} clientSecret={clientSecret}/>
-                    </Elements>
-                    :
-                    <div>Loading...</div>
+                {
+                    clientSecret && cart ? (
+                        <Elements stripe={stripe} options={{ clientSecret }}>
+                            <CheckoutForm cart={cart} clientSecret={clientSecret} />
+                        </Elements>
+                    ) : (
+                        <div>Loading...</div>
+                    )
                 }
             </div>
         );
