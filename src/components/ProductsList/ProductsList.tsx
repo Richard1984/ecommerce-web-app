@@ -48,7 +48,7 @@ const ProductsList = (props: IProductsListProps) => {
     return (
         <div className={styles.productsList} >
             <div className={styles.header}>
-                <h2>{title}</h2>
+                {title}
             </div>
             <div className={styles.body}>
                 {!scrolledToStart ? <button className={styles.buttons + " " + styles.buttonLeft} onClick={handleMoveLeft}><FontAwesomeIcon icon={faAngleLeft} /></button> : null}

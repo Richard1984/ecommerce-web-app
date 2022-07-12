@@ -2,11 +2,14 @@
     width: 100%;
 
     &:not(:last-child) {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .header {
         padding-left: 25px;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 7.5px;
 
         h2 {
             margin-top: 0;
@@ -55,7 +58,7 @@
             flex-direction: row;
             overflow-x: scroll;
             scroll-behavior: smooth;
-            padding: 0 25px;
+            padding: 10px 25px;
 
             /* IE and Edge */
             -ms-overflow-style: none;

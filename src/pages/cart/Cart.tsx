@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import CartItem from "../../components/CartItem/CartItem";
 import Dialog, { DialogActions, DialogHeader } from "../../components/Dialog/Dialog";
+import Paper from "../../components/Paper/Paper";
 import api from "../../config/api";
-import ICartItem, { cartItemDefaultValue } from "../../shared/models/ICartItem";
+import ICartItem from "../../shared/models/ICartItem";
 import styles from "./cart.module.scss";
 
 const Cart = () => {
@@ -73,7 +74,7 @@ const Cart = () => {
             </Dialog>
 
             <div className={styles["left-column"]}>
-                <div className={styles["box-container"]}>
+                <Paper className={styles["box-container"]}>
                     <h2> Il tuo carrello </h2>
                     {
                         cart.length > 0 ? (
@@ -84,7 +85,7 @@ const Cart = () => {
                             <p> Il tuo carrello è vuoto. </p>
                         )
                     }
-                </div>
+                </Paper>
             </div>
             {
                 cart.length > 0 && (

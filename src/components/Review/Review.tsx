@@ -7,6 +7,7 @@ import { useAppSelector } from '../../config/store';
 import IReview from '../../shared/models/IReview';
 import IVote from '../../shared/models/IVote';
 import Button from '../Button/Button';
+import Paper from '../Paper/Paper';
 import styles from './review.module.scss';
 
 interface IReviewProps {
@@ -43,7 +44,7 @@ const Review = (props: IReviewProps) => {
     }
 
     return (
-        <div className={styles.review + (className ? " " + className : "")}>
+        <Paper className={styles.review + (className ? " " + className : "")}>
             <div className={styles.header}>
                 <div className={styles.avatar}>
                     <img src="https://picsum.photos/50" alt="avatar" />
@@ -74,7 +75,7 @@ const Review = (props: IReviewProps) => {
                     {vote?.likes ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faXmark} />} text="Annulla voto" className={styles.action} onClick={unvoteReview} /> : <Button size="small" leftIcon={<FontAwesomeIcon icon={faThumbsUp} />} text="Utile" className={styles.action} onClick={voteReview} />}
                 </div>
             </div>
-        </div>
+        </Paper>
     );
 }
 
