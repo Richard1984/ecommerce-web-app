@@ -1,6 +1,9 @@
 const sassResourcesLoader = require("craco-sass-resources-loader");
+const webpack = require("webpack");
 
 module.exports = async (options) => {
+  const development = options.env === "development";
+
   return {
     devServer: {
       hot: true,
@@ -18,16 +21,27 @@ module.exports = async (options) => {
       historyApiFallback: true,
     },
     webpack: {
-      // plugins: {
-      //   add: [
-      //     {
-      //       plugin: sassResourcesLoader,
-      //       options: {
-      //         resources: "./src/assets/index.scss",
-      //       },
-      //     },
-      //   ],
-      // },
+      plugins: {
+        add: [
+          new webpack.DefinePlugin({
+            DEVELOPMENT: JSON.stringify(development),
+            VERSION: JSON.stringify(
+              process.env.hasOwnProperty("APP_VERSION")
+                ? process.env.APP_VERSION
+                : "DEV"
+            ),
+            SERVER_API_URL: JSON.stringify(
+              process.env.REACT_APP_SERVER_API_URL
+            ),
+          }),
+          //     {
+          //       plugin: sassResourcesLoader,
+          //       options: {
+          //         resources: "./src/assets/index.scss",
+          //       },
+          //     },
+        ],
+      },
     },
   };
 };
