@@ -1,4 +1,4 @@
-import './select.scss';
+import styles from './select.module.scss';
 
 interface SelectOption {
     value: string;
@@ -20,7 +20,6 @@ interface SelectProps {
 
 const Select = (props: SelectProps) => {
 
-
     const { options, label, value, name, onChange, placeholder, className, disabled, required, fullWidth } = props;
 
     const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,9 +28,9 @@ const Select = (props: SelectProps) => {
 
     
         return (
-            <div className={`select${className ? " " + className : ""}`}>
-                {label ? <label htmlFor={label} className="select__label">{required ? label + "*" : label}</label> : null}
-                <select className="select__input"
+            <div className={`${styles.select}${className ? " " + className : ""}`}>
+                {label ? <label htmlFor={label} className={styles.label}>{required ? label + "*" : label}</label> : null}
+                <select className={styles.input}
                     value={value}
                     // onSelect={handleOnChange}
                     onChange={handleOnChange}

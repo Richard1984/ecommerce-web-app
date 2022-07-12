@@ -1,5 +1,5 @@
 import React from 'react';
-import './textfield.scss';
+import styles from './textfield.module.scss';
 
 interface TextfieldProps {
     label?: string;
@@ -20,7 +20,7 @@ interface TextfieldProps {
 const Textfield = (props: TextfieldProps) => {
     const { label, value, name, onChange, type, placeholder, className, disabled, required, autocomplete, onEnter: handleOnEnter } = props;
     let style = props.style || {};
-    if (props.fullWidth){
+    if (props.fullWidth) {
         style = { ...style, width: '100%' };
     }
 
@@ -35,23 +35,21 @@ const Textfield = (props: TextfieldProps) => {
     }
 
     return (
-        <div className={`textfield${className ? " " + className : ""}`} style={style}>
-            {label ? <label htmlFor={label} className="textfield__label">{required ? label + "*" : label}</label> : null}
-            <div className='textfield__group' style={props.fullWidth ? { width: '100%' } : undefined}>
-                <input
-                    type={type}
-                    value={value}
-                    onChange={handleOnChange}
-                    placeholder={placeholder}
-                    name={name}
-                    disabled={disabled}
-                    required={required}
-                    autoComplete={autocomplete}
-                    className="textfield__input"
-                    style={props.fullWidth ? { width: '100%' } : undefined}
-                    onKeyDown={handleKeyDown}
-                />
-            </div>
+        <div className={`${styles.textfield}${className ? " " + className : ""}`} style={style}>
+            {label ? <label htmlFor={label} className={styles.label}>{required ? label + "*" : label}</label> : null}
+            <input
+                type={type}
+                value={value}
+                onChange={handleOnChange}
+                placeholder={placeholder}
+                name={name}
+                disabled={disabled}
+                required={required}
+                autoComplete={autocomplete}
+                className={styles.input}
+                style={props.fullWidth ? { width: '100%' } : undefined}
+                onKeyDown={handleKeyDown}
+            />
         </div>
     )
 }
