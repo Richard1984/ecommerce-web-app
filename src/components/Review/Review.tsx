@@ -47,7 +47,7 @@ const Review = (props: IReviewProps) => {
         <Paper className={styles.review + (className ? " " + className : "")}>
             <div className={styles.header}>
                 <div className={styles.avatar}>
-                    <img src="https://picsum.photos/50" alt="avatar" />
+                    <img src={review.user?.avatar || "https://picsum.photos/50"} alt="avatar" />
                 </div>
                 <div className={styles.info}>
                     <div className={styles.userName}>{review.user?.firstname + " " + review.user?.lastname}</div>

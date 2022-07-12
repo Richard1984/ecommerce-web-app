@@ -5,7 +5,7 @@ interface IUser {
   firstname: string;
   lastname: string;
   email: string;
-  img: string;
+  avatar: string;
   roles: UserRoleEnum[];
 }
 
@@ -14,7 +14,7 @@ export const userDefaultValue: IUser = {
   firstname: "",
   lastname: "",
   email: "",
-  img: "",
+  avatar: "",
   roles: [],
 };
 

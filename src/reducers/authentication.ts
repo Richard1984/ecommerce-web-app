@@ -18,9 +18,14 @@ export const authenticationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(authenticateUser.fulfilled, (state, action) => {
-        state.user = action.payload.data.data;
         const token = action.payload.headers.authorization.split("Bearer ")[1];
         localStorage.setItem("access_token", token);
+        state.user = action.payload.data.data;
+      })
+      .addCase(loginWithFacebook.fulfilled, (state, action) => {
+        const token = action.payload.headers.authorization.split("Bearer ")[1];
+        localStorage.setItem("access_token", token);
+        state.user = action.payload.data.data;
       })
       .addCase(getAccount.fulfilled, (state, action) => {
         state.user = action.payload.data.data;
@@ -51,6 +56,17 @@ export const authenticateUser = createAsyncThunk(
         user: login,
       }
     );
+    return result;
+  }
+);
+
+export const loginWithFacebook = createAsyncThunk(
+  "authentication/login_with_facebook",
+  async (accessToken: string, thunkAPI) => {
+    const requestUrl = `facebook`;
+    const result = await api.post<{ data: IUser }>(requestUrl, {
+      facebook_access_token: accessToken,
+    });
     return result;
   }
 );

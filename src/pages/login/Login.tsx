@@ -7,9 +7,8 @@ import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
 import Link from "../../components/Link/Link";
 import Textfield from "../../components/Textfield/Textfield";
-import api from "../../config/api";
 import { useAppDispatch, useAppSelector } from "../../config/store";
-import { authenticateUser } from "../../reducers/authentication";
+import { authenticateUser, loginWithFacebook } from "../../reducers/authentication";
 import styles from "./login.module.scss";
 
 const Login = () => {
@@ -36,12 +35,7 @@ const Login = () => {
 
         const { accessToken } = facebookResponse
 
-        const response = await api.post('facebook', {
-            facebook_access_token: accessToken
-        })
-
-        // store token to localStorage
-
+        dispatch(loginWithFacebook(accessToken))
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

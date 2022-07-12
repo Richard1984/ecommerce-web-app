@@ -72,7 +72,7 @@ const Header = (props: HeaderProps) => {
                             <div className="separator"/>
                             <div className="menu-item profile-menu" onClick={handleOpenProfileMenu}>
                                 <div className="profile">
-                                    <img src={user?.img || "https://via.placeholder.com/40"} alt="Profile" />
+                                    <img src={user?.avatar || "https://via.placeholder.com/40"} alt="Profile" />
                                 </div>
                                 <p>{user?.firstname + " " + user?.lastname}</p>
                                 {/* <a href="/logout">Logout</a> */}
