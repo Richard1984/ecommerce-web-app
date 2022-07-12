@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import CartItem from "../../components/CartItem/CartItem";
+import Container from "../../components/Container/Container";
 import Dialog, { DialogActions, DialogHeader } from "../../components/Dialog/Dialog";
 import Paper from "../../components/Paper/Paper";
 import api from "../../config/api";
@@ -63,8 +64,7 @@ const Cart = () => {
     }
 
     return (
-        <div className={styles["content"]}>
-
+        <>
             <Dialog open={isOpen} width="600px">
                 <DialogHeader title={"Vuoi davvero rimuovere questo prodotto dal carrello?"} />
                 <DialogActions>
@@ -73,36 +73,40 @@ const Cart = () => {
                 </DialogActions>
             </Dialog>
 
-            <div className={styles["left-column"]}>
-                <Paper className={styles["box-container"]}>
-                    <h2> Il tuo carrello </h2>
-                    {
-                        cart.length > 0 ? (
-                            cart.map(item => (
-                                <CartItem key={item.product.id} item={item} setQuantity={handleChangeQuantity} />
-                            ))
-                        ) : (
-                            <p> Il tuo carrello è vuoto. </p>
-                        )
-                    }
-                </Paper>
-            </div>
-            {
-                cart.length > 0 && (
-                    <div className={styles["right-column"]}>
-                        <div className={styles["box-container"]}>
-                            <h2> Totale </h2>
-                            <h3>
-                                {cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2) + " €"}
-                            </h3>
-                            <Link to={"/payment"} className={styles.image}>
-                                <Button text="Vai al checkout" />
-                            </Link>
+
+            <Container size="large" className={styles["content"]}>
+
+                <div className={styles["left-column"]}>
+                    <Paper className={styles["box-container"]}>
+                        <h2> Il tuo carrello </h2>
+                        {
+                            cart.length > 0 ? (
+                                cart.map(item => (
+                                    <CartItem key={item.product.id} item={item} setQuantity={handleChangeQuantity} />
+                                ))
+                            ) : (
+                                <p> Il tuo carrello è vuoto. </p>
+                            )
+                        }
+                    </Paper>
+                </div>
+                {
+                    cart.length > 0 && (
+                        <div className={styles["right-column"]}>
+                            <div className={styles["box-container"]}>
+                                <h2> Totale </h2>
+                                <h3>
+                                    {cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2) + " €"}
+                                </h3>
+                                <Link to={"/payment"} className={styles.image}>
+                                    <Button text="Vai al checkout" />
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                )
-            }
-        </div>
+                    )
+                }
+            </Container>
+        </>
     );
 };
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import Button from '../../components/Button/Button';
+import Container from '../../components/Container/Container';
 import Divider from '../../components/Divider/Divider';
 import Review from '../../components/Review/Review';
 import api from '../../config/api';
@@ -46,7 +47,7 @@ const ProductDetail = () => {
 
     return (
         <>
-            <div className={styles.content}>
+            <Container size='large' className={styles.content}>
                 <section className={styles.productSection}>
                     <div className={styles.images}>
                         <img src="https://picsum.photos/150" alt="product" />
@@ -85,7 +86,7 @@ const ProductDetail = () => {
                         {reviews.map(review => (<Review review={review} className={styles.review} key={review.id} onEdit={handleOpenEditReviewDialog} />))}
                     </div>
                 </section>
-            </div>
+            </Container>
             <EditReview open={editReviewDialog} review={reviewToEdit} product={product} onClose={handleCloseEditReviewDialog} onEdit={getReviews} />
         </>
     );
