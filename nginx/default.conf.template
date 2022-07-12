@@ -1,3 +1,7 @@
+upstream api {
+  server $SERVER_API_URL:7000;
+}
+
 server {
   # Remove all inherited headers
   listen $PORT default_server;
@@ -7,5 +11,12 @@ server {
     try_files $uri $uri/ /index.html;
     index  index.html;
   }
+
+    location /api {
+		rewrite ^/api/(.*) /$1  break;
+        proxy_pass_header X-XSRF-TOKEN;
+		proxy_set_header Origin $http_host;
+		proxy_pass http://api;
+	}
 
 }

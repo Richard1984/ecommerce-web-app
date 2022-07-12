@@ -30,9 +30,6 @@ module.exports = async (options) => {
                 ? process.env.APP_VERSION
                 : "DEV"
             ),
-            SERVER_API_URL: JSON.stringify(
-              process.env.REACT_APP_SERVER_API_URL
-            ),
           }),
           //     {
           //       plugin: sassResourcesLoader,

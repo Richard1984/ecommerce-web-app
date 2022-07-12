@@ -4,7 +4,7 @@ FROM node:16-alpine as builder
 ARG SERVER_API_URL
 
 # Environment vars
-ENV REACT_APP_SERVER_API_URL=$SERVER_API_URL
+ENV SERVER_API_URL=$SERVER_API_URL
 
 WORKDIR /app
 COPY package*.json /app/
@@ -20,4 +20,4 @@ COPY --from=builder /app/build /usr/share/nginx/html
 ENV PORT=80
 EXPOSE 80
 
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+CMD /bin/bash -c "envsubst '\$PORT \$SERVER_API_URL' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

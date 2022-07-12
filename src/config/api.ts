@@ -2,10 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL:
-    process.env.NODE_ENV !== "development"
-      ? SERVER_API_URL
-      : "http://localhost:3000/",
+  baseURL: DEVELOPMENT ? "http://localhost:3000" : "api/",
   timeout: 3000,
   headers: { "Content-Type": "application/json", Accept: "application/json" },
   withCredentials: true,
