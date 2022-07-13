@@ -1,10 +1,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
-import Textfield from '../../components/Textfield/Textfield';
-import ICartItem from '../../shared/models/ICartItem';
-import Button from '../../components/Button/Button';
+import Textfield from '../../../components/Textfield/Textfield';
+import ICartItem from '../../../shared/models/ICartItem';
+import Button from '../../../components/Button/Button';
 import { toast } from 'react-toastify';
-import styles from "./payment.module.scss";
+import styles from "../payment.module.scss";
 import { Link } from 'react-router-dom';
 
 interface ICheckoutFormProps {
@@ -203,9 +203,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             <span>
                                 {
                                     // sum of all the prices of the cart
-                                    cart && cart.reduce((acc, item) => {
-                                        return acc + item.product.price * item.quantity;
-                                    }, 0).toFixed(2)
+                                    cart && cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2)
                                 }
                                 €
                             </span>

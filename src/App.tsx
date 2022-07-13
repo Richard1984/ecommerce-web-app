@@ -13,6 +13,7 @@ import SignUp from './pages/signup/Signup';
 import Payment from './pages/payment/Payment';
 import { getAccount } from './reducers/authentication';
 import Cart from './pages/cart/Cart';
+import Orders from './pages/orders/Orders';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -39,6 +40,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Orders />} />
         </Route>
         <Route path="/payment" element={<Payment />} />
       </Routes>

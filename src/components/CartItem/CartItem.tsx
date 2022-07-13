@@ -3,16 +3,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import ICartItem from "../../shared/models/ICartItem";
 import Button from "../Button/Button";
-import styles from './cartItem.module.scss'
+import styles from './cartItem.module.scss';
 
+
+export interface CartItemEditableProps {
+    item: ICartItem;
+    setQuantity: (id: number | null, quantity: number) => void | undefined;
+    isEditable?: true;
+}
 
 export interface CartItemProps {
     item: ICartItem;
-    setQuantity: (id: number | null, quantity: number) => void;
+    isEditable: false;
 }
 
-const CartItem = (props: CartItemProps) => {
-    const { item, setQuantity } = props;
+const CartItem = (props: CartItemEditableProps | CartItemProps) => {
+    const { item, isEditable } = props;
 
     return (
         <div className={styles.product}>
@@ -26,12 +32,24 @@ const CartItem = (props: CartItemProps) => {
                 </Link>
             </div>
             <div className={styles.rightBody}>
-                <Button leftIcon={<FontAwesomeIcon icon={faMinusSquare}/>} onClick={() => setQuantity(item.product.id, item.quantity - 1)} />
-                <p className={styles.quantity}>{item.quantity}</p>
-                <Button leftIcon={<FontAwesomeIcon icon={faPlusSquare}/>}onClick={() => setQuantity(item.product.id, item.quantity + 1)} />
+                {
+                    isEditable === false ||
+                    <Button
+                        leftIcon={<FontAwesomeIcon icon={faMinusSquare} />}
+                        onClick={() => props.setQuantity(item.product.id, item.quantity - 1)}
+                    />
+                }
+                <p className={styles.quantity}>x{item.quantity}</p>
+                {
+                    isEditable === false ||
+                    <Button
+                        leftIcon={<FontAwesomeIcon icon={faPlusSquare} />}
+                        onClick={() => props.setQuantity(item.product.id, item.quantity + 1)}
+                    />
+                }
             </div>
         </div>
     );
-}
+};
 
 export default CartItem;
