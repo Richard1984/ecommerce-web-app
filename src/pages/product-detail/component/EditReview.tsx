@@ -80,7 +80,6 @@ const EditReview = (props: IEditReviewProps) => {
                     onChange={(event, value) => setForm({...form, comments: value})} />
             </DialogContent>
             <DialogActions>
-
                 <Button size="small" leftIcon={<FontAwesomeIcon icon={faSave}/>} text="Salva" onClick={handleSubmit} />
                 <Button size="small" leftIcon={<FontAwesomeIcon icon={faXmark}/>} text="Annulla" onClick={handleOnClose}/>
             </DialogActions>

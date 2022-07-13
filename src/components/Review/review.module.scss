@@ -67,18 +67,33 @@
         align-items: center;
         width: 100%;
 
-        .actions {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-end;
-                align-items: center;
-        
-                .action {
-                    &:not(:last-child) {
-                        margin-right: 10px;
-                    }
-                }
-        
+        @include devices(tablet) {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .stats {
+
+            @include devices(tablet) {
+                margin-bottom: 10px;
             }
+
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+
+
+
+            .action {
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+
+        }
     }
 }

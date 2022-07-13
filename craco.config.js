@@ -1,10 +1,18 @@
-const sassResourcesLoader = require("craco-sass-resources-loader");
 const webpack = require("webpack");
 
 module.exports = async (options) => {
   const development = options.env === "development";
 
   return {
+    style: {
+      sass: {
+        loaderOptions: {
+          additionalData: `
+          @import "src/assets/styles/index.scss";
+        `,
+        },
+      },
+    },
     devServer: {
       hot: true,
       port: 3001,
@@ -31,12 +39,6 @@ module.exports = async (options) => {
                 : "DEV"
             ),
           }),
-          //     {
-          //       plugin: sassResourcesLoader,
-          //       options: {
-          //         resources: "./src/assets/index.scss",
-          //       },
-          //     },
         ],
       },
     },
