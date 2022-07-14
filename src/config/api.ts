@@ -16,6 +16,14 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+const logError = (error: any) => {
+  if (error?.response?.data?.message) {
+    toast.error(error.response.data.message);
+  } else if (error?.response?.data?.error) {
+    toast.error(error.response.data.error);
+  }
+};
+
 api.interceptors.response.use(
   (response) => {
     if (response?.data?.message) {
@@ -24,16 +32,16 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (["account"].includes(error.response?.config.url)) {
-      return Promise.reject(error);
-    }
-
-    if (error?.response?.data?.message) {
-      toast.error(error.response.data.message);
-    } else if (error?.response?.data?.error) {
-      toast.error(error.response.data.error);
+    if (error.response?.status === 401) {
+      if (!["login"].includes(error.response?.config.url)) {
+        return Promise.reject(error);
+      }
+    } else if (error.response?.status === 403) {
+      return;
     } else if (error?.response?.status === 404) {
       toast.error("Not found");
+    } else {
+      logError(error);
     }
 
     return Promise.reject(error);

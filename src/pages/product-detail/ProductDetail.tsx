@@ -83,7 +83,9 @@ const ProductDetail = () => {
                         <Button text="Scrivi una recensione" leftIcon={<FontAwesomeIcon icon={faAdd}/>}  onClick={() => handleOpenEditReviewDialog(null)} />
                     </div>
                     <div className={styles.reviews}>
-                        {reviews.map(review => (<Review review={review} className={styles.review} key={review.id} onEdit={handleOpenEditReviewDialog} />))}
+                        {reviews.length ? (
+                            reviews.map(review => (<Review review={review} className={styles.review} key={review.id} onEdit={handleOpenEditReviewDialog} />))
+                        ) : (<div className={styles.noReviews}>Nessuna recensione</div>)}
                     </div>
                 </section>
             </Container>

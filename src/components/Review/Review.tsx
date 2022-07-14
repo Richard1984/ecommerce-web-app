@@ -27,7 +27,9 @@ const Review = (props: IReviewProps) => {
             const response = await api.get(`/products/${review.product_id}/reviews/${review.id}/vote`)
             setVote(response.data.data)
         }
-        getVote()
+        if (user) {
+            getVote()
+        }
     }, [review])
 
     const voteReview = async () => {

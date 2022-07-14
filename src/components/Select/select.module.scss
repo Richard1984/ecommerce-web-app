@@ -13,6 +13,11 @@
         border: 1px solid #ccc;
         border-radius: 3px;
         font-size: 14px;
-        height: 46px;
+        height: 100%;
+        background: url(data:image/svg+xml;base64,PHN2ZyBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMTYuODQzIDEwLjIxMWMuMTA4LS4xNDEuMTU3LS4zLjE1Ny0uNDU2IDAtLjM4OS0uMzA2LS43NTUtLjc0OS0uNzU1aC04LjUwMWMtLjQ0NSAwLS43NS4zNjctLjc1Ljc1NSAwIC4xNTcuMDUuMzE2LjE1OS40NTcgMS4yMDMgMS41NTQgMy4yNTIgNC4xOTkgNC4yNTggNS40OTguMTQyLjE4NC4zNi4yOS41OTIuMjkuMjMgMCAuNDQ5LS4xMDcuNTkxLS4yOTEgMS4wMDItMS4yOTkgMy4wNDQtMy45NDUgNC4yNDMtNS40OTh6Ii8+PC9zdmc+) no-repeat 97% 56%;
+        background-size: 25px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
     }
 }
