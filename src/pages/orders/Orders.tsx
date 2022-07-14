@@ -12,8 +12,8 @@ const Orders = () => {
 
     useEffect(() => {
         const getOrders = async () => {
-            const response = await api.get<{ data: IOrder[] }>("/account/orders");
-            setOrders(response.data.data);
+            const response = await api.get<{ data: IOrder[]; }>("/account/orders");
+            setOrders(response.data.data.sort(order => - (order.id || 0)));
             setIsLoading(false);
         };
         getOrders();

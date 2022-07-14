@@ -12,7 +12,7 @@ type ICartItemProps = {
     item: ICartItem;
     setQuantity: (id: number | null, quantity: number) => void | undefined;
     isEditable?: true;
-}
+};
 
 const CartItem = (props: ICartItemProps) => {
     const { item, isEditable } = props;
@@ -33,15 +33,18 @@ const CartItem = (props: ICartItemProps) => {
                     isEditable === false ||
                     <Button
                         leftIcon={<FontAwesomeIcon icon={faMinusSquare} />}
-                        onClick={() => isEditable ? props.setQuantity(item.product.id, item.quantity - 1) : null}
+                        onClick={() => props.setQuantity(item.product.id, item.quantity - 1)}
                     />
                 }
-                <p className={styles.quantity}>x{item.quantity}</p>
+                <p className={styles.quantity}>
+                    <b>Quantità</b><br />
+                    x{item.quantity}
+                </p>
                 {
                     isEditable === false ||
                     <Button
                         leftIcon={<FontAwesomeIcon icon={faPlusSquare} />}
-                        onClick={() => isEditable ? props.setQuantity(item.product.id, item.quantity + 1) : null}
+                        onClick={() => props.setQuantity(item.product.id, item.quantity + 1)}
                     />
                 }
             </div>

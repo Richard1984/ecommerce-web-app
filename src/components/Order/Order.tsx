@@ -1,5 +1,5 @@
 
-import IOrder from "../../shared/models/IOrder";
+import IOrder, { ShippingStatusEnum } from "../../shared/models/IOrder";
 import CartItem from "../CartItem/CartItem";
 import Link from "../Link/Link";
 import styles from "./order.module.scss";
@@ -9,14 +9,18 @@ interface OrderProps {
 }
 
 export const getShippingStatus = (order: IOrder) => {
-    if (order.shipping_status === "delivered") {
-        return "Consegnato";
-    } else if (order.shipping_status === "shipped") {
-        return "Spedito";
-    } else if (order.shipping_status === "pending") {
-        return "In attesa di spedizione";
+    switch (order.shipping_status) {
+        case ShippingStatusEnum.NOT_SHIPPED:
+            return "Non spedito";
+        case ShippingStatusEnum.PENDING:
+            return "In lavorazione";
+        case ShippingStatusEnum.SHIPPED:
+            return "Spedito";
+        case ShippingStatusEnum.DELIVERED:
+            return "Consegnato";
+        default:
+            return "ERROR";
     }
-    return "Non spedito";
 };
 
 export const renderOrder = (order: IOrder) => {

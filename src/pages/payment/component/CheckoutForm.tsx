@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Textfield from '../../../components/Textfield/Textfield';
 import ICartItem from '../../../shared/models/ICartItem';
@@ -6,17 +7,19 @@ import Button from '../../../components/Button/Button';
 import { toast } from 'react-toastify';
 import styles from "../payment.module.scss";
 import { Link } from 'react-router-dom';
+import api from '../../../config/api';
 
 interface ICheckoutFormProps {
     cart: ICartItem[];
-    clientSecret: string;
+    orderId: number;
 }
 
 const CheckoutForm = (props: ICheckoutFormProps) => {
-    const { cart } = props;
+    const { cart, orderId } = props;
     const stripe = useStripe();
     const elements = useElements();
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         firstname: "",
@@ -79,6 +82,18 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
             setErrorMessage(error.message || "Something went wrong");
         } else {
             toast.success("Payment successful. Redirecting to order confirmation page...");
+            await api.post("/payment/success/client", {
+                order_id: orderId,
+                name: `${form.firstname} ${form.lastname}`,
+                address: {
+                    line1: form.address,
+                    line2: form.house_number,
+                    city: form.city,
+                    country: form.country,
+                    postal_code: form.zip,
+                }
+            });
+            navigate("/account/orders/" + orderId);
         }
 
         setIsLoading(false);

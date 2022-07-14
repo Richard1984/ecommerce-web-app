@@ -1,14 +1,12 @@
-import { debug } from "console";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import CartItem from "../../components/CartItem/CartItem";
 import Container from "../../components/Container/Container";
 import Divider from "../../components/Divider/Divider";
-import Order, { renderOrder, getShippingStatus, getTotalOrder } from "../../components/Order/Order";
+import { renderOrder, getShippingStatus, getTotalOrder } from "../../components/Order/Order";
 import Paper from "../../components/Paper/Paper";
 import api from "../../config/api";
-import IOrder from "../../shared/models/IOrder";
+import IOrder, { PaymentStatusEnum } from "../../shared/models/IOrder";
 import styles from "./order-detail.module.scss";
 
 type OrderDetailParams = Record<"id", string>;
@@ -18,20 +16,35 @@ const OrderDetail = () => {
     const [order, setOrder] = useState<IOrder>();
     const [isLoading, setIsLoading] = useState(true);
 
-    const handleReceipt = () => {
-
-    };
-
-
     useEffect(() => {
         const getOrders = async () => {
             const response = await api.get<{ data: IOrder; }>("/account/orders/" + params.id);
-            console.log(response.data.data);
             setOrder(response.data.data);
             setIsLoading(false);
         };
         getOrders();
+
     }, [params.id]);
+
+    const handleReceipt = () => {
+        // open receipt_url on a new window
+        if (order?.receipt_url) {
+            window.open(order.receipt_url, "_blank");
+        }
+    };
+
+    const getPaymentStatus = (order: IOrder) => {
+        switch (order.payment_status) {
+            case PaymentStatusEnum.NOT_PAID:
+                return "Non pagato";
+            case PaymentStatusEnum.PAID_CLIENT:
+                return "In attesa di verifica pagamento";
+            case PaymentStatusEnum.PAID:
+                return "Pagato";
+            default:
+                return "ERROR";
+        }
+    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -53,8 +66,9 @@ const OrderDetail = () => {
                         </div>
                         <div className={styles["right-column"]}>
                             <h3> Stato ordine </h3>
-                            <p> Totale: {getTotalOrder(order)} <br />
-                                Stato spedizione: {getShippingStatus(order)} </p>
+                            <p> Totale: <b>{getTotalOrder(order)}</b> <br />
+                                Stato pagamento: <b>{getPaymentStatus(order)}</b> <br />
+                                Stato spedizione: <b>{getShippingStatus(order)}</b> </p>
                             <Button
                                 text="Scarica ricevuta"
                                 onClick={handleReceipt}

@@ -11,15 +11,17 @@ const stripe_key = STRIPE_PUB_KEY || "";
 const getOrder = async () => {
     // passing the client secret obtained from the server
     let response = await api.get("/payment");
-    let clientSecret = response.data.client_secret;
-    let cart = response.data.cart;
-    return [clientSecret, cart] as [string, ICartItem[]];
+    let clientSecret = response.data.client_secret as string;
+    let cart = response.data.cart as ICartItem[];
+    let orderId = response.data.order_id as number;
+    return { clientSecret, cart, orderId };
 };
 
 const Payment = () => {
     const [stripe, setStripe] = useState<Stripe>();
     const [clientSecret, setClientSecret] = useState<string>();
     const [cart, setCart] = useState<ICartItem[]>([]);
+    const [orderId, setOrderId] = useState<number>(-1);
 
     useEffect(() => {
         loadStripe(stripe_key).then(stripe => {
@@ -28,9 +30,10 @@ const Payment = () => {
             }
         });
 
-        getOrder().then((data: [string, ICartItem[]]) => {
-            setClientSecret(data[0]);
-            setCart(data[1]);
+        getOrder().then(({ clientSecret, cart, orderId }) => {
+            setClientSecret(clientSecret);
+            setCart(cart);
+            setOrderId(orderId);
         });
     }, []);
 
@@ -44,7 +47,7 @@ const Payment = () => {
                 {
                     clientSecret && cart ? (
                         <Elements stripe={stripe} options={{ clientSecret }}>
-                            <CheckoutForm cart={cart} clientSecret={clientSecret} />
+                            <CheckoutForm cart={cart} orderId={orderId} />
                         </Elements>
                     ) : (
                         <div>Loading...</div>
