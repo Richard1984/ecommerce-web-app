@@ -9,6 +9,7 @@ interface IReview {
     created_at: string;
     updated_at: string;
     user?: IUser | null;
+    votes?: { likes: number, dislikes: number } | null;
 }
 
 export const reviewDefaultValue: IReview = {

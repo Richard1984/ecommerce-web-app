@@ -33,11 +33,18 @@ api.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      if (!["login"].includes(error.response?.config.url)) {
-        return Promise.reject(error);
+      if (!["account", "users/login"].includes(error.response?.config.url)) {
+        toast.error("Non si detengono i privilegi necessari.");
+        console.log(error);
+        // return Promise.reject(error);
+      } else {
+        logError(error);
       }
     } else if (error.response?.status === 403) {
-      return;
+      if (!["account"].includes(error.response?.config.url)) {
+        toast.error("Non si detengono i privilegi necessari.");
+        // return Promise.reject(error);
+      }
     } else if (error?.response?.status === 404) {
       toast.error("Not found");
     } else {

@@ -1,13 +1,14 @@
 import { faAdd, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
 import Divider from '../../components/Divider/Divider';
 import Review from '../../components/Review/Review';
 import api from '../../config/api';
+import { useAppSelector } from '../../config/store';
 import IProduct from '../../shared/models/IProduct';
 import IReview from '../../shared/models/IReview';
 import EditReview from './component/EditReview';
@@ -15,6 +16,8 @@ import styles from './product-detail.module.scss';
 
 const ProductDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { user } = useAppSelector(state => state.authentication);
     const [product, setProduct] = useState<IProduct | null>(null);
     const [reviews, setReviews] = useState<IReview[]>([]);
     const [reviewToEdit, setReviewToEdit] = useState<IReview | null>(null);
@@ -30,6 +33,13 @@ const ProductDetail = () => {
         setReviewToEdit(null);
     }
 
+    const handleAddTocard = () => {
+        if (!user) {
+            return navigate('/login');
+        }
+
+        // Aggiungi prodotto al carrello
+    }
 
     const getReviews = async () => {
         const response = await api.get<{ data: IReview[] }>(`/products/${id}/reviews`);
@@ -72,7 +82,7 @@ const ProductDetail = () => {
                     <div className={styles.sidebar}>
                         <div className={styles.availability}>{product?.availability + " ancora disponibili"}</div>
                         <div className={styles.actions}>
-                            <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" />
+                            <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard}/>
                         </div>
                     </div>
                 </section>
@@ -80,7 +90,7 @@ const ProductDetail = () => {
                 <section className={styles.reviewsSection}>
                     <div className={styles.header}>
                         <div className={styles.title}>Recensioni</div>
-                        <Button text="Scrivi una recensione" leftIcon={<FontAwesomeIcon icon={faAdd}/>}  onClick={() => handleOpenEditReviewDialog(null)} />
+                        {user ? <Button text="Scrivi una recensione" leftIcon={<FontAwesomeIcon icon={faAdd} />} onClick={() => handleOpenEditReviewDialog(null)} /> : null}
                     </div>
                     <div className={styles.reviews}>
                         {reviews.length ? (

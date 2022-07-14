@@ -70,11 +70,21 @@ const Review = (props: IReviewProps) => {
                 <div className={styles.text}>{review.comments}</div>
             </div>
             <div className={styles.footer}>
-                <div className={styles.stats}>54 persone l'hanno trovato utile</div>
+                <div className={styles.stats}>{review.votes?.likes} persone l'hanno trovato utile</div>
 
                 <div className={styles.actions}>
                     {review.user_id === user?.id ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faEdit} />} text="Modifica" className={styles.action} onClick={() => handleOnEdit(review)} /> : null}
-                    {vote?.likes ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faXmark} />} text="Annulla voto" className={styles.action} onClick={unvoteReview} /> : <Button size="small" leftIcon={<FontAwesomeIcon icon={faThumbsUp} />} text="Utile" className={styles.action} onClick={voteReview} />}
+                    {user ?
+                        (
+                            vote?.likes ?
+                                (
+                                    <Button size="small" leftIcon={<FontAwesomeIcon icon={faXmark} />} text="Annulla voto" className={styles.action} onClick={unvoteReview} />
+                                ) :
+                                (
+                                    <Button size="small" leftIcon={<FontAwesomeIcon icon={faThumbsUp} />} text="Utile" className={styles.action} onClick={voteReview} />
+                                )
+                        )
+                        : null}
                 </div>
             </div>
         </Paper>

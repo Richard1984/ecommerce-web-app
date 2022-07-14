@@ -12,9 +12,16 @@ server {
     index  index.html;
   }
 
-    location /api {
+  location /api {
 		rewrite ^/api/(.*) /$1  break;
-        proxy_pass_header X-XSRF-TOKEN;
+    proxy_pass_header X-XSRF-TOKEN;
+		proxy_set_header Origin $http_host;
+		proxy_pass http://api;
+	}
+
+  location /rails {
+    rewrite ^/rails/(.*) /$1  break;
+    proxy_pass_header X-XSRF-TOKEN;
 		proxy_set_header Origin $http_host;
 		proxy_pass http://api;
 	}
