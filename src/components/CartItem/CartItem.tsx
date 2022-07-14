@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import ICartItem from "../../shared/models/ICartItem";
 import Button from "../Button/Button";
-import styles from './cartItem.module.scss';
+import styles from './cart-item.module.scss';
 
 type ICartItemProps = {
     item: ICartItem;

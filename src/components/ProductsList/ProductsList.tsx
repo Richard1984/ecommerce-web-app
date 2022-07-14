@@ -43,7 +43,7 @@ const ProductsList = (props: IProductsListProps) => {
             setScrolledToStart(true)
         }
         productsListRef.current?.addEventListener("scroll", handleOnScroll);
-    }, [productsListRef.current])
+    }, [productsListRef])
 
     return (
         <div className={styles.productsList} >

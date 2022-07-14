@@ -14,6 +14,7 @@ import Payment from './pages/payment/Payment';
 import { getAccount } from './reducers/authentication';
 import Cart from './pages/cart/Cart';
 import Orders from './pages/orders/Orders';
+import OrderDetail from './pages/order-detail/OrderDetail';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,10 +27,12 @@ function App() {
   return (
     <div className="App">
       <ToastContainer
-        position={toast.POSITION.TOP_LEFT}
+        position={toast.POSITION.BOTTOM_RIGHT}
         className="toastify-container"
         toastClassName="toastify-toast"
         style={{ "zIndex": "100001" }}
+        autoClose={1000}
+        limit={3}
       />
       <Routes>
 
@@ -39,8 +42,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Orders />} />
+          <Route path="/account/cart" element={<Cart />} />
+          <Route path="/account/orders" element={<Orders />} />
+          <Route path="/account/orders/:id" element={<OrderDetail />} />
         </Route>
         <Route path="/payment" element={<Payment />} />
       </Routes>

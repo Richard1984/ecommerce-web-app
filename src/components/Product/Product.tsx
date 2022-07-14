@@ -1,10 +1,11 @@
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link } from "react-router-dom"
-import IProduct from "../../shared/models/IProduct"
-import Button from "../Button/Button"
-import Paper from "../Paper/Paper"
-import styles from './product.module.scss'
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import api from "../../config/api";
+import IProduct from "../../shared/models/IProduct";
+import Button from "../Button/Button";
+import Paper from "../Paper/Paper";
+import styles from './product.module.scss';
 
 interface ProductProps {
     product: IProduct;
@@ -13,7 +14,15 @@ interface ProductProps {
 
 const Product = (props: ProductProps) => {
 
-    const { product, className } = props
+    const { product, className } = props;
+
+    const handleAddToCart = async () => {
+        await api.put("/account/cart", { 
+            op : "create",
+            product_id: product.id,
+            quantity: 1
+        });
+    };
 
     return (
         <Paper className={styles.product + (className ? " " + className : "")}>
@@ -26,11 +35,16 @@ const Product = (props: ProductProps) => {
                     <p className={styles.price}>{product.price + " €"}</p>
                 </Link>
                 <div className={styles.actions}>
-                    <Button size="small" leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" />
+                    <Button
+                        size="small"
+                        leftIcon={<FontAwesomeIcon icon={faShoppingCart} />}
+                        text="Aggiungi al carrello"
+                        onClick={handleAddToCart}
+                    />
                 </div>
             </div>
         </Paper>
-    )
-}
+    );
+};
 
-export default Product
+export default Product;

@@ -70,8 +70,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         country: form.country,
                         postal_code: form.zip,
                     },
-                },
-                receipt_email: "test@mail.com"
+                }
             },
         });
 
@@ -213,7 +212,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             :
                             <div>
                                 <Button type='submit' text='Paga' className={styles['submit-button']}></Button>
-                                <Link to="/cart">
+                                <Link to="/account/cart">
                                     <Button type='reset' text='Annulla ordine'></Button>
                                 </Link>
                             </div>

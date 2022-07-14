@@ -52,7 +52,7 @@ const Header = (props: HeaderProps) => {
                         <>
                             <div className="menu-item shopping-cart-menu">
                         
-                                <RouterLink to="/cart">
+                                <RouterLink to="/account/cart">
                                     <div className="shopping-cart-menu-icon">
                                         <FontAwesomeIcon icon={faShoppingCart} />
                                     </div>
