@@ -2,9 +2,11 @@ FROM node:16-alpine as builder
 
 # Build args
 ARG SERVER_API_URL
+ARG STRIPE_PUB_KEY
 
 # Environment vars
 ENV SERVER_API_URL=$SERVER_API_URL
+ENV REACT_APP_STRIPE_PUB_KEY=$STRIPE_PUB_KEY
 
 WORKDIR /app
 COPY package*.json /app/

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+
 import IOrder from "../../shared/models/IOrder";
 import CartItem from "../CartItem/CartItem";
+import Link from "../Link/Link";
 import styles from "./order.module.scss";
 
 interface OrderProps {

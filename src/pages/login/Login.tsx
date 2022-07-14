@@ -91,7 +91,7 @@ const Login = () => {
                                 />
                             </div>
                             <div style={{ textAlign: "center" }}>
-                                <p>Non sei ancora registrato? <Link href="/signup">Registrati</Link></p>
+                                <p>Non sei ancora registrato? <Link to="/signup">Registrati</Link></p>
                             </div>
                         </div>
                     </div>

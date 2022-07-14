@@ -5,19 +5,16 @@ import ICartItem from "../../shared/models/ICartItem";
 import Button from "../Button/Button";
 import styles from './cartItem.module.scss';
 
-
-export interface CartItemEditableProps {
+type ICartItemProps = {
+    item: ICartItem;
+    isEditable: false;
+} | {
     item: ICartItem;
     setQuantity: (id: number | null, quantity: number) => void | undefined;
     isEditable?: true;
 }
 
-export interface CartItemProps {
-    item: ICartItem;
-    isEditable: false;
-}
-
-const CartItem = (props: CartItemEditableProps | CartItemProps) => {
+const CartItem = (props: ICartItemProps) => {
     const { item, isEditable } = props;
 
     return (
@@ -36,7 +33,7 @@ const CartItem = (props: CartItemEditableProps | CartItemProps) => {
                     isEditable === false ||
                     <Button
                         leftIcon={<FontAwesomeIcon icon={faMinusSquare} />}
-                        onClick={() => props.setQuantity(item.product.id, item.quantity - 1)}
+                        onClick={() => isEditable ? props.setQuantity(item.product.id, item.quantity - 1) : null}
                     />
                 }
                 <p className={styles.quantity}>x{item.quantity}</p>
@@ -44,7 +41,7 @@ const CartItem = (props: CartItemEditableProps | CartItemProps) => {
                     isEditable === false ||
                     <Button
                         leftIcon={<FontAwesomeIcon icon={faPlusSquare} />}
-                        onClick={() => props.setQuantity(item.product.id, item.quantity + 1)}
+                        onClick={() => isEditable ? props.setQuantity(item.product.id, item.quantity + 1) : null}
                     />
                 }
             </div>

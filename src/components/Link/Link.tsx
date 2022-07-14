@@ -1,18 +1,19 @@
 import { NavLink } from "react-router-dom";
-import './link.scss';
+import styles from './link.module.scss';
 
 interface LinkProps {
-    href: string;
+    to: string;
     underline?: boolean;
     children: React.ReactNode;
+    className?: string;
 }
 
 const Link = (props: LinkProps) => {
 
-    const { href, underline = true, children } = props;
+    const { to, underline = true, children, className } = props;
 
     return (
-        <NavLink to={href} className={"link" + (underline ? " link--underline"  : "")}>
+        <NavLink to={to} className={`${styles.link}${className ? " " + className : ""}${underline ? " " + styles["link--underline"]  : ""}`}>
             {children}
         </NavLink>
     )

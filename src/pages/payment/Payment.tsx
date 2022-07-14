@@ -1,12 +1,12 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { useEffect, useState } from 'react';
 import MinimalHeader from '../../components/Header/MinimalHeader';
 import api from "../../config/api";
-import { useEffect, useState } from 'react';
 import ICartItem from '../../shared/models/ICartItem';
 import CheckoutForm from './component/CheckoutForm';
 
-const stripe_key = process.env.REACT_APP_STRIPE_PUB_KEY || "";
+const stripe_key = STRIPE_PUB_KEY || "";
 
 const getOrder = async () => {
     // passing the client secret obtained from the server

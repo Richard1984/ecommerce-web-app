@@ -5,7 +5,7 @@ const MinimalHeader = () => {
     return (
         <header className="header">
             <div className="left">
-                <Link href="/" underline={false}>
+                <Link to="/" underline={false}>
                     <h2>Amnazom</h2>
                 </Link>
             </div>

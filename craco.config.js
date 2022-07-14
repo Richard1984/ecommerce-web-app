@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+require("react-scripts/config/env");
 
 module.exports = async (options) => {
   const development = options.env === "development";
@@ -37,6 +38,9 @@ module.exports = async (options) => {
               process.env.hasOwnProperty("APP_VERSION")
                 ? process.env.APP_VERSION
                 : "DEV"
+            ),
+            STRIPE_PUB_KEY: JSON.stringify(
+              process.env.REACT_APP_STRIPE_PUB_KEY
             ),
           }),
         ],
