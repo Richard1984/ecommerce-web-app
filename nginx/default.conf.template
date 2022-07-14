@@ -20,7 +20,7 @@ server {
 	}
 
   location /rails {
-    rewrite ^/rails/(.*) /$1  break;
+    # rewrite ^/rails/(.*) /$1  break;
     proxy_pass_header X-XSRF-TOKEN;
 		proxy_set_header Origin $http_host;
 		proxy_pass http://api;
