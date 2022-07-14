@@ -13,14 +13,15 @@ import styles from './review.module.scss';
 interface IReviewProps {
     review: IReview;
     className?: string;
-    onEdit: (review: IReview) => void;
+    onEdit?: (review: IReview) => void;
+    onVote?: (review: IReview) => void;
 }
 
 const Review = (props: IReviewProps) => {
     const { user } = useAppSelector(state => state.authentication)
     const [vote, setVote] = useState<IVote | null>(null)
 
-    const { review, className, onEdit: handleOnEdit } = props;
+    const { review, className, onEdit: handleOnEdit, onVote: handleOnVote } = props;
 
     useEffect(() => {
         const getVote = async () => {
@@ -38,11 +39,13 @@ const Review = (props: IReviewProps) => {
             review_id: review.id
         })
         setVote(response.data.data)
+        handleOnVote && handleOnVote(review)
     }
 
     const unvoteReview = async () => {
         await api.delete(`/products/${review.product_id}/reviews/${review.id}/vote`)
         setVote(null)
+        handleOnVote && handleOnVote(review)
     }
 
     return (
@@ -73,7 +76,7 @@ const Review = (props: IReviewProps) => {
                 <div className={styles.stats}>{review.votes?.likes} persone l'hanno trovato utile</div>
 
                 <div className={styles.actions}>
-                    {review.user_id === user?.id ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faEdit} />} text="Modifica" className={styles.action} onClick={() => handleOnEdit(review)} /> : null}
+                    {review.user_id === user?.id ? <Button size="small" leftIcon={<FontAwesomeIcon icon={faEdit} />} text="Modifica" className={styles.action} onClick={() => handleOnEdit && handleOnEdit(review)} /> : null}
                     {user ?
                         (
                             vote?.likes ?

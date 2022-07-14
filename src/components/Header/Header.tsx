@@ -1,4 +1,4 @@
-import { faAngleDown, faGear, faRightFromBracket, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faBagShopping, faGear, faRightFromBracket, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -33,6 +33,7 @@ const Header = (props: HeaderProps) => {
 
     const handleLogout = async () => {
         dispatch(logout())
+        handleCloseProfileMenu()
     }
 
     return (
@@ -81,8 +82,9 @@ const Header = (props: HeaderProps) => {
                                 </div>
                             </div>
                             <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
-                                <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} />
-                                <MenuItem text="Impostazioni" icon={<FontAwesomeIcon icon={faGear} />} />
+                                <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu}/>
+                                <MenuItem text="I miei ordini" to="/orders" icon={<FontAwesomeIcon icon={faBagShopping} />}onClick={handleCloseProfileMenu}/>
+                                <MenuItem text="Impostazioni" icon={<FontAwesomeIcon icon={faGear} />} onClick={handleCloseProfileMenu}/>
                                 <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                             </Menu>
                         </>

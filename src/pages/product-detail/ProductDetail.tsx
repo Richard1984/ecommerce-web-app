@@ -82,7 +82,7 @@ const ProductDetail = () => {
                     <div className={styles.sidebar}>
                         <div className={styles.availability}>{product?.availability + " ancora disponibili"}</div>
                         <div className={styles.actions}>
-                            <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard}/>
+                            <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard} />
                         </div>
                     </div>
                 </section>
@@ -94,7 +94,7 @@ const ProductDetail = () => {
                     </div>
                     <div className={styles.reviews}>
                         {reviews.length ? (
-                            reviews.map(review => (<Review review={review} className={styles.review} key={review.id} onEdit={handleOpenEditReviewDialog} />))
+                            reviews.map(review => (<Review review={review} className={styles.review} key={review.id} onEdit={handleOpenEditReviewDialog} onVote={getReviews} />))
                         ) : (<div className={styles.noReviews}>Nessuna recensione</div>)}
                     </div>
                 </section>
