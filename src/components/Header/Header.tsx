@@ -83,7 +83,7 @@ const Header = (props: HeaderProps) => {
                             </div>
                             <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
                                 <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu}/>
-                                <MenuItem text="I miei ordini" to="/orders" icon={<FontAwesomeIcon icon={faBagShopping} />}onClick={handleCloseProfileMenu}/>
+                                <MenuItem text="I miei ordini" to="/account/orders" icon={<FontAwesomeIcon icon={faBagShopping} />}onClick={handleCloseProfileMenu}/>
                                 <MenuItem text="Impostazioni" icon={<FontAwesomeIcon icon={faGear} />} onClick={handleCloseProfileMenu}/>
                                 <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                             </Menu>

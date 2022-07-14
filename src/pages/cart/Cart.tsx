@@ -75,10 +75,9 @@ const Cart = () => {
 
 
             <Container size="large" className={styles["content"]}>
-
                 <div className={styles["left-column"]}>
                     <Paper className={styles["box-container"]}>
-                        <h2> Il tuo carrello </h2>
+                        <div className={styles.title}> Il tuo carrello </div>
                         {
                             cart.length > 0 ? (
                                 cart.map(item => (
@@ -94,7 +93,7 @@ const Cart = () => {
                     cart.length > 0 && (
                         <div className={styles["right-column"]}>
                             <div className={styles["box-container"]}>
-                                <h2> Totale </h2>
+                                <div className={styles.title}> Totale </div>
                                 <h3>
                                     {cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2) + " €"}
                                 </h3>
