@@ -70,7 +70,7 @@
                 }
             }
 
-            .shopping-cart-menu {
+            .item-menu {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -84,17 +84,17 @@
                     justify-content: space-between;
                     flex-direction: row;
 
-                    .shopping-cart-menu-icon {
+                    .item-menu-icon {
                         font-size: 22px;
                         margin-right: 10px;
                     }
 
-                    .shopping-cart-menu-primary {
+                    .item-menu-primary {
                         font-size: 12px;
                         margin: 0;
                     }
 
-                    .shopping-cart-menu-secondary {
+                    .item-menu-secondary {
                         font-size: 14px;
                         font-weight: bold;
                         margin: 0;
