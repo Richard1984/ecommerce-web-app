@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import Divider from "../../components/Divider/Divider";
@@ -16,15 +16,19 @@ const OrderDetail = () => {
     const [order, setOrder] = useState<IOrder>();
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        const getOrders = async () => {
-            const response = await api.get<{ data: IOrder; }>("/account/orders/" + params.id);
-            setOrder(response.data.data);
-            setIsLoading(false);
-        };
-        getOrders();
+    const getOrders = async () => {
+        const response = await api.get<{ data: IOrder; }>("/account/orders/" + params.id);
+        setOrder(response.data.data);
+        setIsLoading(false);
+        if (response.data.data?.receipt_url === null) {
+            setTimeout(() => getOrders(), 2000);
+        }
+    };
 
+    useEffect(() => {
+        getOrders();
     }, [params.id]);
+
 
     const handleReceipt = () => {
         // open receipt_url on a new window
@@ -58,11 +62,24 @@ const OrderDetail = () => {
         <div>
             <Container size="large" className={styles["content"]}>
                 <Paper className={styles["box-container"]}>
-                    <h2> Dettagli ordine #{order.id} </h2>
+                    <div className={styles["box-header"]}>
+                        <h2> Dettagli ordine #{order.id} </h2>
+                        <Link to="/account/orders">
+                            <Button>Torna all'elenco ordini</Button>
+                        </Link>
+                    </div>
                     <Divider />
                     <div className={styles["columns"]}>
                         <div className={styles["left-column"]}>
                             <h3> Indirizzo di spedizione </h3>
+                            {
+                                order.address && order.address.name &&
+                                <p>
+                                    {order.address.name} <br />
+                                    {order.address.line1} - {order.address.line2} <br />
+                                    {order.address.postal_code} - {order.address.city} - {order.address.country}
+                                </p>
+                            }
                         </div>
                         <div className={styles["right-column"]}>
                             <h3> Stato ordine </h3>
@@ -70,6 +87,7 @@ const OrderDetail = () => {
                                 Stato pagamento: <b>{getPaymentStatus(order)}</b> <br />
                                 Stato spedizione: <b>{getShippingStatus(order)}</b> </p>
                             <Button
+                                disabled={order.receipt_url === null}
                                 text="Scarica ricevuta"
                                 onClick={handleReceipt}
                             />

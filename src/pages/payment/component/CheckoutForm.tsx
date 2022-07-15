@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import Textfield from '../../../components/Textfield/Textfield';
@@ -18,7 +18,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
     const { cart, orderId } = props;
     const stripe = useStripe();
     const elements = useElements();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isPaying, setIsPaying] = useState(false);
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -35,15 +35,6 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
     };
-    const [errorMessage, setErrorMessage] = useState<string>("");
-
-    // on errorMessage change, setErrorMessage to empty string
-    useEffect(() => {
-        if (errorMessage.length > 0) {
-            toast.error(errorMessage);
-            setErrorMessage("");
-        }
-    }, [errorMessage]);
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -54,17 +45,37 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
 
         // form should be filled out
         if (form.firstname === "" || form.lastname === "" || form.address === "" || form.house_number === "" || form.zip === "" || form.city === "" || form.country === "") {
-            setErrorMessage("Please fill out all fields");
+            toast.error("Please fill out all fields");
             return;
         }
 
-        setIsLoading(true);
+        setIsPaying(true);
 
-        const { error } = await stripe.confirmPayment({
-            elements,
-            redirect: "if_required",
-            confirmParams: {
-                shipping: {
+        try {
+            const { error } = await stripe.confirmPayment({
+                elements,
+                redirect: "if_required",
+                confirmParams: {
+                    shipping: {
+                        name: `${form.firstname} ${form.lastname}`,
+                        address: {
+                            line1: form.address,
+                            line2: form.house_number,
+                            city: form.city,
+                            country: form.country,
+                            postal_code: form.zip,
+                        }
+                    },
+                },
+            });
+
+
+            if (error) {
+                toast.error(error.message || "Something went wrong");
+            } else {
+                toast.success("Payment successful. Redirecting to order confirmation page...");
+                await api.post("/payment/success/client", {
+                    order_id: orderId,
                     name: `${form.firstname} ${form.lastname}`,
                     address: {
                         line1: form.address,
@@ -72,31 +83,15 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         city: form.city,
                         country: form.country,
                         postal_code: form.zip,
-                    },
-                }
-            },
-        });
-
-
-        if (error) {
-            setErrorMessage(error.message || "Something went wrong");
-        } else {
-            toast.success("Payment successful. Redirecting to order confirmation page...");
-            await api.post("/payment/success/client", {
-                order_id: orderId,
-                name: `${form.firstname} ${form.lastname}`,
-                address: {
-                    line1: form.address,
-                    line2: form.house_number,
-                    city: form.city,
-                    country: form.country,
-                    postal_code: form.zip,
-                }
-            });
-            navigate("/account/orders/" + orderId);
+                    }
+                });
+                navigate("/account/orders/" + orderId);
+            }
+        } catch (err: any) {
+            toast.error(err.message || "Something went wrong");
         }
 
-        setIsLoading(false);
+        setIsPaying(false);
     };
 
     return (
@@ -222,7 +217,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                                 €
                             </span>
                         </p>
-                        {isLoading ?
+                        {isPaying ?
                             <Button disabled text='Pagamento in corso' ></Button>
                             :
                             <div>

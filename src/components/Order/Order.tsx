@@ -49,4 +49,4 @@ const Order = (props: OrderProps) => {
     );
 };
 
-export default Order;;;
+export default Order;

@@ -28,9 +28,12 @@ const Orders = () => {
             <Paper className={styles["box-container"]}>
                 <div className={styles.title}> I tuoi ordini </div>
                 {
-                    orders.map(order => (
-                        <Order key={order.id} order={order} />
-                    ))
+                    orders.length > 0 ?
+                        orders.map(order => (
+                            <Order key={order.id} order={order} />
+                        ))
+                        :
+                        <p> Sembra che tu non abbia effettuato nessun ordine. </p>
                 }
             </Paper>
         </Container>

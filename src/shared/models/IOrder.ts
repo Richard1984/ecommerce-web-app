@@ -11,6 +11,7 @@ export enum PaymentStatusEnum {
     NOT_PAID = 0,
     PAID_CLIENT = 1,
     PAID = 2,
+    FAILED = 3
 }
 
 interface IOrder {
@@ -19,6 +20,14 @@ interface IOrder {
     shipping_status: ShippingStatusEnum;
     payment_status: PaymentStatusEnum;
     receipt_url?: string;
+    address?: {
+        name: string;
+        city: string;
+        country: string;
+        line1: string;
+        line2: string;
+        postal_code: string;
+    };
 }
 
 export const orderItemDefaultValue: IOrder = {
