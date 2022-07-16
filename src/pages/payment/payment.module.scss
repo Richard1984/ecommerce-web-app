@@ -44,3 +44,15 @@
 .submit-button {
     margin-right: 10px;
 }
+
+.payment-method {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 0 0 10px 0;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: #e0e0e0;
+}

@@ -8,18 +8,24 @@ import { toast } from 'react-toastify';
 import styles from "../payment.module.scss";
 import { Link } from 'react-router-dom';
 import api from '../../../config/api';
+import IPaymentMethod from '../../../shared/models/IPaymentMethod';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 interface ICheckoutFormProps {
     cart: ICartItem[];
     orderId: number;
+    clientSecret: string;
+    paymentMethods: IPaymentMethod[];
 }
 
 const CheckoutForm = (props: ICheckoutFormProps) => {
-    const { cart, orderId } = props;
+    const { cart, orderId, clientSecret, paymentMethods } = props;
     const stripe = useStripe();
     const elements = useElements();
     const [isPaying, setIsPaying] = useState(false);
     const navigate = useNavigate();
+    const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<number>(-1);
 
     const [form, setForm] = useState({
         firstname: "",
@@ -52,23 +58,44 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
         setIsPaying(true);
 
         try {
-            const { error } = await stripe.confirmPayment({
-                elements,
-                redirect: "if_required",
-                confirmParams: {
-                    shipping: {
-                        name: `${form.firstname} ${form.lastname}`,
-                        address: {
-                            line1: form.address,
-                            line2: form.house_number,
-                            city: form.city,
-                            country: form.country,
-                            postal_code: form.zip,
-                        }
+            let error;
+            if (selectedPaymentMethod === -1) {
+                let response = await stripe.confirmPayment({
+                    elements,
+                    redirect: "if_required",
+                    confirmParams: {
+                        shipping: {
+                            name: `${form.firstname} ${form.lastname}`,
+                            address: {
+                                line1: form.address,
+                                line2: form.house_number,
+                                city: form.city,
+                                country: form.country,
+                                postal_code: form.zip,
+                            }
+                        },
                     },
-                },
-            });
-
+                });
+                error = response.error;
+            } else {
+                let response = await stripe.confirmCardPayment(
+                    clientSecret,
+                    {
+                        payment_method: paymentMethods[selectedPaymentMethod].id,
+                        shipping: {
+                            name: `${form.firstname} ${form.lastname}`,
+                            address: {
+                                line1: form.address,
+                                line2: form.house_number,
+                                city: form.city,
+                                country: form.country,
+                                postal_code: form.zip,
+                            }
+                        }
+                    }
+                );
+                error = response.error;
+            }
 
             if (error) {
                 toast.error(error.message || "Something went wrong");
@@ -183,8 +210,43 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                     </div>
                 </div>
                 <div className={styles["box-container"]}>
-                    <h2> Pagamento </h2>
-                    <PaymentElement id="payment-element" />
+                    <h2> Metodi di pagamento </h2>
+                    {
+                        props.paymentMethods.length > 0 &&
+                        <div>
+                            <p> Seleziona il metodo di pagamento che preferisci: </p>
+                            {
+                                props.paymentMethods.map((paymentMethod, index) => {
+                                    return (
+                                        <div
+                                            key={paymentMethod.id}
+                                            className={styles["payment-method"] + " " + (selectedPaymentMethod === index ? styles["selected"] : "")}
+                                            onClick={() => setSelectedPaymentMethod(index)}
+                                        >
+                                            <p>
+                                                <FontAwesomeIcon icon={faCreditCard} />
+                                                <span style={{ marginLeft: "10px" }} />
+                                                {paymentMethod.card.brand} - ****{paymentMethod.card.last4}
+                                            </p>
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
+                    }
+                    <div
+                        className={styles["payment-method"] + " " + (selectedPaymentMethod === -1 ? styles["selected"] : "")}
+                        onClick={() => setSelectedPaymentMethod(-1)}
+                    >
+                        <p>
+                            <FontAwesomeIcon icon={faCreditCard} />
+                            <span style={{ marginLeft: "10px" }} />
+                            Aggiungi nuovo metodo di pagamento
+                        </p>
+                        <div style={selectedPaymentMethod === -1 ? {} : { display: "none" }}>
+                            <PaymentElement id="payment-element" />
+                        </div>
+                    </div>
                 </div>
             </div>
 

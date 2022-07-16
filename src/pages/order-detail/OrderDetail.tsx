@@ -73,12 +73,14 @@ const OrderDetail = () => {
                         <div className={styles["left-column"]}>
                             <h3> Indirizzo di spedizione </h3>
                             {
-                                order.address && order.address.name &&
+                                order.address && order.address.name ?
                                 <p>
                                     {order.address.name} <br />
                                     {order.address.line1} - {order.address.line2} <br />
                                     {order.address.postal_code} - {order.address.city} - {order.address.country}
                                 </p>
+                                :
+                                <p> In attesa di verifica </p>
                             }
                         </div>
                         <div className={styles["right-column"]}>
