@@ -1,6 +1,7 @@
 .product {
     display: flex;
     flex-direction: row;
+
     .image {
         overflow: hidden;
         border-top-left-radius: 3px;
@@ -11,11 +12,15 @@
         width: 150px;
         height: 150px;
         padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         img {
             display: block;
-            margin: 0 auto;
-            height: 100%;
+            max-width: fill-available;
+            max-height: fill-available;
         }
     }
 

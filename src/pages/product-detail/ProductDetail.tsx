@@ -60,7 +60,7 @@ const ProductDetail = () => {
             <Container size='large' className={styles.content}>
                 <section className={styles.productSection}>
                     <div className={styles.images}>
-                        <img src="https://picsum.photos/150" alt="product" />
+                        <img src={product?.images[0]} alt="product" />
                     </div>
                     <div className={styles.info}>
                         <div className={styles.productName}>{product?.name}</div>
