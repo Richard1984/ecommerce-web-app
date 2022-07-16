@@ -7,9 +7,15 @@
         border-bottom-left-radius: 3px;
         color: inherit;
         text-decoration: none;
+        display: block;
+        width: 150px;
+        height: 150px;
+        padding: 10px;
 
         img {
             display: block;
+            margin: 0 auto;
+            height: 100%;
         }
     }
 

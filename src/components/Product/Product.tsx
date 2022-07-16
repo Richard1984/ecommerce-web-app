@@ -27,7 +27,7 @@ const Product = (props: ProductProps) => {
     return (
         <Paper className={styles.product + (className ? " " + className : "")}>
             <Link to={"/products/" + product.id} className={styles.image}>
-                <img src="https://picsum.photos/150" alt="product" />
+                <img src={product.images[0]} alt="product" />
             </Link>
             <div className={styles.body}>
                 <Link to={"/products/" + product.id} className={styles.info}>
