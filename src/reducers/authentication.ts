@@ -27,6 +27,11 @@ export const authenticationSlice = createSlice({
         localStorage.setItem("access_token", token);
         state.user = action.payload.data.data;
       })
+      .addCase(signup.fulfilled, (state, action) => {
+        const token = action.payload.headers.authorization.split("Bearer ")[1];
+        localStorage.setItem("access_token", token);
+        state.user = action.payload.data.data;
+      })
       .addCase(getAccount.fulfilled, (state, action) => {
         state.user = action.payload.data.data;
       })
@@ -54,6 +59,28 @@ export const authenticateUser = createAsyncThunk(
       requestUrl,
       {
         user: login,
+      }
+    );
+    return result;
+  }
+);
+
+export const signup = createAsyncThunk(
+  "authentication/signup",
+  async (
+    user: {
+      firstname: string;
+      lastname: string;
+      email: string;
+      password: string;
+    },
+    thunkAPI
+  ) => {
+    const requestUrl = `users/signup`;
+    const result = await api.post<{ data: IUser; message: string }>(
+      requestUrl,
+      {
+        user,
       }
     );
     return result;

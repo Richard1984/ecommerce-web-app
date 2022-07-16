@@ -25,11 +25,6 @@ const Login = () => {
         dispatch(authenticateUser({ email: form.email, password: form.password }))
     }
 
-
-    const handleFacebookLogin = () => {
-        console.log("handleFacebookLogin");
-    }
-
     const responseFacebook = async (facebookResponse: ReactFacebookLoginInfo) => {
         if (!facebookResponse) return
 
@@ -82,7 +77,6 @@ const Login = () => {
                                     // autoLoad={true}
                                     fields="first_name,last_name,email,picture"
                                     scope="public_profile,email"
-                                    onClick={handleFacebookLogin}
                                     callback={responseFacebook}
                                     icon="fa-facebook"
                                     render={renderProps => (

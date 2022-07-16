@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
 import Textfield from "../../components/Textfield/Textfield";
-import api from "../../config/api";
+import { useAppDispatch, useAppSelector } from "../../config/store";
+import { loginWithFacebook, signup } from "../../reducers/authentication";
 import "./signup.scss";
 
 
 const SignUp = () => {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const { user } = useAppSelector(state => state.authentication)
     const [form, setForm] = useState({
         firstname: "",
         lastname: "",
@@ -21,20 +24,7 @@ const SignUp = () => {
     const [picture, setPicture] = useState('');
 
     const handleSignup = async () => {
-        const response = await api.post('users/signup', {
-            user: {
-                firstname: form.firstname,
-                lastname: form.lastname,
-                email: form.email,
-                password: form.password
-            }
-        });
-        toast.success("Login successful");
-    }
-
-
-    const handleFacebookLogin = () => {
-        console.log("handleFacebookLogin");
+        dispatch(signup({ firstname: form.firstname, lastname: form.lastname, email: form.email, password: form.password }))
     }
 
     const responseFacebook = async (facebookResponse: ReactFacebookLoginInfo) => {
@@ -42,18 +32,19 @@ const SignUp = () => {
 
         const { accessToken } = facebookResponse
 
-        const response = await api.post('facebook', {
-            facebook_access_token: accessToken
-        })
-
-        // store token to localStorage
-
+        dispatch(loginWithFacebook(accessToken))
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user])
 
     return (
         <div className="container">
@@ -89,7 +80,6 @@ const SignUp = () => {
                                     // autoLoad={true}
                                     fields="first_name,last_name,email,picture"
                                     scope="public_profile,email"
-                                    onClick={handleFacebookLogin}
                                     callback={responseFacebook}
                                     icon="fa-facebook"
                                     render={renderProps => (
