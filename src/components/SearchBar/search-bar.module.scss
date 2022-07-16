@@ -1,6 +1,8 @@
 .searchBar {
     display: flex;
     flex-direction: row;
+    // align-items: center;
+    // justify-content: center;
 
     &:focus-within {
         outline: 2px solid black;
@@ -13,6 +15,7 @@
         select {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            min-width: 170px;
 
             &:focus {
                 outline: none;
@@ -21,7 +24,6 @@
     }
 
     .textfield {
-
         input {
             border-radius: 0;
             border-left: none;
