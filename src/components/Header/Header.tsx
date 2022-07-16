@@ -1,7 +1,7 @@
-import { faAngleDown, faBagShopping, faGear, faReceipt, faRightFromBracket, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faGear, faReceipt, faRightFromBracket, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { logout } from "../../reducers/authentication";
 import IUser from "../../shared/models/IUser";
@@ -16,6 +16,7 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const [profileMenuAnchor, setProfileMenuAnchor] = useState<HTMLElement | null>(null);
     const { entities: categories } = useAppSelector(state => state.categories);
@@ -30,7 +31,7 @@ const Header = (props: HeaderProps) => {
     const handleCloseProfileMenu = () => {
         setProfileMenuAnchor(null);
     };
-
+    
     const handleLogout = async () => {
         dispatch(logout());
         handleCloseProfileMenu();
@@ -86,7 +87,7 @@ const Header = (props: HeaderProps) => {
                                 </div>
                             </div>
                             <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
-                                <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu} />
+                                <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu} to="/account" />
                                 <MenuItem text="Impostazioni" icon={<FontAwesomeIcon icon={faGear} />} onClick={handleCloseProfileMenu} />
                                 <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                             </Menu>

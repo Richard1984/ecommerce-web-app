@@ -7,6 +7,13 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     backface-visibility: hidden;
+    text-align: center;
+    text-decoration: none;
+    background-color: #f0f0f0;
+
+    &--full-width {
+        width: 100%;
+    }
 
     &--facebook {
         background-color: #3b5998;

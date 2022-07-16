@@ -5,16 +5,17 @@ import "react-toastify/dist/ReactToastify.css";
 import './App.scss';
 import { useAppDispatch } from './config/store';
 import PublicLayout from './layout/PublicLayout/PublicLayout';
+import Account from './pages/account/Account';
+import Cart from './pages/cart/Cart';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
+import OrderDetail from './pages/order-detail/OrderDetail';
+import Orders from './pages/orders/Orders';
+import Payment from './pages/payment/Payment';
 import ProductDetail from './pages/product-detail/ProductDetail';
 import Search from './pages/search/Search';
 import SignUp from './pages/signup/Signup';
-import Payment from './pages/payment/Payment';
 import { getAccount } from './reducers/authentication';
-import Cart from './pages/cart/Cart';
-import Orders from './pages/orders/Orders';
-import OrderDetail from './pages/order-detail/OrderDetail';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/account" element={<Account />} />
           <Route path="/account/cart" element={<Cart />} />
           <Route path="/account/orders" element={<Orders />} />
           <Route path="/account/orders/:id" element={<OrderDetail />} />
