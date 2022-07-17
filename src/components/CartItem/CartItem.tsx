@@ -19,8 +19,10 @@ const CartItem = (props: ICartItemProps) => {
 
     return (
         <div className={styles.product}>
-            <Link to={"/products/" + item.product.id} className={styles.image}>
-                <img src="https://picsum.photos/150" alt="product" />
+            <Link to={"/products/" + item.product.id}>
+                <div className={styles.image}>
+                    <img src={item.product?.images[0]} alt="product" />
+                </div>
             </Link>
             <div className={styles.body}>
                 <Link to={"/products/" + item.product.id} className={styles.info}>
