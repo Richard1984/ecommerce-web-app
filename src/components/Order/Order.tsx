@@ -34,11 +34,11 @@ export const getTotalOrder = (order: IOrder) => {
 const Order = (props: OrderProps) => {
     const { order } = props;
     return (
-        <div className={styles["order"]}>
-            <div className={styles["order-header"]}>
+        <div className={styles.order}>
+            <div className={styles.orderHeader}>
                 <h3> {`Ordine #${order.id} - ${getTotalOrder(order)}`} </h3>
                 <h3> {getShippingStatus(order)} </h3>
-                <Link to={"/account/orders/" + order.id} className={styles["order-link"]}>
+                <Link to={"/account/orders/" + order.id}>
                     <p> Dettagli ordine </p>
                 </Link>
             </div>

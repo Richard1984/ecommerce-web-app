@@ -22,7 +22,7 @@ const Cart = () => {
             setCart(response.data.data);
             setIsLoading(false);
             } catch (error: any) {
-                if(error.response.status === 403) {
+                if (!error || !error.response || error.response.status === 403) {
                     window.location.href = "/";
                 }
             }
@@ -80,9 +80,9 @@ const Cart = () => {
             </Dialog>
 
 
-            <Container size="large" className={styles["content"]}>
-                <div className={styles["left-column"]}>
-                    <Paper className={styles["box-container"]}>
+            <Container size="large" className={styles.content}>
+                <div className={styles.leftColumn}>
+                    <Paper className={styles.boxContainer}>
                         <div className={styles.title}> Il tuo carrello </div>
                         {
                             cart.length > 0 ? (
@@ -97,8 +97,8 @@ const Cart = () => {
                 </div>
                 {
                     cart.length > 0 && (
-                        <div className={styles["right-column"]}>
-                            <div className={styles["box-container"]}>
+                        <div className={styles.rightColumn}>
+                            <div className={styles.boxContainer}>
                                 <div className={styles.title}> Totale </div>
                                 <h3>
                                     {cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toFixed(2) + " €"}

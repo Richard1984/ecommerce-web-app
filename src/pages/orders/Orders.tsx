@@ -30,8 +30,8 @@ const Orders = () => {
     }
 
     return (
-        <Container size="large" className={styles["content"]}>
-            <Paper className={styles["box-container"]}>
+        <Container size="large" className={styles.content}>
+            <Paper className={styles.boxContainer}>
                 <div className={styles.title}> I tuoi ordini </div>
                 {
                     orders.length > 0 ?

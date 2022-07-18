@@ -14,18 +14,20 @@ import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 interface ICheckoutFormProps {
     cart: ICartItem[];
+    paymentIntentId: string;
     orderId: number;
     clientSecret: string;
     paymentMethods: IPaymentMethod[];
 }
 
 const CheckoutForm = (props: ICheckoutFormProps) => {
-    const { cart, orderId, clientSecret, paymentMethods } = props;
+    const { cart, paymentIntentId, orderId, clientSecret, paymentMethods } = props;
     const stripe = useStripe();
     const elements = useElements();
     const [isPaying, setIsPaying] = useState(false);
     const navigate = useNavigate();
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<number>(-1);
+    const [savePaymentMethod, setSavePaymentMethod] = useState(true);
 
     const [form, setForm] = useState({
         firstname: "",
@@ -40,6 +42,16 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
+    };
+
+    const handleSetSavePaymentMethod = async () => {
+        toast.error("Per il momento non è possibile scegliere di non salvare il metodo di pagamento");
+        // await api.put(`/payment/save_payment_method`, {
+        //     payment_intent_id: paymentIntentId,
+        //     save_payment_method: !savePaymentMethod
+        // });
+        // await elements?.fetchUpdates();
+        // setSavePaymentMethod(!savePaymentMethod);
     };
 
     const handleSubmit = async (event: FormEvent) => {
@@ -122,11 +134,11 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
     };
 
     return (
-        <form className={styles["content"]} onSubmit={handleSubmit}>
-            <div className={styles["left-column"]}>
-                <div className={styles["box-container"]}>
+        <form className={styles.content} onSubmit={handleSubmit}>
+            <div className={styles.leftColumn}>
+                <div className={styles.boxContainer}>
                     <h2> Indirizzo e spedizione </h2>
-                    <div className={styles["multiple-input"]}>
+                    <div className={styles.multipleInput}>
                         <Textfield
                             type="text"
                             name="firstname"
@@ -149,7 +161,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             required={true}
                         />
                     </div>
-                    <div className={styles["multiple-input"]}>
+                    <div className={styles.multipleInput}>
                         <Textfield
                             type="text"
                             name="address"
@@ -184,7 +196,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             required={true}
                         />
                     </div>
-                    <div className={styles["multiple-input"]}>
+                    <div className={styles.multipleInput}>
                         <Textfield
                             type="text"
                             name="city"
@@ -209,7 +221,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         />
                     </div>
                 </div>
-                <div className={styles["box-container"]}>
+                <div className={styles.boxContainer}>
                     <h2> Metodi di pagamento </h2>
                     {
                         props.paymentMethods.length > 0 &&
@@ -235,7 +247,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         </div>
                     }
                     <div
-                        className={styles["payment-method"] + " " + (selectedPaymentMethod === -1 ? styles["selected"] : "")}
+                        className={styles["paymentMethod"] + " " + (selectedPaymentMethod === -1 ? styles["selected"] : "")}
                         onClick={() => setSelectedPaymentMethod(-1)}
                     >
                         <p>
@@ -245,17 +257,21 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         </p>
                         <div style={selectedPaymentMethod === -1 ? {} : { display: "none" }}>
                             <PaymentElement id="payment-element" />
+                            <div className={styles.checkbox}>
+                                <input type="checkbox" id="save-payment-method" checked={savePaymentMethod} onChange={() => handleSetSavePaymentMethod()} />
+                                <label htmlFor="save-payment-method">Salva questo metodo di pagamento</label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className={styles["right-column"]}>
-                <div className={styles["box-container"]}>
-                    <div className={styles["payment-title"]}>
+            <div className={styles.rightColumn}>
+                <div className={styles.boxContainer}>
+                    <div className={styles.paymentTitle}>
                         <h2>Riepilogo ordine</h2>
                     </div>
-                    <div className={styles["payment-info"]}>
+                    <div className={styles.paymentInfo}>
                         <ul>
                             {
                                 cart.map((item: ICartItem) => {
@@ -283,7 +299,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             <Button disabled text='Pagamento in corso' ></Button>
                             :
                             <div>
-                                <Button type='submit' text='Paga' className={styles['submit-button']}></Button>
+                                <Button type='submit' text='Paga' className={styles.submitButton}></Button>
                                 <Link to="/account/cart">
                                     <Button type='reset' text='Annulla ordine'></Button>
                                 </Link>
