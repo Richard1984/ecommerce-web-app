@@ -4,6 +4,7 @@ interface IPaymentMethod {
     card: {
         brand: string;
         last4: string;
+        funding: string;
     }
   }
   
@@ -12,6 +13,7 @@ interface IPaymentMethod {
     card: {
         brand: "",
         last4: "",
+        funding: ""
     }
   };
   

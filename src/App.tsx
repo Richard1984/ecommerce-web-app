@@ -11,6 +11,7 @@ import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import OrderDetail from './pages/order-detail/OrderDetail';
 import Orders from './pages/orders/Orders';
+import PaymentMethods from './pages/payment-mehods/PaymentMethods';
 import Payment from './pages/payment/Payment';
 import ProductDetail from './pages/product-detail/ProductDetail';
 import Search from './pages/search/Search';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/account/cart" element={<Cart />} />
           <Route path="/account/orders" element={<Orders />} />
           <Route path="/account/orders/:id" element={<OrderDetail />} />
+          <Route path="/account/payment_methods" element={<PaymentMethods />} />
         </Route>
         <Route path="/payment" element={<Payment />} />
       </Routes>
