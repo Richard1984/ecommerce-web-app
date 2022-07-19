@@ -5,11 +5,15 @@ import IUser from "../shared/models/IUser";
 export interface AuthenticationState {
   user?: IUser | null;
   logoutSuccess?: boolean;
+  isAuthenticated?: boolean;
+  sessionHasBeenFetched?: boolean;
 }
 
 const initialState: AuthenticationState = {
   user: null,
   logoutSuccess: false,
+  isAuthenticated: false,
+  sessionHasBeenFetched: false,
 };
 
 export const authenticationSlice = createSlice({
@@ -21,27 +25,38 @@ export const authenticationSlice = createSlice({
         const token = action.payload.headers.authorization.split("Bearer ")[1];
         localStorage.setItem("access_token", token);
         state.user = action.payload.data.data;
+        state.isAuthenticated = true;
       })
       .addCase(loginWithFacebook.fulfilled, (state, action) => {
         const token = action.payload.headers.authorization.split("Bearer ")[1];
         localStorage.setItem("access_token", token);
         state.user = action.payload.data.data;
+        state.isAuthenticated = true;
       })
       .addCase(signup.fulfilled, (state, action) => {
         const token = action.payload.headers.authorization.split("Bearer ")[1];
         localStorage.setItem("access_token", token);
         state.user = action.payload.data.data;
+        state.isAuthenticated = true;
       })
       .addCase(getAccount.fulfilled, (state, action) => {
         state.user = action.payload.data.data;
+        state.sessionHasBeenFetched = true;
+        state.isAuthenticated = true;
+      })
+      .addCase(getAccount.pending, (state, action) => {
+        state.sessionHasBeenFetched = false;
       })
       .addCase(getAccount.rejected, (state, action) => {
         state.user = null;
         localStorage.removeItem("access_token");
+        state.isAuthenticated = false;
+        state.sessionHasBeenFetched = true;
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.user = null;
         state.logoutSuccess = true;
+        state.isAuthenticated = false;
       });
   },
   reducers: {

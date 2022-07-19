@@ -19,6 +19,8 @@ import Search from './pages/search/Search';
 import Shop from './pages/shop/Shop';
 import SignUp from './pages/signup/Signup';
 import { getAccount } from './reducers/authentication';
+import UserRoleEnum from './shared/enums/role.enum';
+import PrivateRoute from './shared/utils/private-route';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -43,7 +45,6 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route element={<PublicLayout />}>
           <Route index element={<Home />} />
-          <Route path="/admin/shop" element={<Shop />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
@@ -51,7 +52,8 @@ function App() {
           <Route path="/account/orders" element={<Orders />} />
           <Route path="/account/orders/:id" element={<OrderDetail />} />
           <Route path="/account/payment_methods" element={<PaymentMethods />} />
-          <Route path="/admin/categories" element={<Categories />} />
+          <Route path="/admin/shop" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Shop /></PrivateRoute>} />
+          <Route path="/admin/categories" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Categories /></PrivateRoute>} />
         </Route>
         <Route path="/payment" element={<Payment />} />
       </Routes>

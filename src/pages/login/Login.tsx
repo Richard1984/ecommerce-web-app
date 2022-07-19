@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import ButtonFacebook from "../../components/Button/ButtonFacebook";
 import Divider from "../../components/Divider/Divider";
@@ -13,6 +13,7 @@ import styles from "./login.module.scss";
 
 const Login = () => {
     const navigate = useNavigate()
+    const location = useLocation()
     const dispatch = useAppDispatch()
     const { user } = useAppSelector(state => state.authentication)
     const [form, setForm] = useState({
@@ -20,6 +21,7 @@ const Login = () => {
         password: "",
     })
     const [picture, setPicture] = useState('');
+    const from = (location.state as { from?: string  })?.from || "/";
 
     const handleLogin = async () => {
         dispatch(authenticateUser({ email: form.email, password: form.password }))
@@ -40,21 +42,18 @@ const Login = () => {
 
     useEffect(() => {
         if (user) {
-            navigate('/')
+            navigate(from, { replace: true })
         }
     }, [user])
 
     return (
         <div className={styles.container}>
             <div className={styles.login}>
-                <div className={styles["login-form"]}>
-                    <NavLink to="/" className={styles["login-form-header"]}>
+                <div className={styles.form}>
+                    <NavLink to="/" className={styles.header}>
                         <h1>Amnazom</h1>
                     </NavLink>
                     <div className={styles["login-form-body"]}>
-                        <div className={styles["login-form-body-picture"]}>
-                            <img src={picture} alt="" />
-                        </div>
                         <div className={styles["login-form-body-form"]}>
                             <form onSubmit={(event) => {
                                 event.preventDefault();
