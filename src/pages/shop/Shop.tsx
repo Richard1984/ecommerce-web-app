@@ -18,9 +18,9 @@ const Shop = () => {
                 <div className={styles.actions}>
                     <Button className={styles.action} fullWidth text="Modifica informazioni negozio" to="/admin/shop" />
                     <Button className={styles.action} fullWidth text="Gestione categorie" to="/admin/categories" />
-                    <Button className={styles.action} fullWidth text="Aggiungi prodotto" />
-                    <Button className={styles.action} fullWidth text="Gestione prodotti" />
-                    <Button className={styles.action} fullWidth text="Visualizza ordini" />
+                    <Button className={styles.action} fullWidth text="Aggiungi prodotto" to="/admin/products/new"/>
+                    <Button className={styles.action} fullWidth text="Gestione prodotti" to="/admin/products"/>
+                    <Button className={styles.action} fullWidth text="Visualizza ordini" to="./admin/orders"/>
                 </div>
             </Paper>
         </div>

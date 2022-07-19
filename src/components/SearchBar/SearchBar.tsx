@@ -57,7 +57,7 @@ const SearchBar = (props: SearchBarProps) => {
     return (
         <div className={`${styles.searchBar}${className ? " " + className : ""}`} style={fullWidth ? { width: '100%' } : undefined}>
             <Select className={styles.select}  name="select-cateogory" placeholder="Seleziona categoria" value={category} onChange={handleChangeCategory} options={options}/>
-            <Textfield className={styles.textfield} type="text" name="products-search" placeholder="Cerca prodotti" fullWidth onEnter={search} value={searchName} onChange={(event, value) => setSearchName(value)} />
+            <Textfield className={styles.textfield} type="text" name="products-search" placeholder="Cerca prodotti" fullWidth onEnter={search} value={searchName} onValueChange={(event, value) => setSearchName(value)} />
             <Button className={styles.button} leftIcon={<FontAwesomeIcon icon={faSearch} />} onClick={search} />
         </div>
     )

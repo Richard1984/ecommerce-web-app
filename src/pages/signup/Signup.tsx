@@ -59,16 +59,16 @@ const SignUp = () => {
                         </div>
                         <div className="signup-form-body-form">
                             <div className="signup-form-body-form-input">
-                                <Textfield type="text" name="firstname" label="Nome" placeholder="Nome" fullWidth value={form.firstname} onChange={handleChange} />
+                                <Textfield type="text" name="firstname" label="Nome" placeholder="Nome" fullWidth value={form.firstname} onValueChange={handleChange} />
                             </div>
                             <div className="signup-form-body-form-input">
-                                <Textfield type="email" name="lastname" label="Cognome" placeholder="Cognome" fullWidth value={form.lastname} onChange={handleChange} />
+                                <Textfield type="email" name="lastname" label="Cognome" placeholder="Cognome" fullWidth value={form.lastname} onValueChange={handleChange} />
                             </div>
                             <div className="signup-form-body-form-input">
-                                <Textfield type="email" name="email" label="Email" placeholder="Email" fullWidth value={form.email} onChange={handleChange} />
+                                <Textfield type="email" name="email" label="Email" placeholder="Email" fullWidth value={form.email} onValueChange={handleChange} />
                             </div>
                             <div className="signup-form-body-form-input">
-                                <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" fullWidth value={form.password} onChange={handleChange} />
+                                <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" fullWidth value={form.password} onValueChange={handleChange} />
                             </div>
                             <div className="signup-form-body-form-button">
                                 <Button text="Registrati" onClick={() => handleSignup()} />

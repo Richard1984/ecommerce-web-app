@@ -1,16 +1,15 @@
-import React, { FormEvent, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
-import Textfield from '../../../components/Textfield/Textfield';
-import ICartItem from '../../../shared/models/ICartItem';
-import Button from '../../../components/Button/Button';
-import { toast } from 'react-toastify';
-import styles from "../payment.module.scss";
-import { Link } from 'react-router-dom';
-import api from '../../../config/api';
-import IPaymentMethod from '../../../shared/models/IPaymentMethod';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import React, { FormEvent, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import Button from '../../../components/Button/Button';
+import Textfield from '../../../components/Textfield/Textfield';
+import api from '../../../config/api';
+import ICartItem from '../../../shared/models/ICartItem';
+import IPaymentMethod from '../../../shared/models/IPaymentMethod';
+import styles from "../payment.module.scss";
 
 interface ICheckoutFormProps {
     cart: ICartItem[];
@@ -146,7 +145,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="Nome"
                             fullWidth
                             value={form.firstname}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ marginRight: "10px", flex: 1 }}
                             required={true}
                         />
@@ -156,7 +155,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="Cognome"
                             fullWidth
                             value={form.lastname}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ flex: 1 }}
                             required={true}
                         />
@@ -169,7 +168,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="Indirizzo"
                             fullWidth
                             value={form.address}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ marginRight: "10px", flex: 2 }}
                             required={true}
                         />
@@ -180,7 +179,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="Civico"
                             fullWidth
                             value={form.house_number}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ marginRight: "10px", flex: 1 }}
                             required={true}
                         />
@@ -191,7 +190,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="CAP"
                             fullWidth
                             value={form.zip}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ flex: 1 }}
                             required={true}
                         />
@@ -204,7 +203,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="Città"
                             fullWidth
                             value={form.city}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ marginRight: "10px", flex: 1 }}
                             required={true}
                         />
@@ -215,7 +214,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             placeholder="Stato"
                             fullWidth
                             value={form.country}
-                            onChange={handleChange}
+                            onValueChange={handleChange}
                             style={{ flex: 1 }}
                             required={true}
                         />

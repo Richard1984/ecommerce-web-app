@@ -8,6 +8,8 @@ import PublicLayout from './layout/PublicLayout/PublicLayout';
 import Account from './pages/account/Account';
 import Cart from './pages/cart/Cart';
 import Categories from './pages/categories/Categories';
+import EditProductRoute from './pages/edit-product/EditProduct';
+import EditShopRoute from './pages/edit-shop/EditShop';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import OrderDetail from './pages/order-detail/OrderDetail';
@@ -47,12 +49,16 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products/:id/edit" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
           <Route path="/account/cart" element={<Cart />} />
           <Route path="/account/orders" element={<Orders />} />
           <Route path="/account/orders/:id" element={<OrderDetail />} />
           <Route path="/account/payment_methods" element={<PaymentMethods />} />
+          <Route path="/admin/products/new" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><EditProductRoute /></PrivateRoute>} />
+          <Route path="/admin/products/:id/edit" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><EditProductRoute /></PrivateRoute>} />
           <Route path="/admin/shop" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Shop /></PrivateRoute>} />
+          <Route path="/admin/shop/edit" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><EditShopRoute /></PrivateRoute>} />
           <Route path="/admin/categories" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Categories /></PrivateRoute>} />
         </Route>
         <Route path="/payment" element={<Payment />} />

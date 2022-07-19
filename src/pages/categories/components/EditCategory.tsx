@@ -59,7 +59,8 @@ const EditCategory = (props: IEditCategoryProps) => {
                     fullWidth
                     value={form.name}
                     required={true}
-                    onChange={(event, value) => setForm({ ...form, name: value })} />
+                    type="text"
+                    onValueChange={(event, value) => setForm({ ...form, name: value })} />
             </DialogContent>
             <DialogActions>
                 <Button size="small" leftIcon={<FontAwesomeIcon icon={faSave} />} text="Salva" onClick={handleSubmit} />
