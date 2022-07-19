@@ -7,6 +7,7 @@ export interface AuthenticationState {
   logoutSuccess?: boolean;
   isAuthenticated?: boolean;
   sessionHasBeenFetched?: boolean;
+  updateSuccess?: boolean;
 }
 
 const initialState: AuthenticationState = {
@@ -14,6 +15,7 @@ const initialState: AuthenticationState = {
   logoutSuccess: false,
   isAuthenticated: false,
   sessionHasBeenFetched: false,
+  updateSuccess: false,
 };
 
 export const authenticationSlice = createSlice({
@@ -57,6 +59,18 @@ export const authenticationSlice = createSlice({
         state.user = null;
         state.logoutSuccess = true;
         state.isAuthenticated = false;
+      })
+      .addCase(updateAccount.pending, (state, action) => {
+        state.updateSuccess = false;
+      })
+      .addCase(updateAccount.rejected, (state, action) => {
+        state.updateSuccess = true;
+      })
+      .addCase(updateAccount.fulfilled, (state, action) => {
+        state.user = action.payload.data.data;
+        state.sessionHasBeenFetched = true;
+        state.isAuthenticated = true;
+        state.updateSuccess = true;
       });
   },
   reducers: {
@@ -116,6 +130,17 @@ export const loginWithFacebook = createAsyncThunk(
 export const getAccount = createAsyncThunk(
   "authentication/get_account",
   async () => api.get<{ data: IUser }>("account")
+);
+
+export const updateAccount = createAsyncThunk(
+  "authentication/update_account",
+  async (user: IUser, thunkAPI) => {
+    const requestUrl = `account`;
+    const result = await api.put<{ data: IUser; message: string }>(requestUrl, {
+      user,
+    });
+    return result;
+  }
 );
 
 export const logout = createAsyncThunk("authentication/logout", async () => {

@@ -6,29 +6,29 @@ import Grid from "../../components/Grid/Grid";
 import GridItem from "../../components/Grid/GridItem";
 import Paper from "../../components/Paper/Paper";
 import Textfield from "../../components/Textfield/Textfield";
-import api from "../../config/api";
-import IShop, { shopDefaultValue } from "../../shared/models/IShop";
-import styles from "./edit-shop.module.scss";
+import { useAppDispatch, useAppSelector } from "../../config/store";
+import { updateAccount } from "../../reducers/authentication";
+import IUser, { userDefaultValue } from "../../shared/models/IUser";
+import styles from "./edit-profile.module.scss";
 
 
-const EditShopRoute = () => {
+const EditProfileRoute = () => {
     const navigate = useNavigate();
-    const [form, setForm] = useState<IShop>(shopDefaultValue);
+    const dispatch = useAppDispatch()
+    const { user } = useAppSelector(state => state.authentication)
+    const [form, setForm] = useState<IUser>(userDefaultValue);
 
     const handleOnChange = (event: React.SyntheticEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, value: string | number) => {
         setForm({ ...form, [event.currentTarget.name]: value })
     }
 
     const handleSubmit = async () => {
-        const response = await api.put<{ data: IShop }>("/shop/", {
-            name: form.name,
-            surname: form.surname,
-            social_reason: form.social_reason,
-            vat_number: form.vat_number,
-            address: form.address,
-            sector: form.sector,
-        });
-        setForm(response.data.data);
+        dispatch(updateAccount({
+            firstname: form.firstname,
+            lastname: form.lastname,
+            email: form.email,
+            country: form.country
+        }))
     }
 
     const handleCancel = () => {
@@ -36,18 +36,17 @@ const EditShopRoute = () => {
     }
 
     useEffect(() => {
-        const getShop = async () => {
-            const response = await api.get<{ data: IShop }>(`/shop`);
-            setForm(response.data.data);
+        if (user) {
+            setForm(user)
         }
-            getShop()
-    }, [])
+    }, [user])
 
     return (
         <Container size="large" className={styles.container}>
             <Paper className={styles.content}>
                 <div className={styles.header}>
-                    <div className={styles.title}>{"Modifica informazioni negozio"}</div>
+                    <div className={styles.title}>{"Modifica il tuo profilo"}</div>
+                    <div className={styles.subtitle}>{"Aggiorna le informazioni del account"}</div>
                 </div>
                 <div className={styles.form}>
                     <form onSubmit={(event) => {
@@ -57,73 +56,49 @@ const EditShopRoute = () => {
                         <Grid rowGap={2} colGap={1.5}>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="name"
+                                    name="firstname"
                                     label="Nome"
                                     required
                                     placeholder="Nome"
                                     type="text"
                                     fullWidth
-                                    value={form.name}
+                                    value={form.firstname}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="surname"
+                                    name="lastname"
                                     label="Cognome"
                                     required
                                     placeholder="Cognome"
                                     type="text"
                                     fullWidth
-                                    value={form.surname}
+                                    value={form.lastname}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="social_reason"
-                                    label="Ragione sociale"
+                                    name="email"
+                                    label="Email"
                                     required
-                                    placeholder="Ragione sociale"
+                                    placeholder="Email"
                                     type="text"
                                     fullWidth
-                                    value={form.social_reason}
+                                    value={form.email}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="vat_number"
-                                    label="P.IVA/Codice fiscale"
+                                    name="country"
+                                    label="Paese"
                                     required
-                                    placeholder="P.IVA/Codice fiscale"
+                                    placeholder="Paese"
                                     type="text"
                                     fullWidth
-                                    value={form.vat_number}
-                                    onValueChange={handleOnChange}
-                                />
-                            </GridItem>
-                            <GridItem cols={6}>
-                                <Textfield
-                                    name="address"
-                                    label="Indirizzo sede legale"
-                                    required
-                                    placeholder="Indirizzo sede legale"
-                                    type="text"
-                                    fullWidth
-                                    value={form.address}
-                                    onValueChange={handleOnChange}
-                                />
-                            </GridItem>
-                            <GridItem cols={6}>
-                                <Textfield
-                                    name="sector"
-                                    label="Settore"
-                                    required
-                                    placeholder="Settore"
-                                    type="text"
-                                    fullWidth
-                                    value={form.sector}
+                                    value={form.country}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
@@ -139,4 +114,4 @@ const EditShopRoute = () => {
     );
 }
 
-export default EditShopRoute;
+export default EditProfileRoute;
