@@ -8,6 +8,7 @@ import PublicLayout from './layout/PublicLayout/PublicLayout';
 import Account from './pages/account/Account';
 import Cart from './pages/cart/Cart';
 import Categories from './pages/categories/Categories';
+import CategoryProductsRoute from './pages/category-products/CategoryProducts';
 import EditProductRoute from './pages/edit-product/EditProduct';
 import EditShopRoute from './pages/edit-shop/EditShop';
 import Home from './pages/home/Home';
@@ -18,7 +19,7 @@ import NewPamentMethod from './pages/payment-mehods/NewPaymentMethod';
 import PaymentMethods from './pages/payment-mehods/PaymentMethods';
 import Payment from './pages/payment/Payment';
 import ProductDetail from './pages/product-detail/ProductDetail';
-import Search from './pages/search/Search';
+import SearchRoute from './pages/search/Search';
 import Shop from './pages/shop/Shop';
 import SignUp from './pages/signup/Signup';
 import { getAccount } from './reducers/authentication';
@@ -49,8 +50,9 @@ function App() {
         <Route element={<PublicLayout />}>
           {/* PUBLIC PATHS */}
           <Route index element={<Home />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/search" element={<SearchRoute />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/categories/:id/products" element={<CategoryProductsRoute />} />
 
           {/* LOGGED USER PATHS */}
           <Route path="/account" element={<PrivateRoute><Account /></PrivateRoute>} />

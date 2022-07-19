@@ -32,8 +32,13 @@ const SearchBar = (props: SearchBarProps) => {
 
     const search = () => { 
         const params = new URLSearchParams()
+
+        if (category !== "all" && category !== "" && searchName === "") { 
+            return navigate({ pathname: `/categories/${category}/products`})
+        }
+
         if (category !== "all") {
-            params.append("category", category)
+            params.append("category_id", category)
         }
         if (searchName) {
             params.append("search_name", searchName)

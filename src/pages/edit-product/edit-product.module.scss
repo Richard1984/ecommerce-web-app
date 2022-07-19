@@ -2,45 +2,74 @@
     padding: 20px 0;
     display: flex;
     flex-direction: row;
-}
+    padding: 40px 0px;
 
-.content {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    padding: 20px;
-    margin: 20px;
-
-    .header {
+    .content {
         display: flex;
+        flex: 1;
         flex-direction: row;
-        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
 
-        .title {
-            font-size: 25px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-    }
+        .image {
+            width: 250px;
+            overflow: hidden;
+            border-radius: 3px;
 
-    .form {
-        .selectCategory {
-
-            select {
-                min-width: 170px;
+            img {
+                display: block;
             }
         }
 
-        .actions {
+        .info {
             display: flex;
-            flex-direction: row;
-            justify-content: flex-end;
+            flex: 1;
+            flex-direction: column;
+            padding: 20px;
+            // margin: 20px;
 
-            .action {
-                &:not(:last-child) {
-                    margin-right: 10px;
+            .header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .title {
+                    font-size: 25px;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                }
+            }
+
+            .form {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                form {
+                    flex: 1;
+
+                    .selectCategory {
+
+                        select {
+                            min-width: 170px;
+                        }
+                    }
+
+                    .actions {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
+
+                        .action {
+                            &:not(:last-child) {
+                                margin-right: 10px;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+
+
 }

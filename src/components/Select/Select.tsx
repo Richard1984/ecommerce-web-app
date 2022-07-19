@@ -3,6 +3,7 @@ import styles from './select.module.scss';
 interface SelectOption {
     value: string;
     label: string;
+    disabled?: boolean;
 }
 
 interface SelectProps {
@@ -39,7 +40,7 @@ const Select = (props: SelectProps) => {
                     disabled={disabled}
                     required={required}
                     style={props.fullWidth ? { width: '100%' } : undefined}>
-                    {options.map(({ value, label }) => <option key={value}  value={value}>{label}</option>)}
+                    {options.map(({ value, label, disabled }) => <option key={value} disabled={disabled} value={value}>{label}</option>)}
                 </select>
             </div>
         )
