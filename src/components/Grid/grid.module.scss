@@ -1,11 +1,5 @@
 .grid {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: space-between;
-    // flex-wrap: wrap;
     width: 100%;
     display: grid;
-}
-
-.gridItem {
+    grid-template-columns: repeat(12, 1fr);
 }

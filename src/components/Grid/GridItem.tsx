@@ -1,4 +1,3 @@
-import styles from './grid.module.scss';
 
 interface IGridItemProps {
     children: React.ReactNode;
@@ -11,7 +10,7 @@ const GridItem = (props: IGridItemProps) => {
     const { children, className, style, cols } = props;
 
     return (
-        <div className={`${styles.gridItem}${className ? " " + className : ""}`} style={{ ...style, gridColumnEnd: `span ${cols}` }}>
+        <div className={`${className ? " " + className : ""}`} style={{ ...style, gridColumnEnd: `span ${cols}` }}>
             {children}
         </div>
     )
