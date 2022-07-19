@@ -231,7 +231,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                                     return (
                                         <div
                                             key={paymentMethod.id}
-                                            className={styles["payment-method"] + " " + (selectedPaymentMethod === index ? styles["selected"] : "")}
+                                            className={styles["paymentMethod"] + " " + (selectedPaymentMethod === index ? styles["selected"] : "")}
                                             onClick={() => setSelectedPaymentMethod(index)}
                                         >
                                             <p>
