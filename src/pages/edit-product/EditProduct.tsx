@@ -153,7 +153,7 @@ const EditProductRoute = () => {
                                 </GridItem>
                                 <GridItem cols={12} className={styles.actions}>
                                     <Button type="submit" className={styles.action} text="Salva" />
-                                    <Button className={styles.action} text="Annulla" onClick={handleCancel} />
+                                    <Button type="button" className={styles.action} text="Annulla" onClick={handleCancel} />
                                 </GridItem>
                             </Grid>
                         </form>

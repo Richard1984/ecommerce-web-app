@@ -16,11 +16,11 @@ const Shop = () => {
                 </div>
 
                 <div className={styles.actions}>
-                    <Button className={styles.action} fullWidth text="Modifica informazioni negozio" to="/admin/shop" />
+                    <Button className={styles.action} fullWidth text="Modifica informazioni negozio" to="/admin/shop/edit" />
                     <Button className={styles.action} fullWidth text="Gestione categorie" to="/admin/categories" />
                     <Button className={styles.action} fullWidth text="Aggiungi prodotto" to="/admin/products/new"/>
                     <Button className={styles.action} fullWidth text="Gestione prodotti" to="/admin/products"/>
-                    <Button className={styles.action} fullWidth text="Visualizza ordini" to="./admin/orders"/>
+                    <Button className={styles.action} fullWidth text="Visualizza ordini" to="/admin/orders"/>
                 </div>
             </Paper>
         </div>
