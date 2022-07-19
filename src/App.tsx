@@ -12,6 +12,7 @@ import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import OrderDetail from './pages/order-detail/OrderDetail';
 import Orders from './pages/orders/Orders';
+import NewPamentMethod from './pages/payment-mehods/NewPaymentMethod';
 import PaymentMethods from './pages/payment-mehods/PaymentMethods';
 import Payment from './pages/payment/Payment';
 import ProductDetail from './pages/product-detail/ProductDetail';
@@ -44,18 +45,24 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route element={<PublicLayout />}>
+          {/* PUBLIC PATHS */}
           <Route index element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+
+          {/* LOGGED USER PATHS */}
           <Route path="/account" element={<Account />} />
           <Route path="/account/cart" element={<Cart />} />
           <Route path="/account/orders" element={<Orders />} />
           <Route path="/account/orders/:id" element={<OrderDetail />} />
           <Route path="/account/payment_methods" element={<PaymentMethods />} />
+          <Route path="/account/payment_methods/new" element={<NewPamentMethod />} />
+
+          {/* LOGGED ADMIN PATHS */}
           <Route path="/admin/shop" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Shop /></PrivateRoute>} />
           <Route path="/admin/categories" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Categories /></PrivateRoute>} />
         </Route>
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.USER]}><Payment /></PrivateRoute>} />
       </Routes>
     </div>
   );

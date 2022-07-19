@@ -77,7 +77,7 @@ const PaymentMethods = () => {
                             <p> Non hai metodi di pagamento salvati. </p>
                         )
                     }
-                    <Link to="/payment-methods/add">
+                    <Link to="/account/payment_methods/new">
                         <Button className={styles.addCardButton} size="large" text="Aggiungi una nuova carta" />
                     </Link>
                 </Paper>
