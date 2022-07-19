@@ -1,8 +1,8 @@
 interface IShop {
     id: number | null;
-    name: string;
-    surname: string,
-    social_reason: string,
+    firstname: string;
+    lastname: string,
+    company_name: string,
     vat_number: string,
     address: string,
     sector: string
@@ -10,9 +10,9 @@ interface IShop {
 
 export const shopDefaultValue: IShop = {
     id: null,
-    name: "",
-    surname: "",
-    social_reason: "",
+    firstname: "",
+    lastname: "",
+    company_name: "",
     vat_number: "",
     address: "",
     sector: ""

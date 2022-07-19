@@ -21,9 +21,9 @@ const EditShopRoute = () => {
 
     const handleSubmit = async () => {
         const response = await api.put<{ data: IShop }>("/shop/", {
-            name: form.name,
-            surname: form.surname,
-            social_reason: form.social_reason,
+            name: form.firstname,
+            surname: form.lastname,
+            social_reason: form.company_name,
             vat_number: form.vat_number,
             address: form.address,
             sector: form.sector,
@@ -57,37 +57,37 @@ const EditShopRoute = () => {
                         <Grid rowGap={2} colGap={1.5}>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="name"
+                                    name="firstname"
                                     label="Nome"
                                     required
                                     placeholder="Nome"
                                     type="text"
                                     fullWidth
-                                    value={form.name}
+                                    value={form.firstname}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="surname"
+                                    name="lastname"
                                     label="Cognome"
                                     required
                                     placeholder="Cognome"
                                     type="text"
                                     fullWidth
-                                    value={form.surname}
+                                    value={form.lastname}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
                             <GridItem cols={6}>
                                 <Textfield
-                                    name="social_reason"
+                                    name="company_name"
                                     label="Ragione sociale"
                                     required
                                     placeholder="Ragione sociale"
                                     type="text"
                                     fullWidth
-                                    value={form.social_reason}
+                                    value={form.company_name}
                                     onValueChange={handleOnChange}
                                 />
                             </GridItem>
