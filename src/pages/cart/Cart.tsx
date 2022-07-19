@@ -17,15 +17,9 @@ const Cart = () => {
 
     useEffect(() => {
         const getProducts = async () => {
-            try {
             const response = await api.get<{ data: ICartItem[]; }>("/account/cart");
             setCart(response.data.data);
             setIsLoading(false);
-            } catch (error: any) {
-                if (!error || !error.response || error.response.status === 403) {
-                    window.location.href = "/";
-                }
-            }
         };
         getProducts();
     }, []);

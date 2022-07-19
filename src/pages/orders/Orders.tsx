@@ -12,15 +12,9 @@ const Orders = () => {
 
     useEffect(() => {
         const getOrders = async () => {
-            try {
-                const response = await api.get<{ data: IOrder[]; }>("/account/orders");
-                setOrders(response.data.data.sort(order => - (order.id || 0)));
-                setIsLoading(false);
-            } catch (error: any) {
-                if(error.response.status === 403) {
-                    window.location.href = "/";
-                }
-            }
+            const response = await api.get<{ data: IOrder[]; }>("/account/orders");
+            setOrders(response.data.data.sort(order => - (order.id || 0)));
+            setIsLoading(false);
         };
         getOrders();
     }, []);

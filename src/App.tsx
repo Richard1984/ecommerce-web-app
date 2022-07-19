@@ -53,12 +53,12 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
 
           {/* LOGGED USER PATHS */}
-          <Route path="/account" element={<Account />} />
-          <Route path="/account/cart" element={<Cart />} />
-          <Route path="/account/orders" element={<Orders />} />
-          <Route path="/account/orders/:id" element={<OrderDetail />} />
-          <Route path="/account/payment_methods" element={<PaymentMethods />} />
-          <Route path="/account/payment_methods/new" element={<NewPamentMethod />} />
+          <Route path="/account" element={<PrivateRoute><Account /></PrivateRoute>} />
+          <Route path="/account/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+          <Route path="/account/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+          <Route path="/account/orders/:id" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
+          <Route path="/account/payment_methods" element={<PrivateRoute><PaymentMethods /></PrivateRoute>} />
+          <Route path="/account/payment_methods/new" element={<PrivateRoute><NewPamentMethod /></PrivateRoute>} />
 
           {/* LOGGED ADMIN PATHS */}
           <Route path="/admin/shop" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Shop /></PrivateRoute>} />
@@ -67,7 +67,7 @@ function App() {
           <Route path="/admin/products/:id/edit" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><EditProductRoute /></PrivateRoute>} />
           <Route path="/admin/categories" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}><Categories /></PrivateRoute>} />
         </Route>
-        <Route path="/payment" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.USER]}><Payment /></PrivateRoute>} />
+        <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
       </Routes>
     </div>
   );

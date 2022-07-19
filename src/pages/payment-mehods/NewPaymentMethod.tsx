@@ -16,16 +16,10 @@ const NewPamentMethod = () => {
 
     useEffect(() => {
         const getClientSecret = async () => {
-            try {
-                const { data } = await api.get<{ data: string }>("/account/payment_methods/new");
-                setClientSecret(data.data);
-                setIsLoading(false);
-            } catch (error: any) {
-                if (!error || !error.response || error.response.status === 403) {
-                    window.location.href = "/";
-                }
-            }
-        }
+            const { data } = await api.get<{ data: string; }>("/account/payment_methods/new");
+            setClientSecret(data.data);
+            setIsLoading(false);
+        };
         getClientSecret();
     }, []);
 

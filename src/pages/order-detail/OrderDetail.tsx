@@ -18,17 +18,11 @@ const OrderDetail = () => {
 
     useEffect(() => {
         const getOrders = async () => {
-            try {
-                const response = await api.get<{ data: IOrder; }>("/account/orders/" + params.id);
-                setOrder(response.data.data);
-                setIsLoading(false);
-                if (response.data.data?.receipt_url === null) {
-                    setTimeout(() => getOrders(), 2000);
-                }
-            } catch (error: any) {
-                if (!error || !error.response || error.response.status === 403) {
-                    window.location.href = "/";
-                }
+            const response = await api.get<{ data: IOrder; }>("/account/orders/" + params.id);
+            setOrder(response.data.data);
+            setIsLoading(false);
+            if (response.data.data?.receipt_url === null) {
+                setTimeout(() => getOrders(), 2000);
             }
         };
         getOrders();

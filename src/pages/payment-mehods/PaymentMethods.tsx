@@ -19,15 +19,9 @@ const PaymentMethods = () => {
 
     useEffect(() => {
         const getPaymentMethods = async () => {
-            try {
-                const response = await api.get<{ data: IPaymentMethod[]; }>("/account/payment_methods");
-                setPaymentMethods(response.data.data);
-                setIsLoading(false);
-            } catch (error: any) {
-                if (!error || !error.response || error.response.status === 403) {
-                    window.location.href = "/";
-                }
-            }
+            const response = await api.get<{ data: IPaymentMethod[]; }>("/account/payment_methods");
+            setPaymentMethods(response.data.data);
+            setIsLoading(false);
         };
         getPaymentMethods();
     }, []);
