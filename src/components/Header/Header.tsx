@@ -1,10 +1,12 @@
-import { faAngleDown, faGear, faReceipt, faRightFromBracket, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faGear, faReceipt, faRightFromBracket, faShop, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { logout } from "../../reducers/authentication";
+import UserRoleEnum from "../../shared/enums/role.enum";
 import IUser from "../../shared/models/IUser";
+import hasAnyAuthority from "../../shared/utils/authorities";
 import Link from "../Link/Link";
 import Menu from "../Menu/Menu";
 import MenuItem from "../Menu/MenuItem";
@@ -43,7 +45,7 @@ const Header = (props: HeaderProps) => {
                 <Link to="/" underline={false}>
                     <h2>Amnazom</h2>
                 </Link>
-                <SearchBar fullWidth className="search-bar" />
+                 <SearchBar fullWidth className="search-bar" />
             </div>
 
             <div className="right">
@@ -51,29 +53,54 @@ const Header = (props: HeaderProps) => {
                 <div className="menu">
                     {props.user ? (
                         <>
-                            <div className="menu-item item-menu">
-                                <RouterLink to="/account/cart">
-                                    <div className="item-menu-icon">
-                                        <FontAwesomeIcon icon={faShoppingCart} />
-                                    </div>
-                                    <div className="text">
-                                        <p className="item-menu-primary">Il tuo</p>
-                                        <p className="item-menu-secondary">Carrello</p>
-                                    </div>
-                                </RouterLink>
-                            </div>
+                            {
+                                hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
+                                    <>
+                                        <div className="menu-item item-menu">
+                                            <RouterLink to="/admin/shop">
+                                                <div className="item-menu-icon">
+                                                    <FontAwesomeIcon icon={faShop} />
+                                                </div>
+                                                <div className="text">
+                                                    <p className="item-menu-primary">Il mio</p>
+                                                    <p className="item-menu-secondary">Negozio</p>
+                                                </div>
+                                            </RouterLink>
+                                        </div>
+                                    </>
+                                ) : null
+                            }
 
-                            <div className="menu-item item-menu">
-                                <RouterLink to="/account/orders">
-                                    <div className="item-menu-icon">
-                                        <FontAwesomeIcon icon={faReceipt} />
-                                    </div>
-                                    <div className="text">
-                                        <p className="item-menu-primary">I tuoi</p>
-                                        <p className="item-menu-secondary">Ordini</p>
-                                    </div>
-                                </RouterLink>
-                            </div>
+                            {
+                                !hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
+                                    <>
+                                        <div className="menu-item item-menu">
+                                            <RouterLink to="/account/cart">
+                                                <div className="item-menu-icon">
+                                                    <FontAwesomeIcon icon={faShoppingCart} />
+                                                </div>
+                                                <div className="text">
+                                                    <p className="item-menu-primary">Il tuo</p>
+                                                    <p className="item-menu-secondary">Carrello</p>
+                                                </div>
+                                            </RouterLink>
+                                        </div>
+
+                                        <div className="menu-item item-menu">
+                                            <RouterLink to="/account/orders">
+                                                <div className="item-menu-icon">
+                                                    <FontAwesomeIcon icon={faReceipt} />
+                                                </div>
+                                                <div className="text">
+                                                    <p className="item-menu-primary">I tuoi</p>
+                                                    <p className="item-menu-secondary">Ordini</p>
+                                                </div>
+                                            </RouterLink>
+                                        </div>
+                                    </>
+                                ) : null
+                            }
+                            
 
                             <div className="separator" />
                             <div className="menu-item profile-menu" onClick={handleOpenProfileMenu}>

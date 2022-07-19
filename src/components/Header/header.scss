@@ -45,6 +45,9 @@
                 border-radius: 3px;
                 overflow: hidden;
                 margin-right: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
 
                 &:hover {
                     filter: brightness(95%);
