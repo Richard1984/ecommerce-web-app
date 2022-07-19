@@ -2,22 +2,20 @@
     padding: 20px 0;
     display: flex;
     flex-direction: row;
-}
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+    padding: 30px;
 
-.leftColumn {
-    flex: 3;
-    padding: 0;
-    margin: 0;
-    display: inline-flex;
-    flex-direction: column;
-}
+    @include devices(tablet) {
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content min-content min-content;
+    }
 
-.rightColumn {
-    flex: 1;
-    padding: 0;
-    margin: 0;
-    display: inline-flex;
-    flex-direction: column;
+    .leftColumn {
+        display: grid;
+        gap: 20px;
+    }
 }
 
 .boxContainer {
@@ -27,30 +25,16 @@
     margin: 0;
     background-color: white;
     padding: 20px;
-    margin: 20px;
-}
 
-.multipleInput {
-    display: flex;
-    flex-direction: row;
-    padding: 0;
-    margin: 0;
-}
-
-.textfield {
-    margin-bottom: 5px;
+    .title {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
 }
 
 .submitButton {
     margin-right: 10px;
-}
-
-.paymentMethod {
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    margin: 0 0 10px 0;
-    padding: 10px;
-    cursor: pointer;
 }
 
 .selected {
@@ -61,10 +45,12 @@
     display: flex;
     align-items: center;
     margin-top: 15px;
+
     input[type="checkbox"] {
         width: 1.5em;
         height: 1.5em;
     }
+
     label {
         text-align: center;
     }

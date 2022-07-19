@@ -5,6 +5,9 @@ import React, { FormEvent, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Button from '../../../components/Button/Button';
+import Grid from '../../../components/Grid/Grid';
+import GridItem from '../../../components/Grid/GridItem';
+import Paper from '../../../components/Paper/Paper';
 import Textfield from '../../../components/Textfield/Textfield';
 import api from '../../../config/api';
 import ICartItem from '../../../shared/models/ICartItem';
@@ -135,93 +138,97 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
     return (
         <form className={styles.content} onSubmit={handleSubmit}>
             <div className={styles.leftColumn}>
-                <div className={styles.boxContainer}>
-                    <h2> Indirizzo e spedizione </h2>
-                    <div className={styles.multipleInput}>
-                        <Textfield
-                            type="text"
-                            name="firstname"
-                            label="Nome"
-                            placeholder="Nome"
-                            fullWidth
-                            value={form.firstname}
-                            onValueChange={handleChange}
-                            style={{ marginRight: "10px", flex: 1 }}
-                            required={true}
-                        />
-                        <Textfield type="text"
-                            name="lastname"
-                            label="Cognome"
-                            placeholder="Cognome"
-                            fullWidth
-                            value={form.lastname}
-                            onValueChange={handleChange}
-                            style={{ flex: 1 }}
-                            required={true}
-                        />
-                    </div>
-                    <div className={styles.multipleInput}>
-                        <Textfield
-                            type="text"
-                            name="address"
-                            label="Indirizzo"
-                            placeholder="Indirizzo"
-                            fullWidth
-                            value={form.address}
-                            onValueChange={handleChange}
-                            style={{ marginRight: "10px", flex: 2 }}
-                            required={true}
-                        />
-                        <Textfield
-                            type="text"
-                            name="house_number"
-                            label="Civico"
-                            placeholder="Civico"
-                            fullWidth
-                            value={form.house_number}
-                            onValueChange={handleChange}
-                            style={{ marginRight: "10px", flex: 1 }}
-                            required={true}
-                        />
-                        <Textfield
-                            type="text"
-                            name="zip"
-                            label="CAP"
-                            placeholder="CAP"
-                            fullWidth
-                            value={form.zip}
-                            onValueChange={handleChange}
-                            style={{ flex: 1 }}
-                            required={true}
-                        />
-                    </div>
-                    <div className={styles.multipleInput}>
-                        <Textfield
-                            type="text"
-                            name="city"
-                            label="Città"
-                            placeholder="Città"
-                            fullWidth
-                            value={form.city}
-                            onValueChange={handleChange}
-                            style={{ marginRight: "10px", flex: 1 }}
-                            required={true}
-                        />
-                        <Textfield
-                            type="text"
-                            name="country"
-                            label="Stato"
-                            placeholder="Stato"
-                            fullWidth
-                            value={form.country}
-                            onValueChange={handleChange}
-                            style={{ flex: 1 }}
-                            required={true}
-                        />
-                    </div>
-                </div>
-                <div className={styles.boxContainer}>
-                    <h2> Metodi di pagamento </h2>
+                <Paper className={styles.boxContainer}>
+                    <div className={styles.title}> Indirizzo e spedizione </div>
+                    <Grid rowGap={2} colGap={1.5}>
+                        <GridItem cols={6}>
+                            <Textfield
+                                type="text"
+                                name="firstname"
+                                label="Nome"
+                                placeholder="Nome"
+                                fullWidth
+                                value={form.firstname}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                        <GridItem cols={6}>
+                            <Textfield type="text"
+                                name="lastname"
+                                label="Cognome"
+                                placeholder="Cognome"
+                                fullWidth
+                                value={form.lastname}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                        <GridItem cols={6}>
+                            <Textfield
+                                type="text"
+                                name="address"
+                                label="Indirizzo"
+                                placeholder="Indirizzo"
+                                fullWidth
+                                value={form.address}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                        <GridItem cols={3}>
+                            <Textfield
+                                type="text"
+                                name="house_number"
+                                label="Civico"
+                                placeholder="Civico"
+                                fullWidth
+                                value={form.house_number}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                        <GridItem cols={3}>
+                            <Textfield
+                                type="text"
+                                name="zip"
+                                label="CAP"
+                                placeholder="CAP"
+                                fullWidth
+                                value={form.zip}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                        <GridItem cols={6}>
+                            <Textfield
+                                type="text"
+                                name="city"
+                                label="Città"
+                                placeholder="Città"
+                                fullWidth
+                                value={form.city}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                        <GridItem cols={6}>
+                            <Textfield
+                                type="text"
+                                name="country"
+                                label="Stato"
+                                placeholder="Stato"
+                                fullWidth
+                                value={form.country}
+                                onValueChange={handleChange}
+                                required={true}
+                            />
+                        </GridItem>
+                    </Grid>
+                </Paper>
+
+                <Paper className={styles.boxContainer}>
+                    <div className={styles.title}>Metodi di pagamento</div>
                     {
                         props.paymentMethods.length > 0 &&
                         <div>
@@ -262,14 +269,14 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Paper>
             </div>
 
+
+
             <div className={styles.rightColumn}>
-                <div className={styles.boxContainer}>
-                    <div className={styles.paymentTitle}>
-                        <h2>Riepilogo ordine</h2>
-                    </div>
+                <Paper className={styles.boxContainer}>
+                    <div className={styles.title}>Riepilogo ordine</div>
                     <div className={styles.paymentInfo}>
                         <ul>
                             {
@@ -305,7 +312,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             </div>
                         }
                     </div>
-                </div>
+                </Paper>
             </div>
         </form>
     );
