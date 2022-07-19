@@ -11,6 +11,15 @@
     text-decoration: none;
     background-color: #f0f0f0;
 
+    &:hover {
+        filter: brightness(95%);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.01);
+    }
+
+    &:active {
+        transform: scale(1);
+    }
+
     &--full-width {
         width: 100%;
     }
@@ -34,7 +43,7 @@
 
         .text {
             font-size: 13px !important;
-            font-weight: 500!important;
+            font-weight: 500 !important;
         }
     }
 
@@ -44,6 +53,10 @@
         color: inherit;
         text-decoration: none;
         display: inline-block;
+
+        & > * {
+            vertical-align: middle;
+        }
     }
 
     .text {
@@ -51,14 +64,5 @@
         font-weight: 700;
         color: inherit;
         display: inline-block;
-    }
-
-    &:hover {
-        filter: brightness(95%);
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.01);
-    }
-
-    &:active {
-        transform: scale(1);
     }
 }

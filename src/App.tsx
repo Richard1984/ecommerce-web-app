@@ -4,9 +4,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import './App.scss';
 import { useAppDispatch } from './config/store';
+import AdminLayout from './layout/AdminLayout/AdminLayout';
 import PublicLayout from './layout/PublicLayout/PublicLayout';
 import Account from './pages/account/Account';
 import Cart from './pages/cart/Cart';
+import Categories from './pages/categories/Categories';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import OrderDetail from './pages/order-detail/OrderDetail';
@@ -37,7 +39,9 @@ function App() {
         limit={3}
       />
       <Routes>
-
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/categories" element={<Categories />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route element={<PublicLayout />}>

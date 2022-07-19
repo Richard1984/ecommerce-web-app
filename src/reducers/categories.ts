@@ -3,7 +3,7 @@ import api from "../config/api";
 import ICategory from "../shared/models/ICategory";
 
 export interface CategoriesState {
-  entities?: ICategory[];
+  entities: ICategory[];
 }
 
 const initialState: CategoriesState = {

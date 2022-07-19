@@ -1,15 +1,15 @@
 import { Outlet } from "react-router-dom";
-import Header from "../../components/Header/Header";
+import AdminHeader from "../../components/Header/AdminHeader";
 import { useAppSelector } from "../../config/store";
 import { AuthenticationState } from "../../reducers/authentication";
-import styles from './public-layout.module.scss';
+import styles from './admin-layout.module.scss';
 
-const PublicLayout = () => {
+const AdminLayout = () => {
     const { user } = useAppSelector<AuthenticationState>(state => state.authentication)
 
     return (
         <div className={styles.container}>
-            <Header user={user} />
+            <AdminHeader user={user} />
             <div className={styles.content}>
                 <Outlet/>
             </div>
@@ -17,4 +17,4 @@ const PublicLayout = () => {
     )
 }
 
-export default PublicLayout;
+export default AdminLayout;
