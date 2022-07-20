@@ -1,0 +1,19 @@
+.content {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.boxContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px;
+
+    .title {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+}

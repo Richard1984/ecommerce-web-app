@@ -1,12 +1,29 @@
 
-import IOrder, { ShippingStatusEnum } from "../../shared/models/IOrder";
+import IOrder, { PaymentStatusEnum, ShippingStatusEnum } from "../../shared/models/IOrder";
 import CartItem from "../CartItem/CartItem";
+import Grid from "../Grid/Grid";
+import GridItem from "../Grid/GridItem";
 import Link from "../Link/Link";
 import styles from "./order.module.scss";
 
 interface OrderProps {
     order: IOrder;
 }
+
+export const getPaymentStatus = (order: IOrder): string => {
+    switch (order.payment_status) {
+        case PaymentStatusEnum.NOT_PAID:
+            return "In attesa di pagamento";
+        case PaymentStatusEnum.PAID_CLIENT:
+            return "In attesa di verifica";
+        case PaymentStatusEnum.PAID:
+            return "Pagato";
+        case PaymentStatusEnum.FAILED:
+            return "Pagamento fallito";
+        default:
+            return "ERROR";
+    }
+};
 
 export const getShippingStatus = (order: IOrder) => {
     switch (order.shipping_status) {
@@ -35,13 +52,22 @@ const Order = (props: OrderProps) => {
     const { order } = props;
     return (
         <div className={styles.order}>
-            <div className={styles.orderHeader}>
-                <h3> {`Ordine #${order.id} - ${getTotalOrder(order)}`} </h3>
-                <h3> {getShippingStatus(order)} </h3>
-                <Link to={"/account/orders/" + order.id}>
-                    <p> Dettagli ordine </p>
-                </Link>
-            </div>
+            <Grid className={styles.orderHeader} colGap={1.5}>
+                <GridItem cols={3} style={{ textAlign: "start" }}>
+                    <h3> {`Ordine #${order.id} - ${getTotalOrder(order)}`} </h3>
+                </GridItem>
+                <GridItem cols={3} style={{ textAlign: "center" }}>
+                    <h3> {getPaymentStatus(order)} </h3>
+                </GridItem>
+                <GridItem cols={3} style={{ textAlign: "center" }}>
+                    <h3> {getShippingStatus(order)} </h3>
+                </GridItem>
+                <GridItem cols={3} style={{ textAlign: "end" }}>
+                    <Link to={"/account/orders/" + order.id}>
+                        <p> Dettagli ordine </p>
+                    </Link>
+                </GridItem>
+            </Grid>
             {
                 renderOrder(order)
             }

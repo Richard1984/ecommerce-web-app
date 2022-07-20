@@ -6,6 +6,7 @@ import './App.scss';
 import { useAppDispatch } from './config/store';
 import PublicLayout from './layout/PublicLayout/PublicLayout';
 import Account from './pages/account/Account';
+import AdminOrders from './pages/admin-orders/AdminOrders';
 import Cart from './pages/cart/Cart';
 import Categories from './pages/categories/Categories';
 import CategoryProductsRoute from './pages/category-products/CategoryProducts';
@@ -87,6 +88,7 @@ function App() {
               <Route path="products/:id/edit" element={<EditProductRoute />} />
               <Route path="categories" element={<Categories />} />
               <Route path="products/:id/delete" element={<DeleteProduct />} />
+              <Route path="orders" element={<AdminOrders />} />
             </Route>
           </Route>
           <Route path="payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
