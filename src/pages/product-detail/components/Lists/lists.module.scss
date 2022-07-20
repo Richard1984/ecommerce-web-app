@@ -26,13 +26,15 @@
             flex-direction: row;
             justify-content: space-between;
             padding: 5px 10px;
+            cursor: pointer;
+            background-color: #f5f5f5;
+
+            &:hover {
+                filter: brightness(95%);
+            }
 
             &:not(:last-child) {
                 border-bottom: 1px solid #ccc;
-            }
-
-            .button {
-                cursor: pointer;
             }
         }
     }

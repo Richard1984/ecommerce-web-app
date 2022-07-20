@@ -35,18 +35,23 @@ const ProductDetail = () => {
         setReviewToEdit(null);
     }
 
-    const handleAddTocard = () => {
+    const handleAddTocard = async () => {
         if (!user) {
             return navigate('/login');
         }
-
-        // Aggiungi prodotto al carrello
+        await api.put("/account/cart", {
+            op: "create",
+            product_id: product?.id,
+            quantity: 1
+        });
     }
 
     const getReviews = async () => {
         const response = await api.get<{ data: IReview[] }>(`/products/${id}/reviews`);
         setReviews(response.data.data);
     }
+
+
 
     useEffect(() => {
         const getProduct = async () => {
@@ -85,7 +90,7 @@ const ProductDetail = () => {
                         <div className={styles.availability}>{product?.availability + " ancora disponibili"}</div>
                         <div className={styles.actions}>
                             <Button className={styles.action} leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard} />
-                            <Lists product={product}/>
+                            <Lists product={product} />
                         </div>
                     </div>
                 </section>

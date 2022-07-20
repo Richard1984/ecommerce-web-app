@@ -1,5 +1,3 @@
-import { faAdd, faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import api from '../../../../config/api';
 import IProduct from '../../../../shared/models/IProduct';
@@ -39,9 +37,9 @@ const List = ({ list, product, className, onChange: handleOnChange }: IListProps
     }
 
     return (
-        <div className={`${styles.list}${className ? " " + className : ""}`}>
+        <div className={`${styles.list}${className ? " " + className : ""}`} onClick={() => addProductToList(list)}>
             <div className={styles.name}>{list.name}</div>
-            <div className={styles.button} onClick={() => addProductToList(list)}><FontAwesomeIcon icon={success ? faCheck : faAdd} /></div>
+            {/* <div className={styles.button} onClick={() => addProductToList(list)}><FontAwesomeIcon icon={success ? faCheck : faAdd} /></div> */}
         </div>
     )
 }
