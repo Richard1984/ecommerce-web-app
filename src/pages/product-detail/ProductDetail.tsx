@@ -7,11 +7,13 @@ import Button from '../../components/Button/Button';
 import Container from '../../components/Container/Container';
 import Divider from '../../components/Divider/Divider';
 import Review from '../../components/Review/Review';
+import ReviewStats from '../../components/ReviewStats/ReviewStats';
 import api from '../../config/api';
 import { useAppSelector } from '../../config/store';
 import IProduct from '../../shared/models/IProduct';
 import IReview from '../../shared/models/IReview';
-import EditReview from './component/EditReview';
+import EditReview from './components/EditReview';
+import Lists from './components/Lists/Lists';
 import styles from './product-detail.module.scss';
 
 const ProductDetail = () => {
@@ -82,7 +84,8 @@ const ProductDetail = () => {
                     <div className={styles.sidebar}>
                         <div className={styles.availability}>{product?.availability + " ancora disponibili"}</div>
                         <div className={styles.actions}>
-                            <Button leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard} />
+                            <Button className={styles.action} leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard} />
+                            <Lists product={product}/>
                         </div>
                     </div>
                 </section>
@@ -92,6 +95,7 @@ const ProductDetail = () => {
                         <div className={styles.title}>Recensioni</div>
                         {user ? <Button text="Scrivi una recensione" leftIcon={<FontAwesomeIcon icon={faAdd} />} onClick={() => handleOpenEditReviewDialog(null)} /> : null}
                     </div>
+                    {product?.reviews_by_stars ? <div className={styles.reviewStats}><ReviewStats stats={product?.reviews_by_stars} /></div> : null}
                     <div className={styles.reviews}>
                         {reviews.length ? (
                             reviews.map(review => (<Review review={review} className={styles.review} key={review.id} onEdit={handleOpenEditReviewDialog} onVote={getReviews} />))
