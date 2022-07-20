@@ -11,7 +11,7 @@ interface IEditCategoryProps {
     category: ICategory | null;
     open: boolean;
     onClose: () => void;
-    onEdit: (review: ICategory) => void;
+    onEdit: (category: ICategory) => void;
 }
 
 const EditCategory = (props: IEditCategoryProps) => {

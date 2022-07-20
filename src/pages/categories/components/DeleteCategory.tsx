@@ -9,7 +9,7 @@ interface IDeleteCategoryProps {
     category: ICategory | null;
     open: boolean;
     onClose: () => void;
-    onDelete: (review: ICategory) => void;
+    onDelete: (category: ICategory) => void;
 }
 
 const DeleteCategory = (props: IDeleteCategoryProps) => {
