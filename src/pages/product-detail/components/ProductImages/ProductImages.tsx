@@ -39,7 +39,7 @@ const ProductImages = (props: IProductImages) => {
             </Paper>
             {previews ? <div className={styles.previews}>
                 {previews.map((image, index) => (
-                    <Paper className={styles.preview} onClick={() => handleImageClick(image, index)}>
+                    <Paper key={index} className={styles.preview} onClick={() => handleImageClick(image, index)}>
                         <img src={image.url} alt="Preview" />
                     </Paper>
                 ))}

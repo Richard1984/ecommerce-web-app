@@ -31,8 +31,9 @@ const ProductItem = (props: IProductItemProps) => {
                 </Link>
             </div>
             <div className={styles.rightBody}>
-                {actions.map(action => (
+                {actions.map((action, index) => (
                     <Button
+                        key={index}
                         leftIcon={action.icon}
                         size="small"
                         onClick={() => action.onClick(product)}
