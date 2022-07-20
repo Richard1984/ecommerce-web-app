@@ -1,11 +1,11 @@
 
-import { Navigate, RouteProps, useLocation } from "react-router-dom";
+import { Navigate, Outlet, RouteProps, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../config/store";
 import UserRoleEnum from "../enums/role.enum";
 import hasAnyAuthority from "./authorities";
 
 interface IPrivateRoute extends RouteProps {
-  children: JSX.Element
+  children?: JSX.Element
   hasAnyAuthorities?: UserRoleEnum[];
 }
 
@@ -34,7 +34,11 @@ const PrivateRoute = ({ children, hasAnyAuthorities = [] }: IPrivateRoute) => {
     )
   }
 
-  return children;
+  if (children) {
+    return children;
+  }
+
+  return <Outlet />
 }
 
 export default PrivateRoute
