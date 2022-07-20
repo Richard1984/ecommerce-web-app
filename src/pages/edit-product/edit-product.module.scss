@@ -5,20 +5,15 @@
     padding: 40px 0px;
 
     .content {
-        display: flex;
-        flex: 1;
-        flex-direction: row;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        align-items: start;
+        flex-grow: 1;
         gap: 20px;
 
-        .image {
-            width: 250px;
-            overflow: hidden;
-            border-radius: 3px;
 
-            img {
-                display: block;
-            }
+        .image {
+            // width: 250px;
         }
 
         .info {
