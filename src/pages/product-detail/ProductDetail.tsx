@@ -69,7 +69,7 @@ const ProductDetail = () => {
                 <section className={styles.productSection}>
                     <div className={styles.images}>
                         {/* <img src={product?.images[0]} alt="product" /> */}
-                        <ProductImages images={product?.images} />
+                        <ProductImages images={product?.images || []} />
                     </div>
                     <div className={styles.info}>
                         <div className={styles.productName}>{product?.name}</div>

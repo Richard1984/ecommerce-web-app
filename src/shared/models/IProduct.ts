@@ -1,3 +1,8 @@
+export interface IProductImage {
+  id: number;
+  url: string;
+}
+
 interface IProduct {
   id: number | null;
   name: string;
@@ -7,7 +12,7 @@ interface IProduct {
   available: boolean;
   avg_reviews: number;
   category_id: number | null;
-  images: string[];
+  images: IProductImage[];
   created_at: string;
   updated_at: string;
   category_name?: string | null;

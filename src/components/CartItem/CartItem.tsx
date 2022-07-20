@@ -21,7 +21,7 @@ const CartItem = (props: ICartItemProps) => {
         <div className={styles.product}>
             <Link to={"/products/" + item.product.id}>
                 <div className={styles.image}>
-                    <img src={item.product?.images[0]} alt="product" />
+                    <img src={item.product?.images[0].url} alt="product" />
                 </div>
             </Link>
             <div className={styles.body}>

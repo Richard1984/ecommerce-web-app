@@ -21,7 +21,7 @@ const ProductItem = (props: IProductItemProps) => {
         <div className={`${styles.product}${className ? " " + className : ""}`}>
             <Link to={"/products/" + product.id}>
                 <div className={styles.image}>
-                    <img src={(product?.images || [])[0]} alt="product" />
+                    <img src={(product?.images || [])[0].url} alt="product" />
                 </div>
             </Link>
             <div className={styles.body}>
