@@ -67,8 +67,7 @@ const ProductDetail = () => {
         <>
             <Container size='large' className={styles.content}>
                 <section className={styles.productSection}>
-                    <div className={styles.images}>
-                        {/* <img src={product?.images[0]} alt="product" /> */}
+                    <div>
                         <ProductImages images={product?.images || []} />
                     </div>
                     <div className={styles.info}>
@@ -92,7 +91,7 @@ const ProductDetail = () => {
                         <div className={styles.availability}>{product?.availability + " ancora disponibili"}</div>
                         <div className={styles.actions}>
                             <Button className={styles.action} leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard} />
-                            {isAuthenticated ? <Lists product={product} /> : null }
+                            {isAuthenticated ? <Lists product={product} /> : null}
                         </div>
                     </div>
                 </section>

@@ -1,4 +1,4 @@
-import { faAngleDown, faGear, faList, faReceipt, faRightFromBracket, faShop, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faList, faReceipt, faRightFromBracket, faShop, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
@@ -116,7 +116,6 @@ const Header = (props: HeaderProps) => {
                             <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
                                 <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu} to="/account" />
                                 <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} onClick={handleCloseProfileMenu} to="/account/lists" />
-                                <MenuItem text="Impostazioni" icon={<FontAwesomeIcon icon={faGear} />} onClick={handleCloseProfileMenu} />
                                 <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                             </Menu>
                         </>
