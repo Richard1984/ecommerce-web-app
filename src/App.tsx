@@ -9,6 +9,7 @@ import Account from './pages/account/Account';
 import Cart from './pages/cart/Cart';
 import Categories from './pages/categories/Categories';
 import CategoryProductsRoute from './pages/category-products/CategoryProducts';
+import EditAvatarRoute from './pages/edit-avatar/EditAvatar';
 import EditProductRoute from './pages/edit-product/EditProduct';
 import EditProfileRoute from './pages/edit-profile/EditProfile';
 import EditShopRoute from './pages/edit-shop/EditShop';
@@ -61,6 +62,7 @@ function App() {
             {/* LOGGED USER PATHS */}
             <Route path="account" element={<PrivateRoute/>}>
               <Route index element={<Account />} />
+              <Route path="avatar/edit" element={<EditAvatarRoute />} />
               <Route path="edit" element={<EditProfileRoute />} />
               <Route path="cart" element={<Cart />} />
               <Route path="lists">

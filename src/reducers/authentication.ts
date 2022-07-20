@@ -71,6 +71,15 @@ export const authenticationSlice = createSlice({
         state.sessionHasBeenFetched = true;
         state.isAuthenticated = true;
         state.updateSuccess = true;
+      })
+      .addCase(updateAvatar.pending, (state, action) => {
+        state.updateSuccess = false;
+      })
+      .addCase(updateAvatar.rejected, (state, action) => {
+        state.updateSuccess = true;
+      })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.updateSuccess = true;
       });
   },
   reducers: {
@@ -139,6 +148,23 @@ export const updateAccount = createAsyncThunk(
     const result = await api.put<{ data: IUser; message: string }>(requestUrl, {
       user,
     });
+    return result;
+  }
+);
+
+export const updateAvatar = createAsyncThunk(
+  "authentication/update_avatar",
+  async (image: File, thunkAPI) => {
+    const formData = new FormData();
+    formData.append("avatar", image);
+
+    const requestUrl = `account/avatar`;
+    const result = await api.post<{ message: string }>(requestUrl, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    thunkAPI.dispatch(getAccount());
     return result;
   }
 );

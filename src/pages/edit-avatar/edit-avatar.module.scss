@@ -1,0 +1,65 @@
+.container {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .box {
+        width: 450px;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+
+            .title {
+                font-size: 22px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 20px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+            .action {
+                margin-bottom: 10px;
+            }
+        }
+
+    }
+}
