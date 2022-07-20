@@ -14,6 +14,7 @@ import IProduct from '../../shared/models/IProduct';
 import IReview from '../../shared/models/IReview';
 import EditReview from './components/EditReview';
 import Lists from './components/Lists/Lists';
+import ProductImages from './components/ProductImages/ProductImages';
 import styles from './product-detail.module.scss';
 
 const ProductDetail = () => {
@@ -67,7 +68,8 @@ const ProductDetail = () => {
             <Container size='large' className={styles.content}>
                 <section className={styles.productSection}>
                     <div className={styles.images}>
-                        <img src={product?.images[0]} alt="product" />
+                        {/* <img src={product?.images[0]} alt="product" /> */}
+                        <ProductImages images={product?.images} />
                     </div>
                     <div className={styles.info}>
                         <div className={styles.productName}>{product?.name}</div>

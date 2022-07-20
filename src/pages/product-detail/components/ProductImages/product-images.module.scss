@@ -1,0 +1,49 @@
+.container {
+
+    .mainImage {
+        width: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 3px;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px;
+        padding: 10px;
+
+        img {
+            display: block;
+            max-width: fill-available;
+            max-height: fill-available;
+        }
+    }
+
+    .previews {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+
+        .preview {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 3px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(95%);
+            }
+
+            img {
+                display: block;
+                max-width: fill-available;
+                max-height: fill-available;
+            }
+        }
+    }
+}

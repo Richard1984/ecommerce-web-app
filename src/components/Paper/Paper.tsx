@@ -1,16 +1,15 @@
 import styles from './paper.module.scss';
 
-interface IPaperProps {
-    className?: string;
+interface IPaperProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
 
 const Paper = (props: IPaperProps) => {
     
-        const { className, children } = props;
+        const { className, children, ...rest } = props;
     
         return (
-            <div className={`${styles.paper}${className ? " " + className : ""}`}>
+            <div {...rest}  className={`${styles.paper}${className ? " " + className : ""}`}>
                 {children}
             </div>
         )
