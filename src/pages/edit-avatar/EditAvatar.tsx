@@ -40,7 +40,7 @@ const EditAvatarRoute = () => {
                 </div>
             </Paper>
         </div>
-        <input ref={fileInput} hidden type="file" onChange={handleFile} />
+            <input ref={fileInput} hidden type="file" onChange={handleFile} accept="image/*" />
         </>
     );
 }
