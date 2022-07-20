@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import Container from "../../components/Container/Container";
 import Paper from "../../components/Paper/Paper";
 import api from "../../config/api";
-import styles from "./payment-methods.module.scss";
 import NewPaymentMethodForm from "./components/NewPaymentMethodForm";
+import styles from "./payment-methods.module.scss";
 
 const stripe_key = STRIPE_PUB_KEY || "";
 const stripePromise = loadStripe(stripe_key);
 
-const NewPamentMethod = () => {
+const NewPaymentMethod = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [clientSecret, setClientSecret] = useState<string>("");
 
@@ -38,4 +38,4 @@ const NewPamentMethod = () => {
         </Container>
     );
 };
-export default NewPamentMethod;
+export default NewPaymentMethod;
