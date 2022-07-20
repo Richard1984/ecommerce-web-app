@@ -21,7 +21,7 @@ const Home = () => {
 
     useEffect(() => {
         const getProducts = async () => {
-            const results = await Promise.all([search({ sort_criteria: "created_at", sort_order: "asc" }), search({ sort_criteria: "total_ordered", sort_order: "desc" }), search({ sort_criteria: "price", sort_order: "asc" })])
+            const results = await Promise.all([search({ sort_criteria: "created_at", sort_order: "desc" }), search({ sort_criteria: "total_ordered", sort_order: "desc" }), search({ sort_criteria: "price", sort_order: "asc" })])
             setNewestProducts(results[0])
             setBestSellingProducts(results[1])
             setBestDealsProducts(results[2])
@@ -34,6 +34,7 @@ const Home = () => {
             <ProductsList title="Nuovi prodotti" products={newestProducts} />
             <ProductsList title="Prodotti più venduti" products={bestSellingProducts} />
             <ProductsList title="Dal prezzo più basso" products={bestDealsProducts} />
+            <ProductsList title="Dal prezzo più alto" products={bestDealsProducts.reverse()} />
         </div>
     )
 }
