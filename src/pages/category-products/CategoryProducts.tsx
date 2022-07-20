@@ -52,7 +52,7 @@ const CategoryProductsRoute = () => {
                 <ProductsList title="Nuovi prodotti" products={newestProducts} />
                 <ProductsList title="Prodotti più venduti" products={bestSellingProducts} />
                 <ProductsList title="Dal prezzo più basso" products={bestDealsProducts} />
-                <ProductsList title="Dal prezzo più alto" products={bestDealsProducts.reverse()} />
+                <ProductsList title="Dal prezzo più alto" products={[...bestDealsProducts].reverse()} />
             </div>
         </>
     )
