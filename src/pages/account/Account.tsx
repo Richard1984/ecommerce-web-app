@@ -24,7 +24,7 @@ const Account = () => {
                 <div className={styles.actions}>
                     <Button className={styles.action} fullWidth text="Modifica account" to="/account/edit" />
                     <Button className={styles.action} fullWidth text="Modifica avatar" />
-                    <Button className={styles.action} fullWidth text="Gestione liste" />
+                    <Button className={styles.action} fullWidth text="Gestione liste" to="/account/lists" />
                     <Button className={styles.action} fullWidth text="Visualizza ordini" to="/account/orders" />
                     <Button className={styles.action} fullWidth text="Visualizza metodi di pagamento" to="/account/payment_methods" />
                     <Button className={styles.action} fullWidth text="Elimina account" to="/account/delete" />

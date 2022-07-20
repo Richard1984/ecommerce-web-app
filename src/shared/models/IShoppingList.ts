@@ -1,6 +1,6 @@
 import IProduct from "./IProduct";
 
-interface IList {
+interface IShoppingList {
   id: number | null;
   name: string;
   user_id: number | null;
@@ -9,7 +9,7 @@ interface IList {
   products?: IProduct[];
 }
 
-export const listDefaultValue: IList = {
+export const shoppingListDefaultValue: IShoppingList = {
   id: null,
   name: "",
   user_id: null,
@@ -17,4 +17,4 @@ export const listDefaultValue: IList = {
   updated_at: new Date().toISOString(),
 };
 
-export default IList;
+export default IShoppingList;

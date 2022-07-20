@@ -22,6 +22,7 @@ import Payment from './pages/payment/Payment';
 import ProductDetail from './pages/product-detail/ProductDetail';
 import SearchRoute from './pages/search/Search';
 import Shop from './pages/shop/Shop';
+import ShoppingListsRoute from './pages/shopping-lists/ShoppingLists';
 import SignUp from './pages/signup/Signup';
 import { getAccount } from './reducers/authentication';
 import UserRoleEnum from './shared/enums/role.enum';
@@ -59,6 +60,7 @@ function App() {
           <Route path="/account" element={<PrivateRoute><Account /></PrivateRoute>} />
           <Route path="/account/edit" element={<PrivateRoute><EditProfileRoute /></PrivateRoute>} />
           <Route path="/account/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+          <Route path="/account/lists" element={<PrivateRoute><ShoppingListsRoute /></PrivateRoute>} />
           <Route path="/account/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
           <Route path="/account/orders/:id" element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
           <Route path="/account/payment_methods" element={<PrivateRoute><PaymentMethods /></PrivateRoute>} />

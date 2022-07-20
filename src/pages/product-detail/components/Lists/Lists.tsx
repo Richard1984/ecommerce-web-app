@@ -2,8 +2,8 @@ import { faAdd, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import api from '../../../../config/api';
-import IList from '../../../../shared/models/IList';
 import IProduct from '../../../../shared/models/IProduct';
+import IShoppingList from '../../../../shared/models/IShoppingList';
 import styles from './lists.module.scss';
 
 interface IListsProps {
@@ -12,7 +12,7 @@ interface IListsProps {
 }
 
 interface IListProps { 
-    list: IList;
+    list: IShoppingList;
     product: IProduct | null;
     className?: string;
     onChange: () => void;
@@ -21,7 +21,7 @@ interface IListProps {
 const List = ({ list, product, className, onChange: handleOnChange }: IListProps) => {
     const [success, setSuccess] = useState(false);
 
-    const addProductToList = async (list: IList) => {
+    const addProductToList = async (list: IShoppingList) => {
         try {
             await api.put<{ data: string }>(`/account/lists/${list.id}`, {
                 name: list.name,
@@ -47,7 +47,7 @@ const List = ({ list, product, className, onChange: handleOnChange }: IListProps
 }
 
 const Lists = (props: IListsProps) => {
-    const [lists, setLists] = useState<IList[]>([]);
+    const [lists, setLists] = useState<IShoppingList[]>([]);
 
     const { className, product } = props;
     
