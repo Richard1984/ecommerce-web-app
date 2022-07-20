@@ -9,7 +9,7 @@ interface IListsProps {
     product: IProduct | null;
 }
 
-interface IListProps { 
+interface IListProps {
     list: IShoppingList;
     product: IProduct | null;
     className?: string;
@@ -32,7 +32,7 @@ const List = ({ list, product, className, onChange: handleOnChange }: IListProps
                 setSuccess(false);
             }, 2000);
         } catch (e) {
-            
+
         }
     }
 
@@ -48,7 +48,7 @@ const Lists = (props: IListsProps) => {
     const [lists, setLists] = useState<IShoppingList[]>([]);
 
     const { className, product } = props;
-    
+
     const getLists = async () => {
         const response = await api.get<{ data: any }>(`/account/lists`);
         setLists(response.data.data);
@@ -57,14 +57,14 @@ const Lists = (props: IListsProps) => {
     useEffect(() => {
         getLists()
     }, [])
-    
+
     return (
         <div className={`${styles.lists}${className ? className : ""}`}>
             <div className={styles.header}>
                 <div className={styles.title}>Aggiungi a lista</div>
             </div>
             <div className={styles.body}>
-                {lists.map(list => <List onChange={getLists} key={list.id}  list={list} product={product} className={styles.list}/>)}
+                {lists.map(list => <List onChange={getLists} key={list.id} list={list} product={product} className={styles.list} />)}
             </div>
         </div>
     )

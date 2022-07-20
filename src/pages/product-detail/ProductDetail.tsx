@@ -19,7 +19,7 @@ import styles from './product-detail.module.scss';
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { user } = useAppSelector(state => state.authentication);
+    const { user, isAuthenticated } = useAppSelector(state => state.authentication);
     const [product, setProduct] = useState<IProduct | null>(null);
     const [reviews, setReviews] = useState<IReview[]>([]);
     const [reviewToEdit, setReviewToEdit] = useState<IReview | null>(null);
@@ -90,7 +90,7 @@ const ProductDetail = () => {
                         <div className={styles.availability}>{product?.availability + " ancora disponibili"}</div>
                         <div className={styles.actions}>
                             <Button className={styles.action} leftIcon={<FontAwesomeIcon icon={faShoppingCart} />} text="Aggiungi al carrello" onClick={handleAddTocard} />
-                            <Lists product={product} />
+                            {isAuthenticated ? <Lists product={product} /> : null }
                         </div>
                     </div>
                 </section>
