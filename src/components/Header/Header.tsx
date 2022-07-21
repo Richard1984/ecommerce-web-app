@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDown, faList, faReceipt, faRightFromBracket, faShop, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -11,17 +12,34 @@ import Link from "../Link/Link";
 import Menu from "../Menu/Menu";
 import MenuItem from "../Menu/MenuItem";
 import SearchBar from "../SearchBar/SearchBar";
-import './header.scss';
+import styles from './header.module.scss';
 
 interface HeaderProps {
     user?: IUser | null;
 }
 
+
+const HeaderItem = ({ to, icon, primaryText, secondaryText }: { to: string, icon?: IconProp, primaryText: string, secondaryText: string }) => {
+    return (
+        <RouterLink to={to} className={styles.headerItem}>
+            {icon ?
+                <div className={styles.icon}>
+                    <FontAwesomeIcon icon={icon} />
+                </div>
+                : null}
+            <div className={styles.text}>
+                <p className={styles.primary}>{primaryText}</p>
+                <p className={styles.secondary}>{secondaryText}</p>
+            </div>
+        </RouterLink>
+    );
+}
+
+
 const Header = (props: HeaderProps) => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const [profileMenuAnchor, setProfileMenuAnchor] = useState<HTMLElement | null>(null);
-    const { entities: categories } = useAppSelector(state => state.categories);
     const { logoutSuccess } = useAppSelector(state => state.authentication);
 
     const { user } = props;
@@ -33,101 +51,56 @@ const Header = (props: HeaderProps) => {
     const handleCloseProfileMenu = () => {
         setProfileMenuAnchor(null);
     };
-    
+
     const handleLogout = async () => {
         dispatch(logout());
         handleCloseProfileMenu();
     };
 
     return (
-        <header className="header">
-            <div className="left">
-                <Link to="/" underline={false}>
-                    <h2>Amnazom</h2>
-                </Link>
-                 <SearchBar fullWidth className="search-bar" />
+        <header className={styles.header}>
+            <div className={styles.logoContainer}>
+                <Link className={styles.logo} to="/" underline={false}>Amnazom</Link>
             </div>
+            <div className={styles.searchBarContainer}>
+                <SearchBar fullWidth />
+            </div>
+            <div className={styles.menu}>
+                {props.user ? (
+                    <>
+                        {
+                            hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
+                                <HeaderItem to="/admin/shop" icon={faShop} primaryText="Il mio" secondaryText="Negozio" />
+                            ) : null
+                        }
 
-            <div className="right">
-
-                <div className="menu">
-                    {props.user ? (
-                        <>
-                            {
-                                hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
-                                    <>
-                                        <div className="menu-item item-menu">
-                                            <RouterLink to="/admin/shop">
-                                                <div className="item-menu-icon">
-                                                    <FontAwesomeIcon icon={faShop} />
-                                                </div>
-                                                <div className="text">
-                                                    <p className="item-menu-primary">Il mio</p>
-                                                    <p className="item-menu-secondary">Negozio</p>
-                                                </div>
-                                            </RouterLink>
-                                        </div>
-                                    </>
-                                ) : null
-                            }
-
-                            {
-                                !hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
-                                    <>
-                                        <div className="menu-item item-menu">
-                                            <RouterLink to="/account/cart">
-                                                <div className="item-menu-icon">
-                                                    <FontAwesomeIcon icon={faShoppingCart} />
-                                                </div>
-                                                <div className="text">
-                                                    <p className="item-menu-primary">Il tuo</p>
-                                                    <p className="item-menu-secondary">Carrello</p>
-                                                </div>
-                                            </RouterLink>
-                                        </div>
-
-                                        <div className="menu-item item-menu">
-                                            <RouterLink to="/account/orders">
-                                                <div className="item-menu-icon">
-                                                    <FontAwesomeIcon icon={faReceipt} />
-                                                </div>
-                                                <div className="text">
-                                                    <p className="item-menu-primary">I tuoi</p>
-                                                    <p className="item-menu-secondary">Ordini</p>
-                                                </div>
-                                            </RouterLink>
-                                        </div>
-                                    </>
-                                ) : null
-                            }
-                            
-
-                            <div className="separator" />
-                            <div className="menu-item profile-menu" onClick={handleOpenProfileMenu}>
-                                <div className="profile">
-                                    <img src={user?.avatar || "https://via.placeholder.com/40"} alt="Profile" />
-                                </div>
-                                <p>{user?.firstname + " " + user?.lastname}</p>
-                                {/* <a href="/logout">Logout</a> */}
-                                <div className="menu-icon">
-                                    <FontAwesomeIcon icon={faAngleDown} />
-                                </div>
+                        {
+                            !hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
+                                <>
+                                    <HeaderItem to="/account/cart" icon={faShoppingCart} primaryText="Il tuo" secondaryText="Carrello" />
+                                    <HeaderItem to="/account/orders" icon={faReceipt} primaryText="I tuoi" secondaryText="Ordini" />
+                                </>
+                            ) : null
+                        }
+                        <div className={styles.separator} />
+                        <div className={styles.profileMenu} onClick={handleOpenProfileMenu}>
+                            <div className={styles.avatar}>
+                                <img src={user?.avatar || "https://via.placeholder.com/40"} alt="Profile" />
                             </div>
-                            <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
-                                <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu} to="/account" />
-                                <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} onClick={handleCloseProfileMenu} to="/account/lists" />
-                                <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
-                            </Menu>
-                        </>
-                    ) : (
-                        <div className="menu-item login-menu">
-                            <RouterLink to="/login">
-                                <p className="login-primary">Sei già registrato?</p>
-                                <p className="login-secondary">Accedi</p>
-                            </RouterLink>
+                            <p className={styles.userName}>{user?.firstname + " " + user?.lastname}</p>
+                            <div className={styles.icon}>
+                                <FontAwesomeIcon icon={faAngleDown} />
+                            </div>
                         </div>
-                    )}
-                </div>
+                        <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
+                            <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu} to="/account" />
+                            <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} onClick={handleCloseProfileMenu} to="/account/lists" />
+                            <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
+                        </Menu>
+                    </>
+                ) : (
+                    <HeaderItem to="/login" primaryText="Sei già registrato?" secondaryText="Accedi" />
+                )}
             </div>
         </header>
     );

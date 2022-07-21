@@ -1,13 +1,11 @@
 import Link from "../Link/Link";
-import './header.scss';
+import styles from './header.module.scss';
 
 const MinimalHeader = () => {
     return (
-        <header className="header">
-            <div className="left">
-                <Link to="/" underline={false}>
-                    <h2>Amnazom</h2>
-                </Link>
+        <header className={`${styles.header} ${styles.minimalHeader}`}>
+            <div className={styles.logoContainer}>
+                <Link className={styles.logo} to="/" underline={false}>Amnazom</Link>
             </div>
         </header>
     )
