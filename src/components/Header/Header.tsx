@@ -1,8 +1,8 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDown, faList, faReceipt, faRightFromBracket, faShop, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { createRef, useEffect, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../config/store";
 import { logout } from "../../reducers/authentication";
 import UserRoleEnum from "../../shared/enums/role.enum";
@@ -37,25 +37,20 @@ const HeaderItem = ({ to, icon, primaryText, secondaryText, className }: { to: s
 
 
 const Header = (props: HeaderProps) => {
-    const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const [profileMenuAnchor, setProfileMenuAnchor] = useState<HTMLElement | null>(null);
     const { logoutSuccess } = useAppSelector(state => state.authentication);
+    const profileMenuButton = createRef<HTMLDivElement>();
 
     const { user } = props;
 
-    const handleOpenProfileMenu = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        setProfileMenuAnchor(event.currentTarget);
-    };
-
-    const handleCloseProfileMenu = () => {
-        setProfileMenuAnchor(null);
-    };
-
     const handleLogout = async () => {
         dispatch(logout());
-        handleCloseProfileMenu();
     };
+
+    useEffect(() => {
+        setProfileMenuAnchor(profileMenuButton.current)
+     }, [profileMenuButton])
 
     return (
         <header className={styles.header}>
@@ -83,7 +78,7 @@ const Header = (props: HeaderProps) => {
                             ) : null
                         }
                         <div className={styles.separator} />
-                        <div className={styles.profileMenu} onClick={handleOpenProfileMenu}>
+                        <div className={styles.profileMenu} ref={profileMenuButton}>
                             <div className={styles.avatar}>
                                 <img src={user?.avatar || "https://via.placeholder.com/40"} alt="Profile" />
                             </div>
@@ -92,9 +87,9 @@ const Header = (props: HeaderProps) => {
                                 <FontAwesomeIcon icon={faAngleDown} />
                             </div>
                         </div>
-                        <Menu anchor={profileMenuAnchor} onClose={handleCloseProfileMenu}>
-                            <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} onClick={handleCloseProfileMenu} to="/account" />
-                            <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} onClick={handleCloseProfileMenu} to="/account/lists" />
+                        <Menu anchor={profileMenuAnchor}>
+                            <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} to="/account" />
+                            <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} to="/account/lists" />
                             <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                         </Menu>
                     </>
