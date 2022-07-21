@@ -27,7 +27,7 @@ const ReviewStats = (props: IReviewStatsProps) => {
                 </div>
             </div>
             <div className={styles.progress} >
-                <div className={styles.progressValue} style={{ width: `${value / totalReviews * 300}px`}}></div>
+                <div className={styles.progressValue} style={{ width: `${value / totalReviews * 100}%`}}></div>
             </div>
             <div className={styles.value}>{stats[key as keyof typeof stats]}</div>
         </div>
