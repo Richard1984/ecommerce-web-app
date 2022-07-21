@@ -3,21 +3,22 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Dialog, { DialogActions, DialogContent, DialogHeader } from "../../components/Dialog/Dialog";
 import Textfield from "../../components/Textfield/Textfield";
-import api from "../../config/api";
+import { useAppDispatch } from "../../config/store";
+import { deleteAccount } from "../../reducers/authentication";
 const DeleteUser = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch()
     const [password, setPassword] = useState<string>("")
 
     const handleCancel = () => {
         navigate(-1);
     }
     const handleDelete = async () => {
-        const response = await api.delete(`/account`);
-        if (response?.data?.message) {
-            localStorage.removeItem("access_token")
-            navigate('/')
-        }
+        dispatch(deleteAccount({
+            password
+        }))
     }
+    
     return (
         <Dialog open={true} width="600px">
             <DialogHeader title="Elimina il tuo account" />
