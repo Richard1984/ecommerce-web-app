@@ -10,6 +10,7 @@ import Cart from './pages/cart/Cart';
 import Categories from './pages/categories/Categories';
 import CategoryProductsRoute from './pages/category-products/CategoryProducts';
 import DeleteProduct from './pages/delete-product/DeleteProduct';
+import DeleteUser from './pages/delete-user/DeleteUser';
 import EditAvatarRoute from './pages/edit-avatar/EditAvatar';
 import EditProductRoute from './pages/edit-product/EditProduct';
 import EditProfileRoute from './pages/edit-profile/EditProfile';
@@ -30,7 +31,6 @@ import SignUp from './pages/signup/Signup';
 import { getAccount } from './reducers/authentication';
 import UserRoleEnum from './shared/enums/role.enum';
 import PrivateRoute from './shared/utils/private-route';
-
 function App() {
   const dispatch = useAppDispatch();
 
@@ -65,6 +65,7 @@ function App() {
               <Route index element={<Account />} />
               <Route path="avatar/edit" element={<EditAvatarRoute />} />
               <Route path="edit" element={<EditProfileRoute />} />
+              <Route path="delete" element={<DeleteUser />} />
               <Route path="cart" element={<Cart />} />
               <Route path="lists">
                 <Route path=":id/products" element={<ShoppingListProductsRoute />} />
