@@ -17,7 +17,7 @@ const Menu = (props: MenuProps) => {
         if (anchor) {
 
             if (menuAnchor.current) {
-                menuAnchor.current.style.top = (anchor?.offsetHeight || 0) + 10 + 'px';
+                menuAnchor.current.style.top = (anchor?.offsetHeight + anchor.offsetTop || 0) + 10 + 'px';
                 
                 menuAnchor.current.style.minWidth = (anchor?.offsetWidth || 0) + 'px';
 
