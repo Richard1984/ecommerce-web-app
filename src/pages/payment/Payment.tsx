@@ -32,7 +32,6 @@ const Payment = () => {
         const getOrder = async () => {
             const { data } = await api.get<{ data: PaymentResponse; }>("/payment");
             const pm_response = await api.get<{ data: IPaymentMethod[]; }>("/account/payment_methods");
-            console.log(data);
             setPaymentIntentId(data.data.payment_intent_id);
             setClientSecret(data.data.client_secret);
             setCart(data.data.cart);

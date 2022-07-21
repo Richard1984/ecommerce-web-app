@@ -37,7 +37,6 @@ const EditProductRoute = () => {
 
     const uploadImages = async (product: IProduct) => {
         if (imagesToAdd.length > 0) {
-            console.log(imagesToAdd)
             const formData = new FormData();
             for (let i = 0; i < imagesToAdd.length; i++) {
                 formData.append("images[]", imagesToAdd[i], imagesToAdd[i].name);
