@@ -19,9 +19,9 @@ interface HeaderProps {
 }
 
 
-const HeaderItem = ({ to, icon, primaryText, secondaryText }: { to: string, icon?: IconProp, primaryText: string, secondaryText: string }) => {
+const HeaderItem = ({ to, icon, primaryText, secondaryText, className }: { to: string, icon?: IconProp, primaryText: string, secondaryText: string, className?: string }) => {
     return (
-        <RouterLink to={to} className={styles.headerItem}>
+        <RouterLink to={to} className={`${styles.headerItem}${className ? " " + className : ""}`}>
             {icon ?
                 <div className={styles.icon}>
                     <FontAwesomeIcon icon={icon} />
@@ -78,7 +78,7 @@ const Header = (props: HeaderProps) => {
                             !hasAnyAuthority(user?.roles!, [UserRoleEnum.ADMIN]) ? (
                                 <>
                                     <HeaderItem to="/account/cart" icon={faShoppingCart} primaryText="Il tuo" secondaryText="Carrello" />
-                                    <HeaderItem to="/account/orders" icon={faReceipt} primaryText="I tuoi" secondaryText="Ordini" />
+                                    <HeaderItem to="/account/orders" className={styles.noMobile} icon={faReceipt} primaryText="I tuoi" secondaryText="Ordini" />
                                 </>
                             ) : null
                         }
