@@ -80,6 +80,18 @@ export const authenticationSlice = createSlice({
       })
       .addCase(updateAvatar.fulfilled, (state, action) => {
         state.updateSuccess = true;
+      })
+      // .addCase(deleteAccount.pending, (state, action) => {
+
+      // })
+      // .addCase(updateAvatar.rejected, (state, action) => {
+
+      // })
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        localStorage.removeItem("access_token");
+        state.user = null;
+        state.isAuthenticated = false;
+        state.logoutSuccess = true;
       });
   },
   reducers: {
@@ -165,6 +177,20 @@ export const updateAvatar = createAsyncThunk(
       },
     });
     thunkAPI.dispatch(getAccount());
+    return result;
+  }
+);
+
+export const deleteAccount = createAsyncThunk(
+  "authentication/delete_account",
+  async ({ password }: { password: string }, thunkAPI) => {
+    const requestUrl = `account`;
+    const result = await api.post<{ data: IUser; message: string }>(
+      requestUrl,
+      {
+        password,
+      }
+    );
     return result;
   }
 );
