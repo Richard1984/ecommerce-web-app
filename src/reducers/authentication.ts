@@ -84,10 +84,10 @@ export const authenticationSlice = createSlice({
       // .addCase(deleteAccount.pending, (state, action) => {
 
       // })
-      // .addCase(updateAvatar.rejected, (state, action) => {
+      // .addCase(deleteAccount.rejected, (state, action) => {
 
       // })
-      .addCase(updateAvatar.fulfilled, (state, action) => {
+      .addCase(deleteAccount.fulfilled, (state, action) => {
         localStorage.removeItem("access_token");
         state.user = null;
         state.isAuthenticated = false;
