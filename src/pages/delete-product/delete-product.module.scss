@@ -1,0 +1,27 @@
+.container {
+    display: grid;
+    min-height: calc(100vh - 70px);
+    justify-content: center;
+    align-content: center;
+
+    .deleteCard {
+        padding: 2em;
+
+        * {
+            padding: 0.5em;
+        }
+    }
+
+    .name {
+        font-weight: bold;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 1em;
+
+        * {
+            padding: 1em;
+        }
+    }
+}

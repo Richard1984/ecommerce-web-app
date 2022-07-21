@@ -9,6 +9,7 @@ import Account from './pages/account/Account';
 import Cart from './pages/cart/Cart';
 import Categories from './pages/categories/Categories';
 import CategoryProductsRoute from './pages/category-products/CategoryProducts';
+import DeleteProduct from './pages/delete-product/DeleteProduct';
 import EditAvatarRoute from './pages/edit-avatar/EditAvatar';
 import EditProductRoute from './pages/edit-product/EditProduct';
 import EditProfileRoute from './pages/edit-profile/EditProfile';
@@ -60,7 +61,7 @@ function App() {
             <Route path="categories/:id/products" element={<CategoryProductsRoute />} />
 
             {/* LOGGED USER PATHS */}
-            <Route path="account" element={<PrivateRoute/>}>
+            <Route path="account" element={<PrivateRoute />}>
               <Route index element={<Account />} />
               <Route path="avatar/edit" element={<EditAvatarRoute />} />
               <Route path="edit" element={<EditProfileRoute />} />
@@ -76,12 +77,13 @@ function App() {
             </Route>
 
             {/* LOGGED ADMIN PATHS */}
-            <Route path="admin" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]}/>}>
+            <Route path="admin" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]} />}>
               <Route path="shop" element={<Shop />} />
               <Route path="shop/edit" element={<EditShopRoute />} />
               <Route path="products/new" element={<EditProductRoute />} />
               <Route path="products/:id/edit" element={<EditProductRoute />} />
               <Route path="categories" element={<Categories />} />
+              <Route path="products/:id/delete" element={<DeleteProduct />} />
             </Route>
           </Route>
           <Route path="payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
