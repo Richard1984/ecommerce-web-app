@@ -27,21 +27,23 @@ const Product = (props: ProductProps) => {
     return (
         <Paper className={styles.product + (className ? " " + className : "")}>
             <Link to={"/products/" + product.id} className={styles.image}>
-                <img src={product.images[0]?.url} alt="product" />
+                <img src={product.images[0]?.url || "https://via.placeholder.com/230"} alt="product" />
             </Link>
             <div className={styles.body}>
-                <Link to={"/products/" + product.id} className={styles.info}>
-                    <h3 className={styles.name}>{product.name}</h3>
-                    <p className={styles.price}>{product.price + " €"}</p>
+                <Link to={"/products/" + product.id} className={styles.primary}>
+                        <div className={styles.name}>{product.name}</div>
                 </Link>
-                <div className={styles.actions}>
-                    <Button
-                        size="small"
-                        leftIcon={<FontAwesomeIcon icon={faShoppingCart} />}
-                        text="Aggiungi al carrello"
+                <div className={styles.secondary}>
+                    <Link to={"/products/" + product.id} className={styles.price}>{product.price + " €"}</Link>
+                        <Button
+                            size="small"
+                            leftIcon={<FontAwesomeIcon icon={faShoppingCart} />}
                         onClick={handleAddToCart}
-                    />
-                </div>
+                        text="Aggiungi al carrello"
+                        fullWidth
+                        className={styles.addToCart}
+                        />
+                    </div>
             </div>
         </Paper>
     );

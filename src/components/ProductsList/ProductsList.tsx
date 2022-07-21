@@ -18,11 +18,11 @@ const ProductsList = (props: IProductsListProps) => {
     const { title, products } = props
 
     const handleMoveLeft = () => {
-        if (productsListRef.current) productsListRef.current.scrollLeft -= 448
+        if (productsListRef.current) productsListRef.current.scrollLeft -= 290
     }
 
     const handleMoveRight = () => {
-        if (productsListRef.current) productsListRef.current.scrollLeft += 448
+        if (productsListRef.current) productsListRef.current.scrollLeft += 290
     }
 
     const handleOnScroll = (event: Event) => { 
