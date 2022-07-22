@@ -1,6 +1,7 @@
 .content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 20px;
     margin: 20px;
 
@@ -12,12 +13,21 @@
         align-items: center;
         padding: 10px 0 20px 0;
         margin-bottom: 20px;
+        width: 100%;
+
+        @include devices(tablet) {
+            flex-direction: column;
+        }
 
         .info {
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
             align-items: center;
+
+            @include devices(tablet) {
+                margin-bottom: 30px;
+            }
 
             .text {
                 padding: 0;
@@ -47,13 +57,22 @@
     }
 
     .products {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(5, min-content);
         align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        column-gap: calc((100% - 250px * 5) / 4);
+        row-gap: 35px;
+
+        @include devices(tablet) {
+            grid-template-columns: 1fr;
+            justify-items: center;
+        }
 
         .product {
-            &:not(:last-child) {
-                margin-bottom: 20px;
+            @include devices(tablet) {
+                // width: 70%;
             }
         }
     }
