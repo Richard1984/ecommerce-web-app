@@ -28,9 +28,7 @@ const ProductList = () => {
                 <div className={styles.title}>
                     Gestione prodotti
                 </div>
-                <Button to="/admin/products/new" text="Aggiungi prodotto" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                    
-                </Button>
+                <Button to="/admin/products/new" text="Aggiungi prodotto" leftIcon={<FontAwesomeIcon icon={faPlus} />}/>
             </div>
             <div className={styles.products}>
                 {products.map(prod =>
