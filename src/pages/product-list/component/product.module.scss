@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+
+    .image {
+        overflow: hidden;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        color: inherit;
+        text-decoration: none;
+        width: 250px;
+
+        aspect-ratio: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            display: block;
+            max-width: fill-available;
+            max-height: fill-available;
+        }
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+
+        .name {
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1em;
+        }
+    }
+
+}

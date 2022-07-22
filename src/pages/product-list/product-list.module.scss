@@ -1,0 +1,24 @@
+.container {
+    margin: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        .title {
+            display: flex;
+            align-self: center;
+            font-weight: bold;
+            font-size: 25px;
+        }
+    }
+
+    .products {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+}

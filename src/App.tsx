@@ -23,6 +23,7 @@ import NewPaymentMethod from './pages/payment-mehods/NewPaymentMethod';
 import PaymentMethods from './pages/payment-mehods/PaymentMethods';
 import Payment from './pages/payment/Payment';
 import ProductDetail from './pages/product-detail/ProductDetail';
+import ProductList from './pages/product-list/ProductList';
 import SearchRoute from './pages/search/Search';
 import Shop from './pages/shop/Shop';
 import ShoppingListProductsRoute from './pages/shopping-lists/pages/ShoppingListProducts/ShoppingListProducts';
@@ -81,6 +82,7 @@ function App() {
             <Route path="admin" element={<PrivateRoute hasAnyAuthorities={[UserRoleEnum.ADMIN]} />}>
               <Route path="shop" element={<Shop />} />
               <Route path="shop/edit" element={<EditShopRoute />} />
+              <Route path="products" element={<ProductList />} />
               <Route path="products/new" element={<EditProductRoute />} />
               <Route path="products/:id/edit" element={<EditProductRoute />} />
               <Route path="categories" element={<Categories />} />

@@ -24,7 +24,7 @@ const DeleteProduct = () => {
     const handleDelete = async () => {
         const response = await api.delete(`/products/${id}`);
         if (!response?.data?.available) {
-            navigate('/')
+            navigate(-1)
         }
     }
     return (
@@ -37,8 +37,8 @@ const DeleteProduct = () => {
                     Sei sicuro di voler eliminare questo prodotto?
                 </div>
                 <div className={styles.buttons}>
-                    <Button onClick={handleCancel}>Annulla</Button>
                     <Button onClick={handleDelete}>Elimina</Button>
+                    <Button onClick={handleCancel}>Annulla</Button>
                 </div>
             </Paper>
         </div>
