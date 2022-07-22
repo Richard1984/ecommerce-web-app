@@ -25,7 +25,7 @@ const AdminOrder = (props: OrderProps) => {
                     <h3> {getShippingStatus(order)} </h3>
                 </GridItem>
                 <GridItem cols={3} style={{ textAlign: "end" }}>
-                    <Link to={"/account/orders/" + order.id}>
+                    <Link to={"/admin/orders/" + order.id}>
                         <p> Dettagli ordine </p>
                     </Link>
                 </GridItem>
