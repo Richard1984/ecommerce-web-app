@@ -1,3 +1,5 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 import api from "../../config/api";
@@ -26,15 +28,14 @@ const ProductList = () => {
                 <div className={styles.title}>
                     Gestione prodotti
                 </div>
-                <Button to="/admin/products/new">
-                    Aggiungi prodotto
+                <Button to="/admin/products/new" text="Aggiungi prodotto" leftIcon={<FontAwesomeIcon icon={faPlus} />}>
+                    
                 </Button>
             </div>
             <div className={styles.products}>
                 {products.map(prod =>
-                    <Product key={prod.id} img={prod.images[0].url} name={prod.name} price={prod.price} id={prod.id} />
-                )
-                }
+                    <Product key={prod.id} img={prod.images[0]?.url || "https://via.placeholder.com/250"} name={prod.name} price={prod.price} id={prod.id} />
+                )}
             </div>
         </div>
     )
