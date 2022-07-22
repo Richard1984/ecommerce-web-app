@@ -3,6 +3,11 @@
     justify-content: flex-start;
     gap: 1em;
 
+    @include devices(tablet) {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .image {
         overflow: hidden;
         border-top-left-radius: 3px;
@@ -30,6 +35,10 @@
         flex-direction: column;
         justify-content: center;
         gap: 1em;
+
+        @include devices(tablet) {
+            padding: 20px;
+        }
 
         .name {
             font-weight: bold;

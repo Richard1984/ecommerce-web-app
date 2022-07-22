@@ -1,3 +1,5 @@
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../../components/Button/Button";
 import Paper from "../../../components/Paper/Paper";
 import styles from "./product.module.scss";
@@ -30,8 +32,8 @@ const Product = (props: IProductProps) => {
                 </div>
 
                 <div className={styles.buttons}>
-                    <Button to={`/admin/products/${id}/edit`}>Modifica prodotto</Button>
-                    <Button to={`/admin/products/${id}/delete`}>Rimuovi prodotto</Button>
+                    <Button to={`/admin/products/${id}/edit`} text="Modifica prodotto" size="small" leftIcon={<FontAwesomeIcon icon={faEdit} />} />
+                    <Button to={`/admin/products/${id}/delete`} text="Rimuovi prodotto" size="small" leftIcon={<FontAwesomeIcon icon={faTrash} />} />
                 </div>
 
             </div>
