@@ -11,6 +11,11 @@
         flex-grow: 1;
         gap: 20px;
 
+        @include devices(tablet) {
+            grid-template-columns: 1fr;
+            padding: 0 20px;
+        }
+
 
         .image {
             // width: 250px;
