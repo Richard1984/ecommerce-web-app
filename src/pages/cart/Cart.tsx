@@ -65,7 +65,7 @@ const Cart = () => {
 
     return (
         <>
-            <Dialog open={isOpen} width="600px">
+            <Dialog open={isOpen} width="600px" onClose={handleOnClose}>
                 <DialogHeader title={"Vuoi davvero rimuovere questo prodotto dal carrello?"} />
                 <DialogActions>
                     <Button size="small" text="Rimuovi" onClick={() => handleSubmit(itemIdToRemove)} />

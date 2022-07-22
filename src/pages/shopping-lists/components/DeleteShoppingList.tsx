@@ -23,7 +23,7 @@ const DeleteShoppingList = (props: IDeleteShoppingListProps) => {
     }
 
     return (
-        <Dialog open={open} width="600px">
+        <Dialog open={open} width="600px" onClose={handleOnClose}>
             <DialogHeader title="Elimina la lista" />
             <DialogContent>
                 <p>Sei sicuro di volere eliminare la lista {shoppingList?.name}</p>

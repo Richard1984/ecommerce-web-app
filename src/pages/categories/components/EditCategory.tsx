@@ -48,7 +48,7 @@ const EditCategory = (props: IEditCategoryProps) => {
     }
 
     return (
-        <Dialog open={open} width="600px">
+        <Dialog open={open} width="600px" onClose={handleOnClose}>
             <DialogHeader title={isNew ? "Crea una categoria" : "Modifica una categoria"} />
             {/* <Divider color="#cacaca"/> */}
             <DialogContent>

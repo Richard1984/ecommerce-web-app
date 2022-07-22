@@ -1,9 +1,11 @@
+import ClickAwayListener from 'react-click-away-listener';
 import styles from './dialog.module.scss';
 
 interface IDialogProps {
     open: boolean;
     children: React.ReactNode;
     width?: string;
+    onClose?: () => void;
 }
 
 interface IDialogHeaderProps {
@@ -21,7 +23,7 @@ interface IDialogActionsProps {
 }
 
 const Dialog = (props: IDialogProps) => {
-    const { open, children, width } = props;
+    const { open, children, width, onClose: handleOnClose } = props;
 
     if (!open) {
         return null;
@@ -29,11 +31,13 @@ const Dialog = (props: IDialogProps) => {
 
     return (
         <div className={styles.backdrop}>
+            <ClickAwayListener onClickAway={() => handleOnClose && handleOnClose()}>
             <div className={styles.dialog}
             // style={width ? { width } : {}}
             >
                 {children}
-            </div>
+                </div>
+            </ClickAwayListener>
         </div>
     );
 }

@@ -53,7 +53,7 @@ const EditReview = (props: IEditReviewProps) => {
     }
 
     return (
-        <Dialog open={open} width="600px">
+        <Dialog open={open} width="600px" onClose={handleOnClose}>
             <DialogHeader title={isNew ? "Scrivi una recensione" : "Modifica recensione"} />
             {/* <Divider color="#cacaca"/> */}
             <DialogContent>

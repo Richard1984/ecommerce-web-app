@@ -53,7 +53,7 @@ const EditShoppingList = (props: IEditShoppingListProps) => {
     }
 
     return (
-        <Dialog open={open} width="600px">
+        <Dialog open={open} width="600px" onClose={handleOnClose}>
             <DialogHeader title={isNew ? "Crea una lista" : "Modifica una lista"} />
             {/* <Divider color="#cacaca"/> */}
             <DialogContent>

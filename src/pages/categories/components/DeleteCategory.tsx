@@ -23,7 +23,7 @@ const DeleteCategory = (props: IDeleteCategoryProps) => {
     }
 
     return (
-        <Dialog open={open} width="600px">
+        <Dialog open={open} width="600px" onClose={handleOnClose}>
             <DialogHeader title="Elimina la categoria" />
             {/* <Divider color="#cacaca"/> */}
             <DialogContent>

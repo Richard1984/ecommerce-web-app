@@ -50,7 +50,7 @@ const PaymentMethods = () => {
 
     return (
         <>
-            <Dialog open={isOpen} width="600px">
+            <Dialog open={isOpen} width="600px" onClose={handleOnClose}>
                 <DialogHeader title={"Vuoi davvero rimuovere questo metodo di pagamento?"} />
                 <DialogActions>
                     <Button size="small" text="Rimuovi" onClick={() => handleRemove(paymentMethodIdToRemove)} />
