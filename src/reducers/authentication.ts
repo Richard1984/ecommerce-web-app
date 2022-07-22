@@ -50,12 +50,13 @@ export const authenticationSlice = createSlice({
         state.sessionHasBeenFetched = false;
       })
       .addCase(getAccount.rejected, (state, action) => {
-        state.user = null;
         localStorage.removeItem("access_token");
+        state.user = null;
         state.isAuthenticated = false;
         state.sessionHasBeenFetched = true;
       })
       .addCase(logout.fulfilled, (state, action) => {
+        localStorage.removeItem("access_token");
         state.user = null;
         state.logoutSuccess = true;
         state.isAuthenticated = false;
@@ -199,7 +200,6 @@ export const logout = createAsyncThunk("authentication/logout", async () => {
   const response = await api.delete<{ data: IUser; message: string }>(
     "users/sign_out"
   );
-  localStorage.removeItem("access_token");
   return response;
 });
 
