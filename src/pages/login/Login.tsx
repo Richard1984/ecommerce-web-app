@@ -60,10 +60,10 @@ const Login = () => {
                                 handleLogin()
                             }}>
                                 <div className={styles["login-form-body-form-input"]}>
-                                    <Textfield type="email" name="email" label="Email" placeholder="Email" autoComplete="email" fullWidth value={form.email} onValueChange={handleChange} />
+                                    <Textfield id="email" type="email" name="email" label="Email" placeholder="Email" autoComplete="email" fullWidth value={form.email} onValueChange={handleChange} />
                                 </div>
                                 <div className={styles["login-form-body-form-input"]}>
-                                    <Textfield type="password" name="password" label="Password" placeholder="●●●●●●●●" autoComplete="current-password" fullWidth value={form.password} onValueChange={handleChange} />
+                                    <Textfield id="password" type="password" name="password" label="Password" placeholder="●●●●●●●●" autoComplete="current-password" fullWidth value={form.password} onValueChange={handleChange} />
                                 </div>
                                 <div className={styles["login-form-body-form-button"]}>
                                     <Button text="Login" type="submit" />

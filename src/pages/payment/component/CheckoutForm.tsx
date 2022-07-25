@@ -144,6 +144,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         <GridItem cols={6}>
                             <Textfield
                                 type="text"
+                                id="firstname"
                                 name="firstname"
                                 label="Nome"
                                 placeholder="Nome"
@@ -154,7 +155,9 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                             />
                         </GridItem>
                         <GridItem cols={6}>
-                            <Textfield type="text"
+                            <Textfield
+                                type="text"
+                                id="lastname"
                                 name="lastname"
                                 label="Cognome"
                                 placeholder="Cognome"
@@ -167,6 +170,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         <GridItem cols={6}>
                             <Textfield
                                 type="text"
+                                id="address"
                                 name="address"
                                 label="Indirizzo"
                                 placeholder="Indirizzo"
@@ -179,6 +183,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         <GridItem cols={3}>
                             <Textfield
                                 type="text"
+                                id="house_number"
                                 name="house_number"
                                 label="Civico"
                                 placeholder="Civico"
@@ -191,6 +196,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         <GridItem cols={3}>
                             <Textfield
                                 type="text"
+                                id="zip"
                                 name="zip"
                                 label="CAP"
                                 placeholder="CAP"
@@ -203,6 +209,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         <GridItem cols={6}>
                             <Textfield
                                 type="text"
+                                id="city"
                                 name="city"
                                 label="Città"
                                 placeholder="Città"
@@ -215,6 +222,7 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         <GridItem cols={6}>
                             <Textfield
                                 type="text"
+                                id="country"
                                 name="country"
                                 label="Stato"
                                 placeholder="Stato"
@@ -263,10 +271,10 @@ const CheckoutForm = (props: ICheckoutFormProps) => {
                         </p>
                         <div style={selectedPaymentMethod === -1 ? {} : { display: "none" }}>
                             <PaymentElement id="payment-element" />
-                            <div className={styles.checkbox}>
+                            {/* <div className={styles.checkbox}>
                                 <input type="checkbox" id="save-payment-method" checked={savePaymentMethod} onChange={() => handleSetSavePaymentMethod()} />
                                 <label htmlFor="save-payment-method">Salva questo metodo di pagamento</label>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </Paper>
