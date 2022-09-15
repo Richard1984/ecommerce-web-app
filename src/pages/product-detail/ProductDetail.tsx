@@ -47,18 +47,22 @@ const ProductDetail = () => {
         });
     }
 
+    const getProduct = async () => {
+        const response = await api.get<{ data: IProduct }>(`/products/${id}`);
+        setProduct(response.data.data);
+    }
+
     const getReviews = async () => {
         const response = await api.get<{ data: IReview[] }>(`/products/${id}/reviews`);
         setReviews(response.data.data);
     }
 
-
+    const handleOnEditReviews = async () => {
+        getReviews();
+        getProduct();
+    }
 
     useEffect(() => {
-        const getProduct = async () => {
-            const response = await api.get<{ data: IProduct }>(`/products/${id}`);
-            setProduct(response.data.data);
-        }
         getProduct();
         getReviews()
     }, [id])
@@ -109,7 +113,7 @@ const ProductDetail = () => {
                     </div>
                 </section>
             </Container>
-            <EditReview open={editReviewDialog} review={reviewToEdit} product={product} onClose={handleCloseEditReviewDialog} onEdit={getReviews} />
+            <EditReview open={editReviewDialog} review={reviewToEdit} product={product} onClose={handleCloseEditReviewDialog} onEdit={handleOnEditReviews} />
         </>
     );
 }
