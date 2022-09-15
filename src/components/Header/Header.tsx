@@ -50,7 +50,7 @@ const Header = (props: HeaderProps) => {
 
     useEffect(() => {
         setProfileMenuAnchor(profileMenuButton.current)
-     }, [profileMenuButton])
+    }, [profileMenuButton])
 
     return (
         <header className={styles.header}>
@@ -89,7 +89,7 @@ const Header = (props: HeaderProps) => {
                         </div>
                         <Menu anchor={profileMenuAnchor}>
                             <MenuItem text="Account" icon={<FontAwesomeIcon icon={faUser} />} to="/account" />
-                            <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} to="/account/lists" />
+                            {!hasAnyAuthority(user?.roles || [], [UserRoleEnum.ADMIN]) ? <MenuItem text="Le mie liste" icon={<FontAwesomeIcon icon={faList} />} to="/account/lists" /> : null}
                             <MenuItem text="Logout" icon={<FontAwesomeIcon icon={faRightFromBracket} />} onClick={handleLogout} />
                         </Menu>
                     </>
