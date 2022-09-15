@@ -16,6 +16,10 @@
             display: block;
             max-width: fill-available;
             max-height: fill-available;
+            max-height: -moz-available;
+            max-height: -webkit-fill-available;
+            max-width: -moz-available;
+            max-width: -webkit-fill-available;
         }
     }
 
