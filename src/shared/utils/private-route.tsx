@@ -1,6 +1,7 @@
 
 import { Navigate, Outlet, RouteProps, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../config/store";
+import { AuthenticationState } from "../../reducers/authentication";
 import UserRoleEnum from "../enums/role.enum";
 import hasAnyAuthority from "./authorities";
 
@@ -9,10 +10,8 @@ interface IPrivateRoute extends RouteProps {
   hasAnyAuthorities?: UserRoleEnum[];
 }
 
-
-
 const PrivateRoute = ({ children, hasAnyAuthorities = [] }: IPrivateRoute) => {
-  const { user, isAuthenticated, sessionHasBeenFetched } = useAppSelector(state => state.authentication);
+  const { user, isAuthenticated, sessionHasBeenFetched } = useAppSelector<AuthenticationState>(state => state.authentication);
   const location = useLocation();
   const isAuthorized = hasAnyAuthority(user?.roles!, hasAnyAuthorities!);
 
