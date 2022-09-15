@@ -100,6 +100,7 @@ const EditProductRoute = () => {
 
             await getProduct()
         }
+        navigate(-1);
     }
 
     const handleCancel = () => {
