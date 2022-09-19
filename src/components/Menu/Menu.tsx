@@ -33,6 +33,28 @@ const Menu = (props: MenuProps) => {
         }
     }, [anchor, document.documentElement.clientWidth]);
 
+    // Possibile modifca
+    // useEffect(() => {
+    //     if (anchor) {
+
+    //         if (menuAnchor.current) {
+    //             menuAnchor.current.style.top = (anchor?.offsetHeight + anchor.offsetTop || 0) + 10 + 'px';
+
+    //             menuAnchor.current.style.minWidth = (anchor?.offsetWidth || 0) + 'px';
+
+    //             if (anchor?.offsetLeft + menuAnchor?.current?.offsetWidth > document.documentElement.offsetWidth) {
+    //                 menuAnchor.current.style.right = document.documentElement.scrollWidth - anchor?.offsetLeft - anchor?.offsetWidth + 'px';
+    //                 menuAnchor.current.style.left = 'auto';
+    //             } else {
+    //                 menuAnchor.current.style.left = (anchor?.offsetLeft || 0) + 'px';
+    //                 menuAnchor.current.style.right = 'auto';
+    //             }
+
+    //         }
+
+    //     }
+    // }, [anchor, document.documentElement.clientWidth, anchor?.offsetLeft, anchor?.offsetWidth]);
+
     if (!anchor) {
         return null;
     }
